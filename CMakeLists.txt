@@ -10,3 +10,6 @@ if (CLOGGER_SHARED)
 else()
     add_library(clogger STATIC src/clog.c)
 endif ()
+
+add_executable(test exc.c)
+target_link_libraries(test clogger)
