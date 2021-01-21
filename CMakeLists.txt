@@ -5,4 +5,8 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(include/)
 
-add_library(clogger STATIC src/clog.c)
+if (CLOGGER_SHARED)
+    add_library(clogger SHARED src/clog.c)
+else()
+    add_library(clogger STATIC src/clog.c)
+endif ()
