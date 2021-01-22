@@ -3,18 +3,11 @@ A lightweight logging library written in C
 ### Debug/Release configurations
 In `CLOGGER_DEBUG` mode, debug and info log messages will be logged to the console; this is turned off by default. To turn it on you can either:
 1. Include a definition for the `CLOGGER_DEBUG` macro
-#### Using CMake
 ```cmake
 # Add a definition in your debug configuration
 if (MY_DEBUG_CONFIG)
     add_definitions(-DCLOGGER_DEBUG)
 endif ()
-```
-#### Within your source code
-```c
-// Define before including the header
-#define CLOGGER_DEBUG
-#include <clogger.h>
 ```
 2. Use the builtin `set_clogger_debug()` function
 ```c
