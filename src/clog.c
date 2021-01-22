@@ -21,16 +21,16 @@ void clog_messagef(const char* location, const char* format, va_list args)
     printf("\n");
 }
 
-void clog_message(const char* location, char* format, ...)
+void clog_message(const char* location, char* message, ...)
 {
     va_list args;
 
-    va_start(args, format);
-    clog_messagef(location, format, args);
+    va_start(args, message);
+    clog_messagef(location, message, args);
     va_end(args);
 }
 
-void clog_info(const char* location, char* format, ...)
+void clog_info(const char* location, char* message, ...)
 {
     if (debug)
     {
@@ -38,13 +38,13 @@ void clog_info(const char* location, char* format, ...)
 
         va_list args;
 
-        va_start(args, format);
-        clog_messagef(location, format, args);
+        va_start(args, message);
+        clog_messagef(location, message, args);
         va_end(args);
     }
 }
 
-void clog_debug(const char* location, char* format, ...)
+void clog_debug(const char* location, char* message, ...)
 {
     if (debug)
     {
@@ -52,42 +52,42 @@ void clog_debug(const char* location, char* format, ...)
 
         va_list args;
 
-        va_start(args, format);
-        clog_messagef(location, format, args);
+        va_start(args, message);
+        clog_messagef(location, message, args);
         va_end(args);
     }
 }
 
-void clog_warning(const char* location, char* format, ...)
+void clog_warning(const char* location, char* message, ...)
 {
     printf(CLOGGER_FG_HYEL"[WARNING]"CLOGGER_RESET_CONSOLE" >> ");
 
     va_list args;
 
-    va_start(args, format);
-    clog_messagef(location, format, args);
+    va_start(args, message);
+    clog_messagef(location, message, args);
     va_end(args);
 }
 
-void clog_error(const char* location, char* format, ...)
+void clog_error(const char* location, char* message, ...)
 {
     printf(CLOGGER_FG_HRED"[ERROR]"CLOGGER_RESET_CONSOLE" >> ");
 
     va_list args;
 
-    va_start(args, format);
-    clog_messagef(location, format, args);
+    va_start(args, message);
+    clog_messagef(location, message, args);
     va_end(args);
 }
 
-void clog_fatal(const char* location, char* format, ...)
+void clog_fatal(const char* location, char* message, ...)
 {
     printf(CLOGGER_BG_RED"[FATAL]"CLOGGER_RESET_CONSOLE" >> ");
 
     va_list args;
 
-    va_start(args, format);
-    clog_messagef(location, format, args);
+    va_start(args, message);
+    clog_messagef(location, message, args);
     va_end(args);
 }
 

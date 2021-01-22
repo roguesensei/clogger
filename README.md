@@ -1,5 +1,24 @@
 # clogger
 A lightweight logging library written in C
+## Usage
+```c
+#include <clogger.h>
+
+int main()
+{
+    clog_message(__FUNCTION__, "Greetings, universe!");
+
+    char some_string[3] = "bit";
+    int some_num = 8;
+
+    clog_message("I also support string formatting", "Mario looks good in %i-%s", some_num, some_string);
+
+    return 0;
+}
+
+```
+#### Result
+![img.png](res/simple_out.png)
 ### Debug/Release configurations
 In `CLOGGER_DEBUG` mode, debug and info log messages will be logged to the console; this is turned off by default. To turn it on you can either:
 1. Include a definition for the `CLOGGER_DEBUG` macro
@@ -32,4 +51,4 @@ To generate as a shared library, use the **CLOGGER_SHARED** flag:
 cmake -DCLOGGER_SHARED=ON ..
 ```
 #### Oh, and did I mention the pretty colours?
-![img.png](res/img.png)
+![img.png](res/colour.png)
