@@ -4,6 +4,7 @@ project(clogger C)
 set(CMAKE_C_STANDARD 11)
 
 include_directories(include/)
+include_directories(src/)
 
 if (CLOGGER_SHARED)
     add_library(clogger SHARED src/clog.c)
@@ -15,5 +16,3 @@ endif ()
 #    add_definitions(-DCLOGGER_DEBUG)
 #endif ()
 
-add_executable(test exc.c)
-target_link_libraries(test clogger)
