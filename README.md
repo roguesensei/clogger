@@ -32,3 +32,4 @@ To generate as a shared library, use the **CLOGGER_SHARED** flag:
 cmake -DCLOGGER_SHARED=ON ..
 ```
 #### Oh, and did I mention the pretty colours?
+![img.png](res/img.png)
