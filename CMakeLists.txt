@@ -11,5 +11,9 @@ else()
     add_library(clogger STATIC src/clog.c)
 endif ()
 
+#if (MY_DEBUG_CONFIG)
+#    add_definitions(-DCLOGGER_DEBUG)
+#endif ()
+
 add_executable(test exc.c)
 target_link_libraries(test clogger)
