@@ -13,6 +13,10 @@ enum CLoggerDebugMode
     #define CLOG_DEBUG_DEFAULT 0
 #endif
 
+// Generic logging message
+void clog_message(const char* location, char* format, ...);
+
+// Pre-defined log functions by level, where info/debug can be configured to display only in debug mode
 void clog_info(const char* location, char* format, ...);
 void clog_debug(const char* location, char* format, ...);
 void clog_warning(const char* location, char* format, ...);

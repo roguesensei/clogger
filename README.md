@@ -31,3 +31,4 @@ To generate as a shared library, use the **CLOGGER_SHARED** flag:
 ```shell
 cmake -DCLOGGER_SHARED=ON ..
 ```
+#### Oh, and did I mention the pretty colours?
