@@ -1,10 +1,11 @@
 #include "clog.h"
+#include "ansi.h"
 
 #include <stdio.h>
 #include <stdarg.h>
 #include <time.h>
 
-void clog_message(const char* location, const char* message)
+void clog_message(const char* location, const char* format, va_list args)
 {
     time_t now;
     struct tm *timestamp = localtime(&now);
@@ -12,24 +13,19 @@ void clog_message(const char* location, const char* message)
 
     strftime(buffer, sizeof(buffer), "%H:%M:%S", timestamp);
 
-    printf("%s [%s]\t%s", buffer, location, message);
-
-    // The formatting magic
-    // va_list args;
-    //
-    // va_start(args, format);
-    // vprintf(format, args);
-    // va_end(args);
+    printf("%s - %s -> ", buffer, location);
+    vprintf(format, args);
+    printf("\n");
 }
 
-void clog_debug(const char* location, const char* format, ...)
+void clog_debug(const char* location, char* format, ...)
 {
-    printf("[DEBUG]\t");
+    printf(CLOGGER_FG_HGRN"[DEBUG]\t"CLOGGER_RESET);
+    // clog_message(location);
 
     va_list args;
 
     va_start(args, format);
-    char* message = va_arg(args, char *);
-    clog_message(location, message);
+    clog_message(location, format, args);
     va_end(args);
 }
