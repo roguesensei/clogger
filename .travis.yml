@@ -1,0 +1,14 @@
+language: c
+
+compiler:
+  - gcc
+
+matrix:
+  include:
+    - os: linux
+      name: "Linux static library"
+
+before_script:
+  - mkdir build
+  - cd build
+  - cmake ..
