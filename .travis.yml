@@ -70,43 +70,55 @@ matrix:
         - CLOGGER_SHARED=ON
     - os: osx
       language: c
+      compiler: clang
+      name: "OSX static library with clang"
+      env:
+        - CLOGGER_SHARED=OFF
+    - os: osx
+      language: c
+      compiler: clang
+      name: "OSX shared library with clang"
+      env:
+        - CLOGGER_SHARED=ON
+    - os: osx
+      language: c
       compiler: gcc
-      name: "OSX static library"
+      name: "OSX static library with GCC"
       env:
         - CLOGGER_SHARED=OFF
     - os: osx
       language: c
       compiler: gcc
-      name: "OSX shared library"
+      name: "OSX shared library with GCC"
       env:
         - CLOGGER_SHARED=ON
     # C++ Builds
-#    - os: linux
-#      language: c++
-#      compiler: gcc
-#      name: "Linux static library C++"
-#      dist: xenial
-#      env:
-#        - CLOGGER_SHARED=OFF
-#    - os: linux
-#      language: c++
-#      compiler: gcc
-#      name: "Linux shared library C++"
-#      dist: xenial
-#      env:
-#        - CLOGGER_SHARED=ON
-#    - os: osx
-#      language: c++
-#      compiler: gcc
-#      name: "OSX static library C++"
-#      env:
-#        - CLOGGER_SHARED=OFF
-#    - os: osx
-#      language: c++
-#      compiler: gcc
-#      name: "OSX shared library C++"
-#      env:
-#        - CLOGGER_SHARED=ON
+    - os: linux
+      language: c++
+      compiler: gcc
+      name: "Linux static library C++"
+      dist: xenial
+      env:
+        - CLOGGER_SHARED=OFF
+    - os: linux
+      language: c++
+      compiler: gcc
+      name: "Linux shared library C++"
+      dist: xenial
+      env:
+        - CLOGGER_SHARED=ON
+    - os: osx
+      language: c++
+      compiler: gcc
+      name: "OSX static library C++"
+      env:
+        - CLOGGER_SHARED=OFF
+    - os: osx
+      language: c++
+      compiler: gcc
+      name: "OSX shared library C++"
+      env:
+        - CLOGGER_SHARED=ON
 
 before_script:
   - mkdir build
