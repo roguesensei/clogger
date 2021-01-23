@@ -9,7 +9,7 @@ static enum CLoggerDebugMode debug = CLOG_DEBUG_DEFAULT; // Default value
 
 void clog_messagef(const char* location, const char* format, va_list args)
 {
-    time_t now;
+    time_t now = time(NULL);
     struct tm* timestamp = localtime(&now);
     char timestamp_buffer[10];
 
@@ -18,7 +18,7 @@ void clog_messagef(const char* location, const char* format, va_list args)
     printf(CLOGGER_FG_BOLD_CYN"%s"CLOGGER_RESET_CONSOLE" >> "CLOGGER_FG_BOLD_MAG"%s"CLOGGER_RESET_CONSOLE" >> ", timestamp_buffer, location);
 
     vprintf(format, args);
-    printf("\n");
+    printf(CLOGGER_RESET_CONSOLE"\n");
 }
 
 void clog_message(const char* location, char* message, ...)
