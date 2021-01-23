@@ -55,4 +55,4 @@ before_script:
   - cmake -DCLOGGER_SHARED=${CLOGGER_SHARED} ..
 
 script:
-  - cmake --build .
+  - make
