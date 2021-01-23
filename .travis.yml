@@ -1,8 +1,3 @@
-#language: c
-#
-#compiler:
-#  - gcc
-#  - clang
 
 install: # CMake
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
@@ -30,14 +25,14 @@ matrix:
       name: "Windows static library"
       env:
         - CLOGGER_SHARED=OFF
-#    - os: windows
-#      language: c
-#      compiler:
-#        - clang
-#        - gcc
-#      name: "Windows shared library"
-#      env:
-#        - CLOGGER_SHARED=ON
+    - os: windows
+      language: c
+      compiler:
+        - clang
+        - gcc
+      name: "Windows shared library"
+      env:
+        - CLOGGER_SHARED=ON
     - os: linux
       language: c
       compiler:
@@ -110,4 +105,4 @@ before_script:
   - cmake -DCLOGGER_SHARED=${CLOGGER_SHARED} ..
 
 script:
-  - cmake -- build .
+  - make
