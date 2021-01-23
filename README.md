@@ -41,7 +41,7 @@ endif ()
 ```c
 void my_debug_function()
 {
-    set_clogger_debug(CLogTrue); // or 1/true
+    set_clogger_debug(CLogTrue); // or CLOGGER_TRUE
     
     char* message = "Debug mode is turned on";
     clog_info("DEBUG FUNCTION", "%s", message);
@@ -57,6 +57,13 @@ printf(CLOGGER_FG_BOLD_WHT"Using std printf");
 ```
 #### Result
 ![img.png](res/pretty_colours.png)
+### Logging to file
+```c
+// Will return CLOGGER_FALSE/0 on fail
+int success = clog_to_file("log.txt", __FUNCTION__, "Egg zample");
+```
+#### Remarks
+Currently `clog_to_file` is the only function that doesn't support string formatting
 ### Compiling with CMake
 By default, clogger can be built as a static library:
 ```shell

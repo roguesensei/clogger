@@ -1,22 +1,24 @@
 #ifndef CLOGGER_CLOG_H
 #define CLOGGER_CLOG_H
 
+#define CLOGGER_FALSE 0X0
+#define CLOGGER_TRUE 0x1
+
 #ifdef CLOGGER_DEBUG
-    #define CLOG_DEBUG_DEFAULT 1
+    #define CLOG_DEBUG_DEFAULT CLOGGER_TRUE
 #else
-    #define CLOG_DEBUG_DEFAULT 0
+    #define CLOG_DEBUG_DEFAULT CLOGGER_FALSE
 #endif
 
 #ifdef __cplusplus
-#define CLOGGER_API extern "C"
+    #define CLOGGER_API extern "C"
 #else
-#define CLOGGER_API
+    #define CLOGGER_API
 #endif
 
-enum CLoggerDebugMode
+enum CLoggerBool
 {
-    CLogFalse = 0,
-    CLogTrue = 1
+    CLogFalse = CLOGGER_FALSE, CLogTrue = CLOGGER_TRUE
 };
 
 // Generic logging message
@@ -29,7 +31,10 @@ CLOGGER_API void clog_warning(const char* location, const char* message, ...);
 CLOGGER_API void clog_error(const char* location, const char* message, ...);
 CLOGGER_API void clog_fatal(const char* location, const char* message, ...);
 
+// Log message to file: returns CLOGGER_FALSE if the file is not found etc. else CLOGGER_TRUE
+CLOGGER_API int clog_to_file(const char* file_path, const char* location, const char* message);
+
 // Toggle whether or not INFO/DEBUG messages should be shown
-CLOGGER_API void set_clogger_debug(enum CLoggerDebugMode value);
+CLOGGER_API void set_clogger_debug(enum CLoggerBool value);
 
 #endif //CLOGGER_CLOG_H
