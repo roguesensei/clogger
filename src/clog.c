@@ -21,7 +21,7 @@ void clog_messagef(const char* location, const char* format, va_list args)
     printf(CLOGGER_RESET_CONSOLE"\n");
 }
 
-void clog_message(const char* location, char* message, ...)
+void clog_message(const char* location, const char* message, ...)
 {
     va_list args;
 
@@ -30,7 +30,7 @@ void clog_message(const char* location, char* message, ...)
     va_end(args);
 }
 
-void clog_info(const char* location, char* message, ...)
+void clog_info(const char* location, const char* message, ...)
 {
     if (debug)
     {
@@ -44,7 +44,7 @@ void clog_info(const char* location, char* message, ...)
     }
 }
 
-void clog_debug(const char* location, char* message, ...)
+void clog_debug(const char* location, const char* message, ...)
 {
     if (debug)
     {
@@ -58,7 +58,7 @@ void clog_debug(const char* location, char* message, ...)
     }
 }
 
-void clog_warning(const char* location, char* message, ...)
+void clog_warning(const char* location, const char* message, ...)
 {
     printf(CLOGGER_FG_HYEL"[WARNING]"CLOGGER_RESET_CONSOLE" >> ");
 
@@ -69,7 +69,7 @@ void clog_warning(const char* location, char* message, ...)
     va_end(args);
 }
 
-void clog_error(const char* location, char* message, ...)
+void clog_error(const char* location, const char* message, ...)
 {
     printf(CLOGGER_FG_HRED"[ERROR]"CLOGGER_RESET_CONSOLE" >> ");
 
@@ -80,7 +80,7 @@ void clog_error(const char* location, char* message, ...)
     va_end(args);
 }
 
-void clog_fatal(const char* location, char* message, ...)
+void clog_fatal(const char* location, const char* message, ...)
 {
     printf(CLOGGER_BG_RED"[FATAL]"CLOGGER_RESET_CONSOLE" >> ");
 
