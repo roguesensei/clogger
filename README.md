@@ -1,6 +1,6 @@
 # clogger
 A lightweight logging library written in C
-## Usage
+### Usage
 ```c
 #include <clogger.h>
 
