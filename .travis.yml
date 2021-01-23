@@ -1,8 +1,8 @@
-language: c
-
-compiler:
-  - gcc
-  - clang
+#language: c
+#
+#compiler:
+#  - gcc
+#  - clang
 
 #install: # CMake
 #  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
@@ -23,29 +23,84 @@ compiler:
 matrix:
   include:
     - os: windows
+      language: c
+      compiler:
+        - clang
+        - gcc
       name: "Windows static library"
       env:
         - CLOGGER_SHARED=OFF
-    - os: windows
-      name: "Windows shared library"
-      env:
-        - CLOGGER_SHARED=ON
+#    - os: windows
+#      language: c
+#      compiler:
+#        - clang
+#        - gcc
+#      name: "Windows shared library"
+#      env:
+#        - CLOGGER_SHARED=ON
     - os: linux
+      language: c
+      compiler:
+        - clang
+        - gcc
       name: "Linux static library"
       dist: xenial
       env:
         - CLOGGER_SHARED=OFF
     - os: linux
+      language: c
+      compiler:
+        - clang
+        - gcc
       name: "Linux shared library"
       dist: xenial
       env:
         - CLOGGER_SHARED=ON
     - os: osx
+      language: c
+      compiler:
+        - clang
+        - gcc
       name: "OSX static library"
       env:
         - CLOGGER_SHARED=OFF
     - os: osx
+      language: c
+      compiler:
+        - clang
+        - gcc
       name: "OSX shared library"
+      env:
+        - CLOGGER_SHARED=ON
+    # C++ Builds
+    - os: linux
+      language: c++
+      compiler:
+        - gcc
+      name: "Linux static library C++"
+      dist: xenial
+      env:
+        - CLOGGER_SHARED=OFF
+    - os: linux
+      language: c++
+      compiler:
+        - gcc
+      name: "Linux shared library C++"
+      dist: xenial
+      env:
+        - CLOGGER_SHARED=ON
+    - os: osx
+      language: c++
+      compiler:
+        - gcc
+      name: "OSX static library C++"
+      env:
+        - CLOGGER_SHARED=OFF
+    - os: osx
+      language: c++
+      compiler:
+        - gcc
+      name: "OSX shared library C++"
       env:
         - CLOGGER_SHARED=ON
 
