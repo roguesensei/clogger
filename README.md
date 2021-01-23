@@ -1,4 +1,6 @@
 # clogger
+[![Build Status](https://travis-ci.com/RogueSensei/clogger.svg?branch=master)](https://travis-ci.com/RogueSensei/clogger)
+
 A lightweight logging library written in C
 ### Usage
 ```c
