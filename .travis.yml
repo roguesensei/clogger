@@ -1,18 +1,18 @@
-install: # CMake
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
-
-  - travis_retry wget --no-check-certificate https://cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz
-
-  - echo "f3546812c11ce7f5d64dc132a566b749 *cmake-3.3.2-Linux-x86_64.tar.gz" > cmake_md5.txt
-  - md5sum -c cmake_md5.txt
-
-  - tar -xvf cmake-3.3.2-Linux-x86_64.tar.gz > /dev/null
-  - mv cmake-3.3.2-Linux-x86_64 cmake-install
-
-  - PATH=${DEPS_DIR}/cmake-install:${DEPS_DIR}/cmake-install/bin:$PATH
-
-  - cd ${TRAVIS_BUILD_DIR}
+#install: # CMake
+#  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+#  - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
+#
+#  - travis_retry wget --no-check-certificate https://cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz
+#
+#  - echo "f3546812c11ce7f5d64dc132a566b749 *cmake-3.3.2-Linux-x86_64.tar.gz" > cmake_md5.txt
+#  - md5sum -c cmake_md5.txt
+#
+#  - tar -xvf cmake-3.3.2-Linux-x86_64.tar.gz > /dev/null
+#  - mv cmake-3.3.2-Linux-x86_64 cmake-install
+#
+#  - PATH=${DEPS_DIR}/cmake-install:${DEPS_DIR}/cmake-install/bin:$PATH
+#
+#  - cd ${TRAVIS_BUILD_DIR}
 
 matrix:
   include:
@@ -42,19 +42,29 @@ matrix:
         - CLOGGER_SHARED=ON
     - os: linux
       language: c
-      compiler:
-        - clang
-        - gcc
-      name: "Linux static library"
+      compiler: clang
+      name: "Linux static library with clang"
       dist: xenial
       env:
         - CLOGGER_SHARED=OFF
     - os: linux
       language: c
-      compiler:
-        - clang
-        - gcc
-      name: "Linux shared library"
+      compiler: clang
+      name: "Linux shared library with clang"
+      dist: xenial
+      env:
+        - CLOGGER_SHARED=ON
+    - os: linux
+      language: c
+      compiler: gcc
+      name: "Linux static library with GCC"
+      dist: xenial
+      env:
+        - CLOGGER_SHARED=OFF
+    - os: linux
+      language: c
+      compiler: gcc
+      name: "Linux shared library with GCC"
       dist: xenial
       env:
         - CLOGGER_SHARED=ON
@@ -71,36 +81,32 @@ matrix:
       env:
         - CLOGGER_SHARED=ON
     # C++ Builds
-    - os: linux
-      language: c++
-      compiler:
-        - gcc
-      name: "Linux static library C++"
-      dist: xenial
-      env:
-        - CLOGGER_SHARED=OFF
-    - os: linux
-      language: c++
-      compiler:
-        - gcc
-      name: "Linux shared library C++"
-      dist: xenial
-      env:
-        - CLOGGER_SHARED=ON
-    - os: osx
-      language: c++
-      compiler:
-        - gcc
-      name: "OSX static library C++"
-      env:
-        - CLOGGER_SHARED=OFF
-    - os: osx
-      language: c++
-      compiler:
-        - gcc
-      name: "OSX shared library C++"
-      env:
-        - CLOGGER_SHARED=ON
+#    - os: linux
+#      language: c++
+#      compiler: gcc
+#      name: "Linux static library C++"
+#      dist: xenial
+#      env:
+#        - CLOGGER_SHARED=OFF
+#    - os: linux
+#      language: c++
+#      compiler: gcc
+#      name: "Linux shared library C++"
+#      dist: xenial
+#      env:
+#        - CLOGGER_SHARED=ON
+#    - os: osx
+#      language: c++
+#      compiler: gcc
+#      name: "OSX static library C++"
+#      env:
+#        - CLOGGER_SHARED=OFF
+#    - os: osx
+#      language: c++
+#      compiler: gcc
+#      name: "OSX shared library C++"
+#      env:
+#        - CLOGGER_SHARED=ON
 
 before_script:
   - mkdir build
