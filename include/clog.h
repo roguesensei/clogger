@@ -31,6 +31,12 @@ CLOGGER_API void clog_warning(const char* location, const char* message, ...);
 CLOGGER_API void clog_error(const char* location, const char* message, ...);
 CLOGGER_API void clog_fatal(const char* location, const char* message, ...);
 
+// Displays a traceback message
+CLOGGER_API void clog_trace(const char* function_name, const char* file_name, int line);
+// Shorthand macros
+#define CLOGGER_TRACE() clog_trace(__FUNCTION__, __FILE__, __LINE__)
+#define CLOGGER_TRACE_LINE(line) clog_trace(__FUNCTION__, __FILE__, line)
+
 // Log message to file: returns CLOGGER_FALSE if the file is not found etc. else CLOGGER_TRUE
 CLOGGER_API int clog_to_file(const char* file_path, const char* location, const char* message);
 

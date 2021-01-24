@@ -1,7 +1,7 @@
 # clogger
 [![Build Status](https://travis-ci.com/RogueSensei/clogger.svg?branch=master)](https://travis-ci.com/RogueSensei/clogger)
 
-A lightweight logging library written in C
+A lightweight functional logging library written in C
 ### Usage
 ```c
 #include <clogger.h>
@@ -48,6 +48,19 @@ void my_debug_function()
     char* message = "Debug mode is turned on";
     clog_info("DEBUG FUNCTION", "%s", message);
 }
+```
+### Tracing functions
+You can log a function trace to make debugging easier with the `clog_trace` function.
+```c
+clog_trace(__FUNCTION__, __FILE__, __LINE__);
+```
+#### Result
+![img.png](res/traceback.png)
+
+In my case, my IDE makes that link clickable and will take me straight to the line the trace was called on. The most common tracebacks will likely be the line it was called on, so you can use the shorthand macros `CLOGGER_TRACE()` or `CLOGGER_TRACE_LINE()` if you want to specify a line.
+```c
+CLOGGER_TRACE();
+CLOGGER_TRACE_LINE(5);
 ```
 ### Did I mention the pretty colours?
 ![img.png](res/log_level_colours.png)
