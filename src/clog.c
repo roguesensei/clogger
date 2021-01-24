@@ -132,7 +132,6 @@ int clog_to_file(const char* file_path, const char* location, const char* messag
     }
     else
     {
-        perror(file_path);
         clog_error(__FUNCTION__, "Could not open file %s", file_path);
     }
 
