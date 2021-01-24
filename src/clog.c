@@ -101,6 +101,11 @@ void clog_fatal(const char* location, const char* message, ...)
     va_end(args);
 }
 
+void clog_trace(const char* function_name, const char* file_name, int line)
+{
+    printf("Traceback:\n\tIn function: %s >> %s:%d\n", function_name, file_name, line);
+}
+
 int clog_to_file(const char* file_path, const char* location, const char* message)
 {
     enum CLoggerBool result = CLOGGER_FALSE;
