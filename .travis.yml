@@ -1,6 +1,6 @@
 branches:
   only:
-    - dev
+    - master
 
 language: c
 os:
