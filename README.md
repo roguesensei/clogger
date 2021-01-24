@@ -1,6 +1,5 @@
 # clogger 
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FRogueSensei%2Fclogger%2Fbadge&style=flat)](https://actions-badge.atrox.dev/RogueSensei/clogger/goto)
-[![Build Status](https://travis-ci.com/RogueSensei/clogger.svg?branch=master)](https://travis-ci.com/RogueSensei/clogger)
 [![License](https://img.shields.io/github/license/RogueSensei/clogger.svg)](https://github.com/RogueSensei/clogger/blob/master/LICENSE)
 
 A lightweight functional logging library written in C
