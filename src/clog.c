@@ -132,24 +132,8 @@ int clog_to_file(const char* file_path, const char* location, const char* messag
     }
     else
     {
-        char* exc = "Could not open ";
-
-        unsigned int error_length = strlen(exc) + strlen(file_path);
-        char error[error_length];
-
-        for (int i = 0; i < error_length; ++i)
-        {
-            if (i < strlen(exc))
-            {
-                error[i] = (char)exc[i];
-            }
-            else
-            {
-                error[i] = (char)file_path[i - strlen(exc)];
-            }
-        }
-
-        perror(error);
+        perror(file_path);
+        clog_error(__FUNCTION__, "Could not open file %s", file_path);
     }
 
     return result;
