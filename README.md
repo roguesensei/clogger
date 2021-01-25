@@ -50,11 +50,11 @@ When the function is called, a simple formatted message is output to the console
 ### Builtin logging functions
 The library comes with five builtin standard logging functions to distinguish between the 5 typical logging levels.
 ```c
-void clog_info(const char* location, char* message, ...);
-void clog_debug(const char* location, char* message, ...);
-void clog_warning(const char* location, char* message, ...);
-void clog_error(const char* location, char* message, ...);
-void clog_fatal(const char* location, char* message, ...);
+void clog_info(const char* location, const char* message, ...);
+void clog_debug(const char* location, const char* message, ...);
+void clog_warning(const char* location, const char* message, ...);
+void clog_error(const char* location, const char* message, ...);
+void clog_fatal(const char* location, const char* message, ...);
 ```
 Their usage is the same as the standard `clog_message()` function, but will include the logging level as part of the message.
 
