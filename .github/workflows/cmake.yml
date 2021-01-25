@@ -6,8 +6,6 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
-
-
 jobs:
   build:
     # The CMake configure and build commands are platform agnostic and should work equally
@@ -17,7 +15,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, osx-latest]
+        os: [ubuntu-latest, windows-latest]
         build_static: [ON, OFF]
 
     steps:
