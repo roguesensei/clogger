@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <time.h>
 
-#include "../include/clogger.h"
+#include <clogger.h>
 
 int expected_behaviour(const char* location, const char* format, ...)
 {
