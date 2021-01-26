@@ -17,4 +17,6 @@ add_test(NAME clog_debug COMMAND test_clog_debug)
 add_test(NAME clog_warning COMMAND test_clog_warning)
 add_test(NAME clog_error COMMAND test_clog_error)
 add_test(NAME clog_fatal COMMAND test_clog_fatal)
+add_test(NAME clog_to_file_true COMMAND test_clog_to_file_true)
+add_test(NAME clog_to_file_false COMMAND test_clog_to_file_false)
 
