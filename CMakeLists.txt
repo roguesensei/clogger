@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(clogger VERSION 0.1.2 LANGUAGES C)
+project(clogger VERSION 0.1.3 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -10,3 +10,11 @@ if (CLOGGER_SHARED)
 else()
     add_library(clogger STATIC src/clog.c)
 endif ()
+
+# Unit testing
+add_subdirectory(tests/)
+enable_testing()
+
+# Add the tests
+add_test(NAME clog_message COMMAND clog_message_test)
+

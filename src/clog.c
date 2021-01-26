@@ -6,7 +6,7 @@
 #include <string.h>
 #include <time.h>
 
-static enum CLoggerBool debug = CLOG_DEBUG_DEFAULT; // Default value
+static clog_bool debug_mode = CLOG_DEBUG_DEFAULT; // Default value
 
 void format_timestamp(char* buffer)
 {
@@ -19,86 +19,111 @@ void format_timestamp(char* buffer)
     strcpy(buffer, timestamp_buffer);
 }
 
-void clog_messagef(const char* location, const char* format, va_list args)
+int clog_messagef(const char* location, const char* format, va_list args)
 {
+    int chars_written = 0;
     char timestamp[10];
 
     format_timestamp(timestamp);
 
-    printf(CLOGGER_FG_BOLD_CYN"%s"CLOGGER_RESET_CONSOLE" >> "CLOGGER_FG_BOLD_MAG"%s"CLOGGER_RESET_CONSOLE" >> ", timestamp, location);
+    chars_written += printf(
+            CLOGGER_FG_BOLD_CYN"%s"CLOGGER_RESET_CONSOLE" >> "CLOGGER_FG_BOLD_MAG"%s"CLOGGER_RESET_CONSOLE" >> ",
+            timestamp, location);
 
-    vprintf(format, args);
-    printf(CLOGGER_RESET_CONSOLE"\n");
+    chars_written += vprintf(format, args);
+    chars_written += printf(CLOGGER_RESET_CONSOLE"\n");
+
+    return chars_written;
 }
 
-void clog_message(const char* location, const char* message, ...)
+int clog_message(const char* location, const char* message, ...)
 {
+    int chars_written = 0;
     va_list args;
 
     va_start(args, message);
-    clog_messagef(location, message, args);
+    chars_written += clog_messagef(location, message, args);
     va_end(args);
+
+    return chars_written;
 }
 
-void clog_info(const char* location, const char* message, ...)
+int clog_info(const char* location, const char* message, ...)
 {
-    if (debug)
-    {
-        printf(CLOGGER_FG_HBLU"[INFO]"CLOGGER_RESET_CONSOLE" >> ");
+    int chars_written = 0;
 
+    if (debug_mode)
+    {
         va_list args;
 
+        chars_written += printf(CLOGGER_FG_HBLU"[INFO]"CLOGGER_RESET_CONSOLE" >> ");
+
         va_start(args, message);
-        clog_messagef(location, message, args);
+        chars_written += clog_messagef(location, message, args);
         va_end(args);
     }
+
+    return chars_written;
 }
 
-void clog_debug(const char* location, const char* message, ...)
+int clog_debug(const char* location, const char* message, ...)
 {
-    if (debug)
-    {
-        printf(CLOGGER_FG_HGRN"[DEBUG]"CLOGGER_RESET_CONSOLE" >> ");
+    int chars_written = 0;
 
+    if (debug_mode)
+    {
         va_list args;
 
+        chars_written += printf(CLOGGER_FG_HGRN"[DEBUG]"CLOGGER_RESET_CONSOLE" >> ");
+
         va_start(args, message);
-        clog_messagef(location, message, args);
+        chars_written += clog_messagef(location, message, args);
         va_end(args);
     }
+
+    return chars_written;
 }
 
-void clog_warning(const char* location, const char* message, ...)
+int clog_warning(const char* location, const char* message, ...)
 {
-    printf(CLOGGER_FG_HYEL"[WARNING]"CLOGGER_RESET_CONSOLE" >> ");
-
+    int chars_written = 0;
     va_list args;
 
+    chars_written += printf(CLOGGER_FG_HYEL"[WARNING]"CLOGGER_RESET_CONSOLE" >> ");
+
     va_start(args, message);
-    clog_messagef(location, message, args);
+    chars_written += clog_messagef(location, message, args);
     va_end(args);
+
+    return chars_written;
 }
 
-void clog_error(const char* location, const char* message, ...)
+int clog_error(const char* location, const char* message, ...)
 {
-    printf(CLOGGER_FG_HRED"[ERROR]"CLOGGER_RESET_CONSOLE" >> ");
-
+    int chars_written = 0;
     va_list args;
 
+    chars_written += printf(CLOGGER_FG_HRED"[ERROR]"CLOGGER_RESET_CONSOLE" >> ");
+
     va_start(args, message);
-    clog_messagef(location, message, args);
+    chars_written += clog_messagef(location, message, args);
     va_end(args);
+
+    return chars_written;
 }
 
-void clog_fatal(const char* location, const char* message, ...)
+int clog_fatal(const char* location, const char* message, ...)
 {
-    printf(CLOGGER_BG_RED"[FATAL]"CLOGGER_RESET_CONSOLE" >> ");
-
+    int chars_written = 0;
     va_list args;
 
+    chars_written += printf(CLOGGER_BG_RED"[FATAL]"CLOGGER_RESET_CONSOLE" >> ");
+
     va_start(args, message);
-    clog_messagef(location, message, args);
+    chars_written += clog_messagef(location, message, args);
     va_end(args);
+
+    return chars_written;
 }
 
 void clog_trace(const char* function_name, const char* file_name, int line)
@@ -106,9 +131,9 @@ void clog_trace(const char* function_name, const char* file_name, int line)
     printf("Traceback:\n\tIn function: %s >> %s:%d\n", function_name, file_name, line);
 }
 
-int clog_to_file(const char* file_path, const char* location, const char* message)
+clog_bool clog_to_file(const char* file_path, const char* location, const char* message)
 {
-    enum CLoggerBool result = CLOGGER_FALSE;
+    clog_bool result = CLOGGER_FALSE;
     FILE* file_ptr;
 
     file_ptr = fopen(file_path, "a+");
@@ -139,8 +164,8 @@ int clog_to_file(const char* file_path, const char* location, const char* messag
     return result;
 }
 
-void set_clogger_debug(enum CLoggerBool value)
+void set_clogger_debug(clog_bool value)
 {
-    debug = value;
+    debug_mode = value;
 }
 
