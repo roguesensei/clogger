@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        build_static: [ON, OFF]
+        build_shared: [ON, OFF]
 
     steps:
     - uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCLOGGER_BUILD_STATIC=${{matrix.build_static}}
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCLOGGER_SHARED=${{matrix.build_shared}}
 
     - name: Build
       working-directory: ${{github.workspace}}/build
