@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(CLogger VERSION 0.1.3 LANGUAGES C)
+project(roguesensei-clogger VERSION 0.1.3 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -10,6 +10,11 @@ add_subdirectory(tests/)
 
 enable_testing()
 
-# Add the tests
-add_test(NAME clog_message COMMAND clog_message_test)
+# Unit tests
+add_test(NAME clog_message COMMAND test_clog_message)
+add_test(NAME clog_info COMMAND test_clog_info)
+add_test(NAME clog_debug COMMAND test_clog_debug)
+add_test(NAME clog_warning COMMAND test_clog_warning)
+add_test(NAME clog_error COMMAND test_clog_error)
+add_test(NAME clog_fatal COMMAND test_clog_fatal)
 
