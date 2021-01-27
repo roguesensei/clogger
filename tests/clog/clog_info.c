@@ -4,10 +4,15 @@
 int main()
 {
     // Arrange
-    int expected_chars = 0; // Leave as 0 as we don't have debug mode turned on
+    int expected_chars = 0;
+
+#ifdef CLOGGER_DEBUG
+    expected_chars += printf(CLOGGER_FG_HBLU"[INFO]"CLOGGER_RESET_CONSOLE" >> ");
+    expected_chars += clog_message(__FUNCTION__, "Debug mode is on");
+#endif
 
     // Act
-    int actual_chars = clog_info(__FUNCTION__, "You can't see me");
+    int actual_chars = clog_info(__FUNCTION__, "Debug mode is on");
 
     // Assert
     assert(expected_chars == actual_chars);
