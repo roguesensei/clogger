@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 3.0)
 project(clogger_test LANGUAGES C)
 
 add_executable(test_clog_message clog/clog_message.c)

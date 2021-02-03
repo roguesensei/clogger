@@ -1,27 +1,7 @@
 #ifndef CLOGGER_CLOG_H
 #define CLOGGER_CLOG_H
 
-#define CLOGGER_FALSE 0
-#define CLOGGER_TRUE 1
-
-#ifdef CLOGGER_DEBUG
-    #define CLOG_DEBUG_DEFAULT CLOGGER_TRUE
-#else
-    #define CLOG_DEBUG_DEFAULT CLOGGER_FALSE
-#endif
-
-#ifdef __cplusplus
-    #define CLOGGER_API extern "C"
-#else
-    #define CLOGGER_API
-#endif
-
-enum CLoggerBool
-{
-    CLogFalse = CLOGGER_FALSE, CLogTrue = CLOGGER_TRUE
-};
-
-typedef enum CLoggerBool clog_bool;
+#include "core.h"
 
 // Generic logging message
 CLOGGER_API int clog_message(const char* location, const char* format, ...);
