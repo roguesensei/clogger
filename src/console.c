@@ -1,52 +1,115 @@
 #include "console.h"
-#include "ansi.h"
-
-#include <stdio.h>
 
 #ifdef WIN32
+
 #include <windows.h>
-#endif
 
-struct ConsoleColourMap
+int
+clog_set_console_colour(clog_console_colour console_colour, clog_bool foreground_intense, clog_bool background_intense,
+                        unsigned short flags)
 {
-    clog_colour colour;
-    char ansi_colour[9];
-    unsigned int windows_console_colour;
-};
+    WORD windows_flags = 0;
 
-void map_colour(clog_colour colour, char* ansi_colour, unsigned int* windows_colour)
-{
-    clog_bool windows_defined = CLogFalse;
-#ifdef WIN32
-    windows_defined = CLogTrue;
-#endif
-
-    switch (colour)
+    switch (console_colour.foreground_colour)
     {
         case Black:
-        {
-            ansi_colour = strcpy(ansi_colour, CLOGGER_FG_BLK);
-            if (windows_defined)
-            {
-                windows_colour = (unsigned int*)0;
-            }
-        }
+            break;
+        case Red:
+            windows_flags |= FOREGROUND_RED;
+            break;
+        case Green:
+            windows_flags |= FOREGROUND_GREEN;
+            break;
+        case Yellow:
+            windows_flags |= FOREGROUND_RED | FOREGROUND_GREEN;
+            break;
+        case Blue:
+            windows_flags |= FOREGROUND_BLUE;
+            break;
+        case Magenta:
+            windows_flags |= FOREGROUND_RED | FOREGROUND_BLUE;
+            break;
+        case Cyan:
+            windows_flags |= FOREGROUND_GREEN | FOREGROUND_BLUE;
+            break;
+        case White:
+            windows_flags |= FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+            break;
+        default:
+            break;
     }
+
+    switch (console_colour.background_colour)
+    {
+        case Black:
+            break;
+        case Red:
+            windows_flags |= BACKGROUND_RED;
+            break;
+        case Green:
+            windows_flags |= BACKGROUND_GREEN;
+            break;
+        case Yellow:
+            windows_flags |= BACKGROUND_RED | BACKGROUND_GREEN;
+            break;
+        case Blue:
+            windows_flags |= BACKGROUND_BLUE;
+            break;
+        case Magenta:
+            windows_flags |= BACKGROUND_RED | BACKGROUND_BLUE;
+            break;
+        case Cyan:
+            windows_flags |= BACKGROUND_GREEN | BACKGROUND_BLUE;
+            break;
+        case White:
+            windows_flags |= BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE;
+            break;
+        default:
+            break;
+    }
+
+    if (foreground_intense)
+    {
+        windows_flags |= FOREGROUND_INTENSITY;
+    }
+
+    if (background_intense)
+    {
+        windows_flags |= BACKGROUND_INTENSITY;
+    }
+
+    if (flags != 0)
+    {
+        windows_flags |= (WORD) flags;
+    }
+
+    return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), windows_flags);
 }
 
-void clog_set_console_colour(clog_colour colour)
+int clog_reset_console_colour()
 {
-    char ansi_colour[10];
-    unsigned int windows_colour;
-    map_colour(colour, &ansi_colour, &windows_colour);
-
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), windows_colour);
+    return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+                                   FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);;
 }
 
-void clog_reset_console_colour()
+#else // UNIX implementations
+
+#include "ansi.h"
+#include <stdio.h>
+
+int clog_reset_console_colour()
 {
-#ifdef WIN32
-#else
-    printf(CLOGGER_RESET_CONSOLE);
+    return printf(CLOGGER_RESET_CONSOLE);
+}
+
 #endif
+
+
+// US English variants
+int clog_set_console_color(clog_console_color console_color, clog_bool foreground_intense, clog_bool background_intense,
+                           unsigned short flags)
+{
+    return clog_set_console_colour(console_color, foreground_intense, background_intense, flags);
 }
+
+int clog_reset_console_color() { return clog_reset_console_colour(); }
