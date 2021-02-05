@@ -1,5 +1,5 @@
 #include "clog.h"
-#include "ansi.h"
+#include "console.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -23,15 +23,26 @@ int clog_messagef(const char* location, const char* format, va_list args)
 {
     int chars_written = 0;
     char timestamp[10];
+    const char separator[] = " >> ";
 
     format_timestamp(timestamp);
 
-    chars_written += printf(
-            CLOGGER_FG_BOLD_CYN"%s"CLOGGER_RESET_CONSOLE" >> "CLOGGER_FG_BOLD_MAG"%s"CLOGGER_RESET_CONSOLE" >> ",
-            timestamp, location);
+    // Timestamp
+    clog_set_console_colour((clog_console_colour){Cyan,Black}, CLOGGER_FOREGROUND_INTENSE);
+    chars_written += printf("%s", timestamp);
+    clog_reset_console_colour();
+
+    chars_written += printf("%s", separator);
+
+    // Location
+    clog_set_console_colour((clog_console_colour){Magenta, Black}, CLOGGER_FOREGROUND_INTENSE);
+    chars_written += printf("%s", location);
+    clog_reset_console_colour();
+
+    chars_written += printf("%s", separator);
 
     chars_written += vprintf(format, args);
-    chars_written += printf(CLOGGER_RESET_CONSOLE"\n");
+    chars_written += printf("\n");
 
     return chars_written;
 }
@@ -56,7 +67,11 @@ int clog_info(const char* location, const char* message, ...)
     {
         va_list args;
 
-        chars_written += printf(CLOGGER_FG_HBLU"[INFO]"CLOGGER_RESET_CONSOLE" >> ");
+        clog_set_console_colour((clog_console_colour){Blue, Black}, CLOGGER_FOREGROUND_INTENSE);
+        chars_written += printf("[INFO]");
+        clog_reset_console_colour();
+
+        chars_written += printf(" >> ");
 
         va_start(args, message);
         chars_written += clog_messagef(location, message, args);
@@ -74,7 +89,11 @@ int clog_debug(const char* location, const char* message, ...)
     {
         va_list args;
 
-        chars_written += printf(CLOGGER_FG_HGRN"[DEBUG]"CLOGGER_RESET_CONSOLE" >> ");
+        clog_set_console_colour((clog_console_colour){Green, Black}, CLOGGER_FOREGROUND_INTENSE);
+        chars_written += printf("[DEBUG]");
+        clog_reset_console_colour();
+
+        chars_written += printf(" >> ");
 
         va_start(args, message);
         chars_written += clog_messagef(location, message, args);
@@ -89,7 +108,11 @@ int clog_warning(const char* location, const char* message, ...)
     int chars_written = 0;
     va_list args;
 
-    chars_written += printf(CLOGGER_FG_HYEL"[WARNING]"CLOGGER_RESET_CONSOLE" >> ");
+    clog_set_console_colour((clog_console_colour){Yellow, Black}, CLOGGER_FOREGROUND_INTENSE);
+    chars_written += printf("[WARNING]");
+    clog_reset_console_colour();
+
+    chars_written += printf(" >> ");
 
     va_start(args, message);
     chars_written += clog_messagef(location, message, args);
@@ -103,7 +126,11 @@ int clog_error(const char* location, const char* message, ...)
     int chars_written = 0;
     va_list args;
 
-    chars_written += printf(CLOGGER_FG_HRED"[ERROR]"CLOGGER_RESET_CONSOLE" >> ");
+    clog_set_console_colour((clog_console_colour){Red, Black}, CLOGGER_FOREGROUND_INTENSE);
+    chars_written += printf("[ERROR]");
+    clog_reset_console_colour();
+
+    chars_written += printf(" >> ");
 
     va_start(args, message);
     chars_written += clog_messagef(location, message, args);
@@ -112,12 +139,16 @@ int clog_error(const char* location, const char* message, ...)
     return chars_written;
 }
 
-int clog_fatal(const char* location, const char* message, ...)
+int clog_critical(const char* location, const char* message, ...)
 {
     int chars_written = 0;
     va_list args;
 
-    chars_written += printf(CLOGGER_BG_RED"[FATAL]"CLOGGER_RESET_CONSOLE" >> ");
+    clog_set_console_colour((clog_console_colour){White, Red}, CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
+    chars_written += printf("[CRITICAL]");
+    clog_reset_console_colour();
+
+    chars_written += printf(" >> ");
 
     va_start(args, message);
     chars_written += clog_messagef(location, message, args);
