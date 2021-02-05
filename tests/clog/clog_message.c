@@ -17,15 +17,13 @@ int expected_behaviour(const char* location, const char* format, ...)
 
     strftime(timestamp_buffer, sizeof timestamp_buffer, "%H:%M:%S", timestamp);
 
-    expected_chars += printf(
-            CLOGGER_FG_BOLD_CYN"%s"CLOGGER_RESET_CONSOLE" >> "CLOGGER_FG_BOLD_MAG"%s"CLOGGER_RESET_CONSOLE" >> ",
-            timestamp_buffer, location);
+    expected_chars += printf("%s >> %s >> ", timestamp_buffer, location);
 
     va_start(args, format);
     expected_chars += vprintf(format, args);
     va_end(args);
 
-    expected_chars += printf(CLOGGER_RESET_CONSOLE"\n");
+    expected_chars += printf("\n");
 
     return expected_chars;
 }

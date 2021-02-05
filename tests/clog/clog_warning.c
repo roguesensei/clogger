@@ -12,7 +12,7 @@ int main()
 
     int expected_chars = 0;
 
-    expected_chars += printf(CLOGGER_FG_HYEL"[WARNING]"CLOGGER_RESET_CONSOLE" >> ");
+    expected_chars += printf("[WARNING] >> ");
     expected_chars += clog_message(location, "%s:%i has enabled debug mode", __FILE__, line);
 
     // Act

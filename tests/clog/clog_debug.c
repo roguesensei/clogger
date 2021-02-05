@@ -12,7 +12,7 @@ int main()
     int num_value = 8;
 
 #ifdef CLOGGER_DEBUG
-    expected_chars += printf(CLOGGER_FG_HGRN"[DEBUG]"CLOGGER_RESET_CONSOLE" >> ");
+    expected_chars += printf("[DEBUG] >> ");
     expected_chars += clog_message(location, "Mario looks good in %i-bit", num_value);
 #endif
 

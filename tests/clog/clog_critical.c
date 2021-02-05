@@ -12,7 +12,7 @@ int main()
 
     int expected_chars = 0;
 
-    expected_chars += printf(CLOGGER_BG_RED"[FATAL]"CLOGGER_RESET_CONSOLE" >> ");
+    expected_chars += printf("[CRITICAL] >> ");
     expected_chars += clog_message(location, error, reason);
 
     // Act

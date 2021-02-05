@@ -11,7 +11,7 @@ int main()
 
     int expected_chars = 0;
 
-    expected_chars += printf(CLOGGER_FG_HRED"[ERROR]"CLOGGER_RESET_CONSOLE" >> ");
+    expected_chars += printf("[ERROR] >> ");
     expected_chars += clog_message(location, "An error occurred %d", line_number);
 
     // Act
