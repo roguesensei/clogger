@@ -19,15 +19,15 @@ typedef struct
     clog_colour background_colour;
 } clog_console_colour;
 
-CLOGGER_API int clog_set_console_colour(clog_console_colour console_colour, unsigned short flags);
-CLOGGER_API int clog_reset_console_colour();
+CLOGGER_API void clog_set_console_colour(clog_console_colour console_colour, unsigned short flags);
+CLOGGER_API void clog_reset_console_colour();
 
 // US English variants
 
 typedef clog_colour clog_color;
 typedef clog_console_colour clog_console_color;
 
-CLOGGER_API int clog_set_console_color(clog_console_color console_color, unsigned short flags);
-CLOGGER_API int clog_reset_console_color();
+CLOGGER_API void clog_set_console_color(clog_console_color console_color, unsigned short flags);
+CLOGGER_API void clog_reset_console_color();
 
 #endif //CLOGGER_CONSOLE_H

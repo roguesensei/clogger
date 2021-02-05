@@ -4,7 +4,7 @@
 
 #include <windows.h>
 
-int clog_set_console_colour(clog_console_colour console_colour, unsigned short flags)
+void clog_set_console_colour(clog_console_colour console_colour, unsigned short flags)
 {
     WORD windows_flags = 0;
 
@@ -71,13 +71,12 @@ int clog_set_console_colour(clog_console_colour console_colour, unsigned short f
         windows_flags |= (WORD) flags;
     }
 
-    return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), windows_flags);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), windows_flags);
 }
 
-int clog_reset_console_colour()
+void clog_reset_console_colour()
 {
-    return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
-                                   FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
 #else // UNIX implementations
@@ -94,9 +93,9 @@ int clog_reset_console_colour()
 
 
 // US English variants
-int clog_set_console_color(clog_console_color console_color, unsigned short flags)
+void clog_set_console_color(clog_console_color console_color, unsigned short flags)
 {
-    return clog_set_console_colour(console_color, flags);
+    clog_set_console_colour(console_color, flags);
 }
 
-int clog_reset_console_color() { return clog_reset_console_colour(); }
+void clog_reset_console_color() { clog_reset_console_colour(); }

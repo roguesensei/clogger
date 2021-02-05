@@ -16,7 +16,7 @@ int main()
     expected_chars += clog_message(location, error, reason);
 
     // Act
-    int actual_chars = clog_fatal(location, error, reason);
+    int actual_chars = clog_critical(location, error, reason);
 
     // Assert
     assert(expected_chars == actual_chars);

@@ -11,7 +11,7 @@ CLOGGER_API int clog_info(const char* location, const char* message, ...);
 CLOGGER_API int clog_debug(const char* location, const char* message, ...);
 CLOGGER_API int clog_warning(const char* location, const char* message, ...);
 CLOGGER_API int clog_error(const char* location, const char* message, ...);
-CLOGGER_API int clog_fatal(const char* location, const char* message, ...);
+CLOGGER_API int clog_critical(const char* location, const char* message, ...);
 
 // Displays a traceback message
 CLOGGER_API void clog_trace(const char* function_name, const char* file_name, int line);
