@@ -4,9 +4,7 @@
 
 #include <windows.h>
 
-int
-clog_set_console_colour(clog_console_colour console_colour, clog_bool foreground_intense, clog_bool background_intense,
-                        unsigned short flags)
+int clog_set_console_colour(clog_console_colour console_colour, unsigned short flags)
 {
     WORD windows_flags = 0;
 
@@ -68,16 +66,6 @@ clog_set_console_colour(clog_console_colour console_colour, clog_bool foreground
             break;
     }
 
-    if (foreground_intense)
-    {
-        windows_flags |= FOREGROUND_INTENSITY;
-    }
-
-    if (background_intense)
-    {
-        windows_flags |= BACKGROUND_INTENSITY;
-    }
-
     if (flags != 0)
     {
         windows_flags |= (WORD) flags;
@@ -106,10 +94,9 @@ int clog_reset_console_colour()
 
 
 // US English variants
-int clog_set_console_color(clog_console_color console_color, clog_bool foreground_intense, clog_bool background_intense,
-                           unsigned short flags)
+int clog_set_console_color(clog_console_color console_color, unsigned short flags)
 {
-    return clog_set_console_colour(console_color, foreground_intense, background_intense, flags);
+    return clog_set_console_colour(console_color, flags);
 }
 
 int clog_reset_console_color() { return clog_reset_console_colour(); }

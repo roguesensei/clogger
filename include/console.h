@@ -3,6 +3,11 @@
 
 #include "core.h"
 
+// Based on wincon.h flags
+#define CLOGGER_FOREGROUND_INTENSE	0x0008
+#define CLOGGER_BACKGROUND_INTENSE  0x0080
+#define CLOGGER_UNDERSCORE          0x8000
+
 typedef enum
 {
     Black, Red, Green, Yellow, Blue, Magenta, Cyan, White
@@ -14,7 +19,7 @@ typedef struct
     clog_colour background_colour;
 } clog_console_colour;
 
-CLOGGER_API int clog_set_console_colour(clog_console_colour console_colour, clog_bool foreground_intense, clog_bool background_intense, unsigned short flags);
+CLOGGER_API int clog_set_console_colour(clog_console_colour console_colour, unsigned short flags);
 CLOGGER_API int clog_reset_console_colour();
 
 // US English variants
@@ -22,7 +27,7 @@ CLOGGER_API int clog_reset_console_colour();
 typedef clog_colour clog_color;
 typedef clog_console_colour clog_console_color;
 
-CLOGGER_API int clog_set_console_color(clog_console_color console_color, clog_bool foreground_intense, clog_bool background_intense, unsigned short flags);
+CLOGGER_API int clog_set_console_color(clog_console_color console_color, unsigned short flags);
 CLOGGER_API int clog_reset_console_color();
 
 #endif //CLOGGER_CONSOLE_H
