@@ -10,7 +10,7 @@
 
 typedef enum
 {
-    Black, Red, Green, Yellow, Blue, Magenta, Cyan, White
+    Clear, Black, Red, Green, Yellow, Blue, Magenta, Cyan, White
 } clog_colour;
 
 typedef struct
