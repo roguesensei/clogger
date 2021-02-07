@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(clogger VERSION 0.2.0 LANGUAGES C)
+project(clogger VERSION 0.3.0 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 

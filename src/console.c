@@ -1,5 +1,5 @@
-#include "console.h"
-#include "ansi.h"
+#include "clogger/console.h"
+#include "clogger/ansi.h"
 
 #ifdef WIN32
 
