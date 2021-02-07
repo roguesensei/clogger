@@ -17,7 +17,7 @@ void format_timestamp(char* buffer)
 
     strftime(timestamp_buffer, sizeof timestamp_buffer, "%H:%M:%S", timestamp);
 
-    strcpy(buffer, timestamp_buffer);
+    strncpy(buffer, timestamp_buffer, sizeof(timestamp_buffer));
 }
 
 int clog_messagef(const char* location, const char* format, va_list args)
