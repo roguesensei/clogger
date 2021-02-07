@@ -22,6 +22,3 @@ if (CLOGGER_TESTS)
     add_test(NAME clog_to_file_false COMMAND test_clog_to_file_false)
 endif ()
 
-add_executable(sandbox sandbox/sandbox.c)
-target_link_libraries(sandbox clogger)
-
