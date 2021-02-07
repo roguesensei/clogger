@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(clogger VERSION 0.2.0 LANGUAGES C)
+project(clogger VERSION 0.3.0 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -21,4 +21,7 @@ if (CLOGGER_TESTS)
     add_test(NAME clog_to_file_true COMMAND test_clog_to_file_true)
     add_test(NAME clog_to_file_false COMMAND test_clog_to_file_false)
 endif ()
+
+add_executable(sandbox sandbox/sandbox.c)
+target_link_libraries(sandbox clogger)
 
