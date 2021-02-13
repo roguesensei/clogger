@@ -177,8 +177,10 @@ void clog_assert(int condition, const char* location, const char* message, ...)
     }
 }
 
-clog_bool clog_to_file(const char* file_path, const char* location, const char* message)
+clog_bool clog_to_file(const char* file_path, const char* location, const char* message, ...)
 {
+    va_list args;
+
     clog_bool result = CLOGGER_FALSE;
     FILE* file_ptr;
 
@@ -194,7 +196,11 @@ clog_bool clog_to_file(const char* file_path, const char* location, const char* 
         fputs(" >> ", file_ptr);
         fputs(location, file_ptr);
         fputs(" >> ", file_ptr);
-        fputs(message, file_ptr);
+
+        va_start(args, message);
+        vfprintf(file_ptr, message, args);
+        va_end(args);
+
         fputs("\n", file_ptr);
 
         result = CLOGGER_TRUE;

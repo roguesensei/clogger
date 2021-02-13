@@ -10,7 +10,7 @@ void default_callback(const char* clogger_name, const char* location) { }
 void clogger_message(char* message_out, const char* message, va_list args)
 {
     char test[256];
-    sscanf(test, message, args);
+    sscanf(test, message, &args);
 
     strncpy(message_out, test, strlen(test));
     // strncpy(message_out, message, strlen(message));
@@ -33,12 +33,11 @@ void clogger_info(clogger* logger, const char* location, const char* message, ..
         va_list args;
 
         va_start(args, message);
-
         char log_message[256];
 
         clogger_message(log_message, message, args);
+        int a = 1;
 
-        // sscanf(message, log_message, args);
         clog_info(location, log_message);
         va_end(args);
     }
