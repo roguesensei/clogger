@@ -5,5 +5,6 @@
 #include "clogger/core.h"
 #include "clogger/console.h"
 #include "clogger/clog.h"
+#include "clogger/clogger.h"
 
 #endif //CLOGGER_CLOGGER_H
