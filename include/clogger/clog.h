@@ -25,7 +25,4 @@ CLOGGER_API void clog_assert(int condition, const char* location, const char* me
 // Log message to file: returns CLOGGER_FALSE if the file is not found etc. else CLOGGER_TRUE
 CLOGGER_API clog_bool clog_to_file(const char* file_path, const char* location, const char* message);
 
-// Toggle whether or not INFO/DEBUG messages should be shown
-CLOGGER_API void set_clogger_debug(clog_bool value);
-
 #endif //CLOGGER_CLOG_H
