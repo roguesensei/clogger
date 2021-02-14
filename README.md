@@ -14,7 +14,7 @@ int main()
 {
     clog_message(__FUNCTION__, "Greetings, universe!");
 
-    char some_string[3] = "bit";
+    char some_string[] = "bit";
     int some_num = 8;
 
     clog_message("I also support string formatting", "Mario looks good in %i-%s", some_num, some_string);

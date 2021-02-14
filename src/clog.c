@@ -3,11 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
 #include <string.h>
 #include <time.h>
-
-static clog_bool debug_mode = CLOG_DEBUG_DEFAULT; // Default value
 
 void format_timestamp(char* buffer)
 {
@@ -64,20 +61,17 @@ int clog_info(const char* location, const char* message, ...)
 {
     int chars_written = 0;
 
-    if (debug_mode)
-    {
-        va_list args;
+    va_list args;
 
-        clog_set_console_colour((clog_console_colour) {Blue, Black}, CLOGGER_FOREGROUND_INTENSE);
-        chars_written += printf("[INFO]");
-        clog_reset_console_colour();
+    clog_set_console_colour((clog_console_colour) {Blue, Black}, CLOGGER_FOREGROUND_INTENSE);
+    chars_written += printf("[INFO]");
+    clog_reset_console_colour();
 
-        chars_written += printf(" >> ");
+    chars_written += printf(" >> ");
 
-        va_start(args, message);
-        chars_written += clog_messagef(location, message, args);
-        va_end(args);
-    }
+    va_start(args, message);
+    chars_written += clog_messagef(location, message, args);
+    va_end(args);
 
     return chars_written;
 }
@@ -86,20 +80,17 @@ int clog_debug(const char* location, const char* message, ...)
 {
     int chars_written = 0;
 
-    if (debug_mode)
-    {
-        va_list args;
+    va_list args;
 
-        clog_set_console_colour((clog_console_colour) {Green, Black}, CLOGGER_FOREGROUND_INTENSE);
-        chars_written += printf("[DEBUG]");
-        clog_reset_console_colour();
+    clog_set_console_colour((clog_console_colour) {Green, Black}, CLOGGER_FOREGROUND_INTENSE);
+    chars_written += printf("[DEBUG]");
+    clog_reset_console_colour();
 
-        chars_written += printf(" >> ");
+    chars_written += printf(" >> ");
 
-        va_start(args, message);
-        chars_written += clog_messagef(location, message, args);
-        va_end(args);
-    }
+    va_start(args, message);
+    chars_written += clog_messagef(location, message, args);
+    va_end(args);
 
     return chars_written;
 }
@@ -185,8 +176,10 @@ void clog_assert(int condition, const char* location, const char* message, ...)
     }
 }
 
-clog_bool clog_to_file(const char* file_path, const char* location, const char* message)
+clog_bool clog_to_file(const char* file_path, const char* location, const char* message, ...)
 {
+    va_list args;
+
     clog_bool result = CLOGGER_FALSE;
     FILE* file_ptr;
 
@@ -202,7 +195,11 @@ clog_bool clog_to_file(const char* file_path, const char* location, const char* 
         fputs(" >> ", file_ptr);
         fputs(location, file_ptr);
         fputs(" >> ", file_ptr);
-        fputs(message, file_ptr);
+
+        va_start(args, message);
+        vfprintf(file_ptr, message, args);
+        va_end(args);
+
         fputs("\n", file_ptr);
 
         result = CLOGGER_TRUE;
@@ -216,10 +213,5 @@ clog_bool clog_to_file(const char* file_path, const char* location, const char* 
     }
 
     return result;
-}
-
-void set_clogger_debug(clog_bool value)
-{
-    debug_mode = value;
 }
 

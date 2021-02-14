@@ -1,10 +1,13 @@
 #ifndef CLOGGER_CLOG_H
 #define CLOGGER_CLOG_H
 
+#include <stdarg.h>
+
 #include "core.h"
 
 // Generic logging message
 CLOGGER_API int clog_message(const char* location, const char* format, ...);
+CLOGGER_API int clog_messagef(const char* location, const char* format, va_list args);
 
 // Pre-defined log functions by level, where info/debug can be configured to display only in debug mode
 CLOGGER_API int clog_info(const char* location, const char* message, ...);
@@ -23,9 +26,6 @@ CLOGGER_API void clog_trace(const char* function_name, const char* file_name, in
 CLOGGER_API void clog_assert(int condition, const char* location, const char* message, ...);
 
 // Log message to file: returns CLOGGER_FALSE if the file is not found etc. else CLOGGER_TRUE
-CLOGGER_API clog_bool clog_to_file(const char* file_path, const char* location, const char* message);
-
-// Toggle whether or not INFO/DEBUG messages should be shown
-CLOGGER_API void set_clogger_debug(clog_bool value);
+CLOGGER_API clog_bool clog_to_file(const char* file_path, const char* location, const char* message, ...);
 
 #endif //CLOGGER_CLOG_H
