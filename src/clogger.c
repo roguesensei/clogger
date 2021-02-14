@@ -30,15 +30,15 @@ void clogger_info(clogger* logger, const char* location, const char* message, ..
         clog_reset_console_colour();
         printf(" >> ");
 
+        clog_set_console_colour((clog_console_colour) {Blue, Black}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[INFO]");
+        clog_reset_console_colour();
+        printf(" >> ");
+
         va_list args;
 
         va_start(args, message);
-        char log_message[256];
-
-        clogger_message(log_message, message, args);
-        int a = 1;
-
-        clog_info(location, log_message);
+        clog_messagef(location, message, args);
         va_end(args);
     }
 }

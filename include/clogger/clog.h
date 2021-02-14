@@ -1,10 +1,13 @@
 #ifndef CLOGGER_CLOG_H
 #define CLOGGER_CLOG_H
 
+#include <stdarg.h>
+
 #include "core.h"
 
 // Generic logging message
 CLOGGER_API int clog_message(const char* location, const char* format, ...);
+CLOGGER_API int clog_messagef(const char* location, const char* format, va_list args);
 
 // Pre-defined log functions by level, where info/debug can be configured to display only in debug mode
 CLOGGER_API int clog_info(const char* location, const char* message, ...);
