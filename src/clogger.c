@@ -3,18 +3,8 @@
 
 #include <stdio.h>
 #include <stdarg.h>
-#include <string.h>
 
 void default_callback(const char* clogger_name, const char* location) { }
-
-void clogger_message(char* message_out, const char* message, va_list args)
-{
-    char test[256];
-    sscanf(test, message, &args);
-
-    strncpy(message_out, test, strlen(test));
-    // strncpy(message_out, message, strlen(message));
-}
 
 clogger make_clogger(const char* clogger_name)
 {
@@ -101,6 +91,9 @@ void clogger_error(clogger* logger, const char* location, const char* message, .
     va_start(args, message);
     clog_messagef(location, message, args);
     va_end(args);
+
+    // Error callback
+    logger->error_callback(logger->name, location);
 }
 
 void clogger_critical(clogger* logger, const char* location, const char* message, ...)
@@ -121,4 +114,7 @@ void clogger_critical(clogger* logger, const char* location, const char* message
     va_start(args, message);
     clog_messagef(location, message, args);
     va_end(args);
+
+    // Error callback
+    logger->error_callback(logger->name, location);
 }
