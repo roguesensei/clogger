@@ -1,6 +1,9 @@
-# clogger 
-![CMake](https://github.com/RogueSensei/clogger/workflows/CMake/badge.svg)
-[![License](https://img.shields.io/github/license/RogueSensei/clogger.svg)](https://github.com/RogueSensei/clogger/blob/master/LICENSE)
+# clogger
+[comment]: <> (Badges generated at https://shields.io)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/RogueSensei/clogger?label=clogger&style=flat-square)
+![GitHub](https://img.shields.io/github/license/RogueSensei/clogger?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/RogueSensei/clogger/CMake?label=UNIX%20Build&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/RogueSensei/clogger/MSBuild?label=Windows%20Build&style=flat-square)
 
 A lightweight functional logging library written in C
 ## Getting Started
