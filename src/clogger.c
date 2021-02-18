@@ -20,7 +20,7 @@ void clogger_info(clogger* logger, const char* location, const char* message, ..
         clog_reset_console_colour();
         printf(" >> ");
 
-        clog_set_console_colour((clog_console_colour) {Blue, Black}, CLOGGER_FOREGROUND_INTENSE);
+        clog_set_console_colour((clog_console_colour) {Blue, Clear}, CLOGGER_FOREGROUND_INTENSE);
         printf("[INFO]");
         clog_reset_console_colour();
         printf(" >> ");
@@ -42,7 +42,7 @@ void clogger_debug(clogger* logger, const char* location, const char* message, .
         clog_reset_console_colour();
         printf(" >> ");
 
-        clog_set_console_colour((clog_console_colour) {Green, Black}, CLOGGER_FOREGROUND_INTENSE);
+        clog_set_console_colour((clog_console_colour) {Green, Clear}, CLOGGER_FOREGROUND_INTENSE);
         printf("[DEBUG]");
         clog_reset_console_colour();
         printf(" >> ");
@@ -62,7 +62,7 @@ void clogger_warning(clogger* logger, const char* location, const char* message,
     clog_reset_console_colour();
     printf(" >> ");
 
-    clog_set_console_colour((clog_console_colour) {Yellow, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Yellow, Clear}, CLOGGER_FOREGROUND_INTENSE);
     printf("[WARNING]");
     clog_reset_console_colour();
     printf(" >> ");
@@ -81,7 +81,7 @@ void clogger_error(clogger* logger, const char* location, const char* message, .
     clog_reset_console_colour();
     printf(" >> ");
 
-    clog_set_console_colour((clog_console_colour) {Red, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Red, Clear}, CLOGGER_FOREGROUND_INTENSE);
     printf("[ERROR]");
     clog_reset_console_colour();
     printf(" >> ");
