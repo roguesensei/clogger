@@ -26,14 +26,14 @@ int clog_messagef(const char* location, const char* format, va_list args)
     format_timestamp(timestamp);
 
     // Timestamp
-    clog_set_console_colour((clog_console_colour) {Cyan, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Cyan, Clear}, CLOGGER_FOREGROUND_INTENSE);
     chars_written += printf("%s", timestamp);
     clog_reset_console_colour();
 
     chars_written += printf("%s", separator);
 
     // Location
-    clog_set_console_colour((clog_console_colour) {Magenta, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Magenta, Clear}, CLOGGER_FOREGROUND_INTENSE);
     chars_written += printf("%s", location);
     clog_reset_console_colour();
 
@@ -63,7 +63,7 @@ int clog_info(const char* location, const char* message, ...)
 
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Blue, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Blue, Clear}, CLOGGER_FOREGROUND_INTENSE);
     chars_written += printf("[INFO]");
     clog_reset_console_colour();
 
@@ -82,7 +82,7 @@ int clog_debug(const char* location, const char* message, ...)
 
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Green, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Green, Clear}, CLOGGER_FOREGROUND_INTENSE);
     chars_written += printf("[DEBUG]");
     clog_reset_console_colour();
 
@@ -100,7 +100,7 @@ int clog_warning(const char* location, const char* message, ...)
     int chars_written = 0;
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Yellow, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Yellow, Clear}, CLOGGER_FOREGROUND_INTENSE);
     chars_written += printf("[WARNING]");
     clog_reset_console_colour();
 
@@ -118,7 +118,7 @@ int clog_error(const char* location, const char* message, ...)
     int chars_written = 0;
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Red, Black}, CLOGGER_FOREGROUND_INTENSE);
+    clog_set_console_colour((clog_console_colour) {Red, Clear}, CLOGGER_FOREGROUND_INTENSE);
     chars_written += printf("[ERROR]");
     clog_reset_console_colour();
 
