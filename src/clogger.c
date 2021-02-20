@@ -8,14 +8,14 @@ void default_callback(const char* clogger_name, const char* location) { }
 
 clogger make_clogger(const char* clogger_name)
 {
-    return (clogger) {clogger_name, default_callback, {Blue, Clear}, clog_false};
+    return (clogger) {clogger_name, default_callback, {Blue, Clear}, clog_false, 0};
 }
 
 void clogger_info(clogger* logger, const char* location, const char* message, ...)
 {
     if (logger->debug_mode)
     {
-        clog_set_console_colour(logger->colour, 0);
+        clog_set_console_colour(logger->colour, logger->colour_flags);
         printf("%s", logger->name);
         clog_reset_console_colour();
         printf(" >> ");
@@ -37,7 +37,7 @@ void clogger_debug(clogger* logger, const char* location, const char* message, .
 {
     if (logger->debug_mode)
     {
-        clog_set_console_colour(logger->colour, 0);
+        clog_set_console_colour(logger->colour, logger->colour_flags);
         printf("%s", logger->name);
         clog_reset_console_colour();
         printf(" >> ");
@@ -57,7 +57,7 @@ void clogger_debug(clogger* logger, const char* location, const char* message, .
 
 void clogger_warning(clogger* logger, const char* location, const char* message, ...)
 {
-    clog_set_console_colour(logger->colour, 0);
+    clog_set_console_colour(logger->colour, logger->colour_flags);
     printf("%s", logger->name);
     clog_reset_console_colour();
     printf(" >> ");
@@ -76,7 +76,7 @@ void clogger_warning(clogger* logger, const char* location, const char* message,
 
 void clogger_error(clogger* logger, const char* location, const char* message, ...)
 {
-    clog_set_console_colour(logger->colour, 0);
+    clog_set_console_colour(logger->colour, logger->colour_flags);
     printf("%s", logger->name);
     clog_reset_console_colour();
     printf(" >> ");
@@ -98,7 +98,7 @@ void clogger_error(clogger* logger, const char* location, const char* message, .
 
 void clogger_critical(clogger* logger, const char* location, const char* message, ...)
 {
-    clog_set_console_colour(logger->colour, 0);
+    clog_set_console_colour(logger->colour, logger->colour_flags);
     printf("%s", logger->name);
     clog_reset_console_colour();
     printf(" >> ");

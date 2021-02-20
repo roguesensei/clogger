@@ -10,6 +10,7 @@ typedef struct CLogger
     void (* error_callback)(const char* clogger_name, const char* location);
     clog_console_colour colour;
     clog_bool debug_mode;
+    unsigned short colour_flags;
 } clogger;
 
 CLOGGER_API clogger make_clogger(const char* clogger_name);
