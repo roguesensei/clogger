@@ -10,6 +10,8 @@
     #define CLOGGER_API
 #endif
 
+typedef unsigned long int clog_thread;
+
 typedef enum clog_bool
 {
     clog_false = CLOGGER_FALSE, clog_true = CLOGGER_TRUE
@@ -40,6 +42,7 @@ typedef struct clogger
 {
     const char* name;
     void (* error_callback)(clog_level level, const char* clogger_name, const char* location);
+    void (* error_callback_async)(const clog_thread* thread, clog_level level, const char* clogger_name, const char* location);
     clog_console_colour colour;
     clog_bool debug_mode;
     unsigned short colour_flags;

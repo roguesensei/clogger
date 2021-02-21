@@ -6,13 +6,12 @@
 #include <string.h>
 #include <pthread.h>
 #include <time.h>
-#include <unistd.h>
 
 typedef struct thread_args
 {
     clog_level level;
-    clogger* logger;
     const char* location;
+    clogger* logger;
     const char* format;
     va_list* args;
 } thread_args;
@@ -28,9 +27,8 @@ void format_timestamp(char* buffer)
     strncpy(buffer, timestamp_buffer, sizeof(timestamp_buffer));
 }
 
-void* clog_thread(void* args)
+void* clog_message_thread(void* args)
 {
-    sleep(1);
     thread_args* arguments = (thread_args*) args;
 
     clog_messagef(arguments->level, arguments->logger, arguments->location, arguments->format, *arguments->args);
@@ -46,6 +44,13 @@ void clog_messagef(clog_level level, clogger* logger, const char* location, cons
 
     format_timestamp(timestamp);
 
+    // Timestamp
+    clog_set_console_colour((clog_console_colour) {Cyan, Clear}, CLOGGER_FOREGROUND_INTENSE);
+    printf("%s", timestamp);
+    clog_reset_console_colour();
+
+    printf("%s", separator);
+
     // Logger name
     if (logger != NULL)
     {
@@ -55,14 +60,6 @@ void clog_messagef(clog_level level, clogger* logger, const char* location, cons
 
         printf("%s", separator);
     }
-
-    // Timestamp
-    clog_set_console_colour((clog_console_colour) {Cyan, Clear}, CLOGGER_FOREGROUND_INTENSE);
-    printf("%s", timestamp);
-    clog_reset_console_colour();
-
-    printf("%s", separator);
-
     // Log level
     switch (level)
     {
@@ -116,12 +113,15 @@ void clog_messagef(clog_level level, clogger* logger, const char* location, cons
     printf("\n");
 }
 
-void clog_messagef_async(pthread_t* thread, clog_level level, clogger* logger, const char* location, const char* format,
-                         va_list args)
+pthread_t clog_messagef_async(clog_level level, clogger* logger, const char* location, const char* format, va_list args)
 {
-    thread_args arguments = {level, logger, location, format, (va_list*) &args};
+    pthread_t thread;
 
-    pthread_create(thread, NULL, clog_thread, &arguments);
+    thread_args arguments = {level, location, logger, format, (va_list*) &args};
+
+    pthread_create(&thread, NULL, clog_message_thread, &arguments);
+
+    return thread;
 }
 
 void clog_message(const char* location, const char* message, ...)
@@ -178,73 +178,73 @@ void clog_critical(const char* location, const char* message, ...)
     va_end(args);
 }
 
-pthread_t clog_message_async(const char* location, const char* message, ...)
+clog_thread clog_message_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
 
     va_start(args, message);
-    clog_messagef_async(&thread, clog_level_message, NULL, location, message, args);
+    thread = clog_messagef_async(clog_level_message, NULL, location, message, args);
     va_end(args);
 
     return thread;
 }
 
-pthread_t clog_info_async(const char* location, const char* message, ...)
+clog_thread clog_info_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
 
     va_start(args, message);
-    clog_messagef_async(&thread, clog_level_info, NULL, location, message, args);
+    thread = clog_messagef_async(clog_level_info, NULL, location, message, args);
     va_end(args);
 
     return thread;
 }
 
-pthread_t clog_debug_async(const char* location, const char* message, ...)
+clog_thread clog_debug_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
 
     va_start(args, message);
-    clog_messagef_async(&thread, clog_level_debug, NULL, location, message, args);
+    thread = clog_messagef_async(clog_level_debug, NULL, location, message, args);
     va_end(args);
 
     return thread;
 }
 
-pthread_t clog_warning_async(const char* location, const char* message, ...)
+clog_thread clog_warning_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
 
     va_start(args, message);
-    clog_messagef_async(&thread, clog_level_warning, NULL, location, message, args);
+    thread = clog_messagef_async(clog_level_warning, NULL, location, message, args);
     va_end(args);
 
     return thread;
 }
 
-pthread_t clog_error_async(const char* location, const char* message, ...)
+clog_thread clog_error_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
 
     va_start(args, message);
-    clog_messagef_async(&thread, clog_level_error, NULL, location, message, args);
+    thread = clog_messagef_async(clog_level_error, NULL, location, message, args);
     va_end(args);
 
     return thread;
 }
 
-pthread_t clog_critical_async(const char* location, const char* message, ...)
+clog_thread clog_critical_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
 
     va_start(args, message);
-    clog_messagef_async(&thread, clog_level_critical, NULL, location, message, args);
+    thread = clog_messagef_async(clog_level_critical, NULL, location, message, args);
     va_end(args);
 
     return thread;
