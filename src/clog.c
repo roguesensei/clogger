@@ -4,7 +4,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
 #include <time.h>
+#include <unistd.h>
+
+typedef struct thread_args
+{
+    clog_level level;
+    clogger* logger;
+    const char* location;
+    const char* format;
+    va_list* args;
+} thread_args;
 
 void format_timestamp(char* buffer)
 {
@@ -17,137 +28,226 @@ void format_timestamp(char* buffer)
     strncpy(buffer, timestamp_buffer, sizeof(timestamp_buffer));
 }
 
-int clog_messagef(const char* location, const char* format, va_list args)
+void* clog_thread(void* args)
 {
-    int chars_written = 0;
+    sleep(1);
+    thread_args* arguments = (thread_args*) args;
+
+    clog_messagef(arguments->level, arguments->logger, arguments->location, arguments->format, *arguments->args);
+
+    pthread_exit(NULL);
+    // return NULL;
+}
+
+void clog_messagef(clog_level level, clogger* logger, const char* location, const char* format, va_list args)
+{
     char timestamp[10];
     const char separator[] = " >> ";
 
     format_timestamp(timestamp);
 
+    // Logger name
+    if (logger != NULL)
+    {
+        clog_set_console_colour(logger->colour, logger->colour_flags);
+        printf("%s", logger->name);
+        clog_reset_console_colour();
+
+        printf("%s", separator);
+    }
+
     // Timestamp
     clog_set_console_colour((clog_console_colour) {Cyan, Clear}, CLOGGER_FOREGROUND_INTENSE);
-    chars_written += printf("%s", timestamp);
+    printf("%s", timestamp);
     clog_reset_console_colour();
 
-    chars_written += printf("%s", separator);
+    printf("%s", separator);
+
+    // Log level
+    switch (level)
+    {
+        case clog_level_info:
+            clog_set_console_colour((clog_console_colour) {Blue, Clear}, CLOGGER_FOREGROUND_INTENSE);
+            printf("[INFO]");
+            clog_reset_console_colour();
+
+            printf("%s", separator);
+            break;
+        case clog_level_debug:
+            clog_set_console_colour((clog_console_colour) {Green, Clear}, CLOGGER_FOREGROUND_INTENSE);
+            printf("[DEBUG]");
+            clog_reset_console_colour();
+
+            printf("%s", separator);
+        case clog_level_warning:
+            clog_set_console_colour((clog_console_colour) {Yellow, Clear}, CLOGGER_FOREGROUND_INTENSE);
+            printf("[WARNING]");
+            clog_reset_console_colour();
+
+            printf("%s", separator);
+            break;
+        case clog_level_error:
+            clog_set_console_colour((clog_console_colour) {Red, Clear}, CLOGGER_FOREGROUND_INTENSE);
+            printf("[ERROR]");
+            clog_reset_console_colour();
+
+            printf("%s", separator);
+            break;
+        case clog_level_critical:
+            clog_set_console_colour((clog_console_colour) {White, Red},
+                                    CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
+            printf("[CRITICAL]");
+            clog_reset_console_colour();
+
+            printf("%s", separator);
+            break;
+        default:
+            break;
+    }
 
     // Location
     clog_set_console_colour((clog_console_colour) {Magenta, Clear}, CLOGGER_FOREGROUND_INTENSE);
-    chars_written += printf("%s", location);
+    printf("%s", location);
     clog_reset_console_colour();
 
-    chars_written += printf("%s", separator);
+    printf("%s", separator);
 
-    chars_written += vprintf(format, args);
-    chars_written += printf("\n");
-
-    return chars_written;
+    vprintf(format, args);
+    printf("\n");
 }
 
-int clog_message(const char* location, const char* message, ...)
+void clog_messagef_async(pthread_t* thread, clog_level level, clogger* logger, const char* location, const char* format,
+                         va_list args)
 {
-    int chars_written = 0;
+    thread_args arguments = {level, logger, location, format, (va_list*) &args};
+
+    pthread_create(thread, NULL, clog_thread, &arguments);
+}
+
+void clog_message(const char* location, const char* message, ...)
+{
     va_list args;
 
     va_start(args, message);
-    chars_written += clog_messagef(location, message, args);
+    clog_messagef(clog_level_message, NULL, location, message, args);
     va_end(args);
-
-    return chars_written;
 }
 
-int clog_info(const char* location, const char* message, ...)
+void clog_info(const char* location, const char* message, ...)
 {
-    int chars_written = 0;
-
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Blue, Clear}, CLOGGER_FOREGROUND_INTENSE);
-    chars_written += printf("[INFO]");
-    clog_reset_console_colour();
-
-    chars_written += printf(" >> ");
-
     va_start(args, message);
-    chars_written += clog_messagef(location, message, args);
+    clog_messagef(clog_level_info, NULL, location, message, args);
     va_end(args);
-
-    return chars_written;
 }
 
-int clog_debug(const char* location, const char* message, ...)
+void clog_debug(const char* location, const char* message, ...)
 {
-    int chars_written = 0;
-
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Green, Clear}, CLOGGER_FOREGROUND_INTENSE);
-    chars_written += printf("[DEBUG]");
-    clog_reset_console_colour();
-
-    chars_written += printf(" >> ");
-
     va_start(args, message);
-    chars_written += clog_messagef(location, message, args);
+    clog_messagef(clog_level_debug, NULL, location, message, args);
     va_end(args);
-
-    return chars_written;
 }
 
-int clog_warning(const char* location, const char* message, ...)
+void clog_warning(const char* location, const char* message, ...)
 {
-    int chars_written = 0;
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Yellow, Clear}, CLOGGER_FOREGROUND_INTENSE);
-    chars_written += printf("[WARNING]");
-    clog_reset_console_colour();
-
-    chars_written += printf(" >> ");
-
     va_start(args, message);
-    chars_written += clog_messagef(location, message, args);
+    clog_messagef(clog_level_warning, NULL, location, message, args);
     va_end(args);
-
-    return chars_written;
 }
 
-int clog_error(const char* location, const char* message, ...)
+void clog_error(const char* location, const char* message, ...)
 {
-    int chars_written = 0;
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {Red, Clear}, CLOGGER_FOREGROUND_INTENSE);
-    chars_written += printf("[ERROR]");
-    clog_reset_console_colour();
-
-    chars_written += printf(" >> ");
-
     va_start(args, message);
-    chars_written += clog_messagef(location, message, args);
+    clog_messagef(clog_level_error, NULL, location, message, args);
     va_end(args);
-
-    return chars_written;
 }
 
-int clog_critical(const char* location, const char* message, ...)
+void clog_critical(const char* location, const char* message, ...)
 {
-    int chars_written = 0;
     va_list args;
 
-    clog_set_console_colour((clog_console_colour) {White, Red},
-                            CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
-    chars_written += printf("[CRITICAL]");
-    clog_reset_console_colour();
+    va_start(args, message);
+    clog_messagef(clog_level_critical, NULL, location, message, args);
+    va_end(args);
+}
 
-    chars_written += printf(" >> ");
+pthread_t clog_message_async(const char* location, const char* message, ...)
+{
+    pthread_t thread;
+    va_list args;
 
     va_start(args, message);
-    chars_written += clog_messagef(location, message, args);
+    clog_messagef_async(&thread, clog_level_message, NULL, location, message, args);
     va_end(args);
 
-    return chars_written;
+    return thread;
+}
+
+pthread_t clog_info_async(const char* location, const char* message, ...)
+{
+    pthread_t thread;
+    va_list args;
+
+    va_start(args, message);
+    clog_messagef_async(&thread, clog_level_info, NULL, location, message, args);
+    va_end(args);
+
+    return thread;
+}
+
+pthread_t clog_debug_async(const char* location, const char* message, ...)
+{
+    pthread_t thread;
+    va_list args;
+
+    va_start(args, message);
+    clog_messagef_async(&thread, clog_level_debug, NULL, location, message, args);
+    va_end(args);
+
+    return thread;
+}
+
+pthread_t clog_warning_async(const char* location, const char* message, ...)
+{
+    pthread_t thread;
+    va_list args;
+
+    va_start(args, message);
+    clog_messagef_async(&thread, clog_level_warning, NULL, location, message, args);
+    va_end(args);
+
+    return thread;
+}
+
+pthread_t clog_error_async(const char* location, const char* message, ...)
+{
+    pthread_t thread;
+    va_list args;
+
+    va_start(args, message);
+    clog_messagef_async(&thread, clog_level_error, NULL, location, message, args);
+    va_end(args);
+
+    return thread;
+}
+
+pthread_t clog_critical_async(const char* location, const char* message, ...)
+{
+    pthread_t thread;
+    va_list args;
+
+    va_start(args, message);
+    clog_messagef_async(&thread, clog_level_critical, NULL, location, message, args);
+    va_end(args);
+
+    return thread;
 }
 
 void clog_trace(const char* function_name, const char* file_name, int line)
@@ -169,7 +269,7 @@ void clog_assert(int condition, const char* location, const char* message, ...)
         printf(" >> ");
 
         va_start(args, message);
-        clog_messagef(location, message, args);
+        clog_messagef(clog_level_message, NULL, location, message, args);
         va_end(args);
 
         abort();
