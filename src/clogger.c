@@ -78,7 +78,7 @@ clog_thread clogger_info_async(clogger* logger, const char* location, const char
     va_list args;
 
     va_start(args, message);
-    thread = clog_messagef_async(clog_level_info, logger, location, message, args);
+    thread = (pthread_t)clog_messagef_async(clog_level_info, logger, location, message, args);
     va_end(args);
 
     return (clog_thread)thread;
@@ -90,7 +90,7 @@ clog_thread clogger_debug_async(clogger* logger, const char* location, const cha
     va_list args;
 
     va_start(args, message);
-    thread = clog_messagef_async(clog_level_debug, logger, location, message, args);
+    thread = (pthread_t)clog_messagef_async(clog_level_debug, logger, location, message, args);
     va_end(args);
 
     return (clog_thread)thread;
@@ -102,7 +102,7 @@ clog_thread clogger_warning_async(clogger* logger, const char* location, const c
     va_list args;
 
     va_start(args, message);
-    thread = clog_messagef_async(clog_level_warning, logger, location, message, args);
+    thread = (pthread_t)clog_messagef_async(clog_level_warning, logger, location, message, args);
     va_end(args);
 
     return (clog_thread)thread;
@@ -114,7 +114,7 @@ clog_thread clogger_error_async(clogger* logger, const char* location, const cha
     va_list args;
 
     va_start(args, message);
-    thread = clog_messagef_async(clog_level_error, logger, location, message, args);
+    thread = (pthread_t)clog_messagef_async(clog_level_error, logger, location, message, args);
     va_end(args);
 
     // Error callback
@@ -129,7 +129,7 @@ clog_thread clogger_critical_async(clogger* logger, const char* location, const 
     va_list args;
 
     va_start(args, message);
-    thread = clog_messagef_async(clog_level_critical, logger, location, message, args);
+    thread = (pthread_t)clog_messagef_async(clog_level_critical, logger, location, message, args);
     va_end(args);
 
     // Error callback
