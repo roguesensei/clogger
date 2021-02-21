@@ -121,7 +121,7 @@ pthread_t clog_messagef_async(clog_level level, clogger* logger, const char* loc
 
     pthread_create(&thread, NULL, clog_message_thread, &arguments);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 void clog_message(const char* location, const char* message, ...)
@@ -187,7 +187,7 @@ clog_thread clog_message_async(const char* location, const char* message, ...)
     thread = clog_messagef_async(clog_level_message, NULL, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clog_info_async(const char* location, const char* message, ...)
@@ -199,7 +199,7 @@ clog_thread clog_info_async(const char* location, const char* message, ...)
     thread = clog_messagef_async(clog_level_info, NULL, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clog_debug_async(const char* location, const char* message, ...)
@@ -211,7 +211,7 @@ clog_thread clog_debug_async(const char* location, const char* message, ...)
     thread = clog_messagef_async(clog_level_debug, NULL, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clog_warning_async(const char* location, const char* message, ...)
@@ -223,7 +223,7 @@ clog_thread clog_warning_async(const char* location, const char* message, ...)
     thread = clog_messagef_async(clog_level_warning, NULL, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clog_error_async(const char* location, const char* message, ...)
@@ -235,7 +235,7 @@ clog_thread clog_error_async(const char* location, const char* message, ...)
     thread = clog_messagef_async(clog_level_error, NULL, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clog_critical_async(const char* location, const char* message, ...)
@@ -247,7 +247,7 @@ clog_thread clog_critical_async(const char* location, const char* message, ...)
     thread = clog_messagef_async(clog_level_critical, NULL, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 void clog_trace(const char* function_name, const char* file_name, int line)

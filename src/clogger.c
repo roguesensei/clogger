@@ -81,7 +81,7 @@ clog_thread clogger_info_async(clogger* logger, const char* location, const char
     thread = clog_messagef_async(clog_level_info, logger, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clogger_debug_async(clogger* logger, const char* location, const char* message, ...)
@@ -93,7 +93,7 @@ clog_thread clogger_debug_async(clogger* logger, const char* location, const cha
     thread = clog_messagef_async(clog_level_debug, logger, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clogger_warning_async(clogger* logger, const char* location, const char* message, ...)
@@ -105,7 +105,7 @@ clog_thread clogger_warning_async(clogger* logger, const char* location, const c
     thread = clog_messagef_async(clog_level_warning, logger, location, message, args);
     va_end(args);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clogger_error_async(clogger* logger, const char* location, const char* message, ...)
@@ -120,7 +120,7 @@ clog_thread clogger_error_async(clogger* logger, const char* location, const cha
     // Error callback
     // logger->error_callback_async(&thread, clog_level_error, logger->name, location);
 
-    return thread;
+    return (clog_thread)thread;
 }
 
 clog_thread clogger_critical_async(clogger* logger, const char* location, const char* message, ...)
@@ -135,5 +135,5 @@ clog_thread clogger_critical_async(clogger* logger, const char* location, const 
     // Error callback
     // logger->error_callback_async(&thread, clog_level_critical, logger->name, location);
 
-    return thread;
+    return (clog_thread)thread;
 }
