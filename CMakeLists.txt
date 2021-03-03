@@ -7,6 +7,3 @@ include_directories(include/)
 
 add_library(clogger STATIC src/clog.c src/console.c src/clogger.c)
 target_link_libraries(clogger pthread)
-
-add_executable(demo sandbox/sandbox.c)
-target_link_libraries(demo clogger)
