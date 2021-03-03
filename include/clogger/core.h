@@ -5,9 +5,9 @@
 #define CLOGGER_TRUE 1
 
 #ifdef __cplusplus
-    #define CLOGGER_API extern "C"
+#define CLOGGER_API extern "C"
 #else
-    #define CLOGGER_API
+#define CLOGGER_API
 #endif
 
 typedef unsigned long int clog_thread;
@@ -19,12 +19,7 @@ typedef enum clog_bool
 
 typedef enum clog_level
 {
-    clog_level_message,
-    clog_level_info,
-    clog_level_debug,
-    clog_level_warning,
-    clog_level_error,
-    clog_level_critical
+    clog_level_message, clog_level_info, clog_level_debug, clog_level_warning, clog_level_error, clog_level_critical
 } clog_level;
 
 typedef enum clog_colour
@@ -42,9 +37,9 @@ typedef struct clogger
 {
     const char* name;
     void (* error_callback)(clog_level level, const char* clogger_name, const char* location);
-    void (* error_callback_async)(const clog_thread* thread, clog_level level, const char* clogger_name, const char* location);
+    // void (* error_callback_async)(const clog_thread* thread, const char* clogger_name, const char* location);
     clog_console_colour colour;
-    clog_bool debug_mode;
+    clog_level log_level;
     unsigned short colour_flags;
 } clogger;
 
