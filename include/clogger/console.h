@@ -8,17 +8,6 @@
 #define CLOGGER_BACKGROUND_INTENSE  0x0080
 #define CLOGGER_UNDERSCORE          0x8000
 
-typedef enum
-{
-    Clear, Black, Red, Green, Yellow, Blue, Magenta, Cyan, White
-} clog_colour;
-
-typedef struct
-{
-    clog_colour foreground_colour;
-    clog_colour background_colour;
-} clog_console_colour;
-
 CLOGGER_API void clog_set_console_colour(clog_console_colour console_colour, unsigned short flags);
 CLOGGER_API void clog_reset_console_colour();
 

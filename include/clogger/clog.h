@@ -5,16 +5,27 @@
 
 #include "core.h"
 
+// Formatter sync/async
+CLOGGER_API void clog_messagef(clog_level level, clogger* logger, const char* location, const char* format, va_list args);
+CLOGGER_API clog_thread clog_messagef_async(clog_level level, clogger* logger, const char* location, const char* format, va_list args);
+
 // Generic logging message
-CLOGGER_API int clog_message(const char* location, const char* format, ...);
-CLOGGER_API int clog_messagef(const char* location, const char* format, va_list args);
+CLOGGER_API void clog_message(const char* location, const char* message, ...);
 
 // Pre-defined log functions by level, where info/debug can be configured to display only in debug mode
-CLOGGER_API int clog_info(const char* location, const char* message, ...);
-CLOGGER_API int clog_debug(const char* location, const char* message, ...);
-CLOGGER_API int clog_warning(const char* location, const char* message, ...);
-CLOGGER_API int clog_error(const char* location, const char* message, ...);
-CLOGGER_API int clog_critical(const char* location, const char* message, ...);
+CLOGGER_API void clog_info(const char* location, const char* message, ...);
+CLOGGER_API void clog_debug(const char* location, const char* message, ...);
+CLOGGER_API void clog_warning(const char* location, const char* message, ...);
+CLOGGER_API void clog_error(const char* location, const char* message, ...);
+CLOGGER_API void clog_critical(const char* location, const char* message, ...);
+
+// Asynchronous varients
+CLOGGER_API clog_thread clog_message_async(const char* location, const char* message, ...);
+CLOGGER_API clog_thread clog_info_async(const char* location, const char* message, ...);
+CLOGGER_API clog_thread clog_debug_async(const char* location, const char* message, ...);
+CLOGGER_API clog_thread clog_warning_async(const char* location, const char* message, ...);
+CLOGGER_API clog_thread clog_error_async(const char* location, const char* message, ...);
+CLOGGER_API clog_thread clog_critical_async(const char* location, const char* message, ...);
 
 // Displays a traceback message
 CLOGGER_API void clog_trace(const char* function_name, const char* file_name, int line);
