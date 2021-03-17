@@ -10,8 +10,6 @@
 #define CLOGGER_API
 #endif
 
-typedef unsigned long int clog_thread;
-
 typedef enum clog_bool
 {
     clog_false = CLOGGER_FALSE, clog_true = CLOGGER_TRUE

@@ -3,6 +3,8 @@ project(clogger VERSION 1.0.0 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 
+find_library(pthread REQUIRED)
+
 include_directories(include/)
 
 add_library(clogger STATIC src/clog.c src/console.c src/clogger.c)
