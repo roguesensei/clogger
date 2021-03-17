@@ -30,7 +30,7 @@ jobs:
       run: cmake -DCMAKE_SYSTEM_VERSION="10.0.18362.0" ..
     
     - name: Install dependencies
-      run: nuget install pthreads -Version 2.9.1.4
+      run: Install-Package pthreads -Version 2.9.1.4
     
     - name: Generated Project
       working-directory: ${{env.SOLUTION_FILE_PATH}}
