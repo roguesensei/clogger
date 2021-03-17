@@ -20,6 +20,9 @@ jobs:
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1
+      
+    - name: Install dependencies
+      run: nuget install pthreads -Version 2.9.1.4
 
     - name: Create Build Environment
       run: mkdir build
