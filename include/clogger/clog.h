@@ -1,13 +1,14 @@
 #ifndef CLOGGER_CLOG_H
 #define CLOGGER_CLOG_H
 
+#include <pthread.h>
 #include <stdarg.h>
 
 #include "core.h"
 
 // Formatter sync/async
 CLOGGER_API void clog_messagef(clog_level level, clogger* logger, const char* location, const char* format, va_list args);
-CLOGGER_API clog_thread clog_messagef_async(clog_level level, clogger* logger, const char* location, const char* format, va_list args);
+CLOGGER_API pthread_t clog_messagef_async(clog_level level, clogger* logger, const char* location, const char* format, va_list args);
 
 // Generic logging message
 CLOGGER_API void clog_message(const char* location, const char* message, ...);
@@ -20,12 +21,12 @@ CLOGGER_API void clog_error(const char* location, const char* message, ...);
 CLOGGER_API void clog_critical(const char* location, const char* message, ...);
 
 // Asynchronous varients
-CLOGGER_API clog_thread clog_message_async(const char* location, const char* message, ...);
-CLOGGER_API clog_thread clog_info_async(const char* location, const char* message, ...);
-CLOGGER_API clog_thread clog_debug_async(const char* location, const char* message, ...);
-CLOGGER_API clog_thread clog_warning_async(const char* location, const char* message, ...);
-CLOGGER_API clog_thread clog_error_async(const char* location, const char* message, ...);
-CLOGGER_API clog_thread clog_critical_async(const char* location, const char* message, ...);
+CLOGGER_API pthread_t clog_message_async(const char* location, const char* message, ...);
+CLOGGER_API pthread_t clog_info_async(const char* location, const char* message, ...);
+CLOGGER_API pthread_t clog_debug_async(const char* location, const char* message, ...);
+CLOGGER_API pthread_t clog_warning_async(const char* location, const char* message, ...);
+CLOGGER_API pthread_t clog_error_async(const char* location, const char* message, ...);
+CLOGGER_API pthread_t clog_critical_async(const char* location, const char* message, ...);
 
 // Displays a traceback message
 CLOGGER_API void clog_trace(const char* function_name, const char* file_name, int line);

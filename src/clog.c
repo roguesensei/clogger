@@ -34,7 +34,7 @@ void* clog_message_thread(void* args)
     clog_messagef(arguments->level, arguments->logger, arguments->location, arguments->format, *arguments->args);
 
     pthread_exit(NULL);
-    // return NULL;
+    return NULL;
 }
 
 void clog_messagef(clog_level level, clogger* logger, const char* location, const char* format, va_list args)
@@ -114,7 +114,7 @@ void clog_messagef(clog_level level, clogger* logger, const char* location, cons
     printf("\n");
 }
 
-clog_thread clog_messagef_async(clog_level level, clogger* logger, const char* location, const char* format, va_list args)
+pthread_t clog_messagef_async(clog_level level, clogger* logger, const char* location, const char* format, va_list args)
 {
     pthread_t thread;
 
@@ -122,7 +122,7 @@ clog_thread clog_messagef_async(clog_level level, clogger* logger, const char* l
 
     pthread_create(&thread, NULL, clog_message_thread, &arguments);
 
-    return (clog_thread) thread;
+    return thread;
 }
 
 void clog_message(const char* location, const char* message, ...)
@@ -179,7 +179,7 @@ void clog_critical(const char* location, const char* message, ...)
     va_end(args);
 }
 
-clog_thread clog_message_async(const char* location, const char* message, ...)
+pthread_t clog_message_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
@@ -188,10 +188,10 @@ clog_thread clog_message_async(const char* location, const char* message, ...)
     thread = (pthread_t) clog_messagef_async(clog_level_message, NULL, location, message, args);
     va_end(args);
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clog_info_async(const char* location, const char* message, ...)
+pthread_t clog_info_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
@@ -200,10 +200,10 @@ clog_thread clog_info_async(const char* location, const char* message, ...)
     thread = (pthread_t) clog_messagef_async(clog_level_info, NULL, location, message, args);
     va_end(args);
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clog_debug_async(const char* location, const char* message, ...)
+pthread_t clog_debug_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
@@ -212,10 +212,10 @@ clog_thread clog_debug_async(const char* location, const char* message, ...)
     thread = (pthread_t) clog_messagef_async(clog_level_debug, NULL, location, message, args);
     va_end(args);
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clog_warning_async(const char* location, const char* message, ...)
+pthread_t clog_warning_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
@@ -224,10 +224,10 @@ clog_thread clog_warning_async(const char* location, const char* message, ...)
     thread = (pthread_t) clog_messagef_async(clog_level_warning, NULL, location, message, args);
     va_end(args);
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clog_error_async(const char* location, const char* message, ...)
+pthread_t clog_error_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
@@ -236,10 +236,10 @@ clog_thread clog_error_async(const char* location, const char* message, ...)
     thread = (pthread_t) clog_messagef_async(clog_level_error, NULL, location, message, args);
     va_end(args);
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clog_critical_async(const char* location, const char* message, ...)
+pthread_t clog_critical_async(const char* location, const char* message, ...)
 {
     pthread_t thread;
     va_list args;
@@ -248,7 +248,7 @@ clog_thread clog_critical_async(const char* location, const char* message, ...)
     thread = (pthread_t) clog_messagef_async(clog_level_critical, NULL, location, message, args);
     va_end(args);
 
-    return (clog_thread) thread;
+    return thread;
 }
 
 void clog_trace(const char* function_name, const char* file_name, int line)

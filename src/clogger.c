@@ -5,17 +5,12 @@
 #include <stdarg.h>
 #include <pthread.h>
 
-void default_callback(clog_level level, const char* clogger_name, const char* location) { }
-
-void default_callback_async(const pthread_t* thread, const char* clogger_name, const char* location) { }
-
 // The "do nothing" thread so when the thread is joined, it doesn't crash
 void* thread_do_nothing(void* args) { return NULL; }
 
 clogger make_clogger(const char* clogger_name)
 {
-    return (clogger) {clogger_name, default_callback, /* default_callback_async, */ {Blue, Clear}, clog_level_warning,
-                      0};
+    return (clogger) {clogger_name, NULL, {Blue, Clear}, clog_level_warning, 0};
 }
 
 void clogger_info(clogger* logger, const char* location, const char* message, ...)
@@ -65,7 +60,10 @@ void clogger_error(clogger* logger, const char* location, const char* message, .
         va_end(args);
 
         // Error callback
-        logger->error_callback(clog_level_error, logger->name, location);
+        if (logger->error_callback)
+        {
+            logger->error_callback(clog_level_error, logger->name, location);
+        }
     }
 }
 
@@ -80,11 +78,14 @@ void clogger_critical(clogger* logger, const char* location, const char* message
         va_end(args);
 
         // Error callback
-        logger->error_callback(clog_level_critical, logger->name, location);
+        if (logger->error_callback)
+        {
+            logger->error_callback(clog_level_critical, logger->name, location);
+        }
     }
 }
 
-clog_thread clogger_info_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_info_async(clogger* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -101,10 +102,10 @@ clog_thread clogger_info_async(clogger* logger, const char* location, const char
         pthread_create(&thread, NULL, thread_do_nothing, NULL);
     }
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clogger_debug_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_debug_async(clogger* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -121,10 +122,10 @@ clog_thread clogger_debug_async(clogger* logger, const char* location, const cha
         pthread_create(&thread, NULL, thread_do_nothing, NULL);
     }
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clogger_warning_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_warning_async(clogger* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -141,10 +142,10 @@ clog_thread clogger_warning_async(clogger* logger, const char* location, const c
         pthread_create(&thread, NULL, thread_do_nothing, NULL);
     }
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clogger_error_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_error_async(clogger* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -164,10 +165,10 @@ clog_thread clogger_error_async(clogger* logger, const char* location, const cha
         pthread_create(&thread, NULL, thread_do_nothing, NULL);
     }
 
-    return (clog_thread) thread;
+    return thread;
 }
 
-clog_thread clogger_critical_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_critical_async(clogger* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -187,5 +188,5 @@ clog_thread clogger_critical_async(clogger* logger, const char* location, const 
         pthread_create(&thread, NULL, thread_do_nothing, NULL);
     }
 
-    return (clog_thread) thread;
+    return thread;
 }
