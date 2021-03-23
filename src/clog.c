@@ -277,6 +277,24 @@ void clog_assert(int condition, const char* location, const char* message, ...)
     }
 }
 
+void clog_expect(int condition, const char* location, const char* message, ...)
+{
+    if (!condition)
+    {
+        va_list args;
+
+        clog_set_console_colour((clog_console_colour) {White, Yellow}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[ASSERT FAILED]");
+        clog_reset_console_colour();
+
+        printf(" >> ");
+
+        va_start(args, message);
+        clog_messagef(clog_level_message, NULL, location, message, args);
+        va_end(args);
+    }
+}
+
 clog_bool clog_to_file(const char* file_path, const char* location, const char* message, ...)
 {
     va_list args;

@@ -5,9 +5,7 @@
 #define CLOGGER_TRUE 1
 
 #ifdef __cplusplus
-#define CLOGGER_API extern "C"
-#else
-#define CLOGGER_API
+extern "C" {
 #endif
 
 typedef enum clog_bool
@@ -40,5 +38,9 @@ typedef struct clogger
     clog_level log_level;
     unsigned short colour_flags;
 } clogger;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //CLOGGER_CORE_H
