@@ -22,7 +22,9 @@ typedef clog_console_colour clog_console_color;
 
 void clog_set_console_color(clog_console_color console_color, unsigned short flags);
 void clog_reset_console_color();
+
 #ifdef __cplusplus
 }
 #endif
+
 #endif //CLOGGER_CONSOLE_H
