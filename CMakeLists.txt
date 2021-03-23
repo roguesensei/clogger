@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(clogger VERSION 1.0.1 LANGUAGES C CXX)
+project(clogger VERSION 1.0.1 LANGUAGES C)
 
 message(STATUS "${CMAKE_PROJECT_NAME}: Version ${CMAKE_VERSION}")
 
