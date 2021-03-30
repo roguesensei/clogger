@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(clogger VERSION 1.0.2 LANGUAGES C)
 
-message(STATUS "${CMAKE_PROJECT_NAME}: Version ${CMAKE_VERSION}")
+message(STATUS "${PROJECT_NAME}: Version ${PROJECT_VERSION}")
 
 set(CMAKE_C_STANDARD 11)
 
