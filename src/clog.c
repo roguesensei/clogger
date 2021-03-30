@@ -77,6 +77,7 @@ void clog_messagef(clog_level level, clogger* logger, const char* location, cons
             clog_reset_console_colour();
 
             printf("%s", separator);
+            break;
         case clog_level_warning:
             clog_set_console_colour((clog_console_colour) {Yellow, Clear}, CLOGGER_FOREGROUND_INTENSE);
             printf("[WARNING]");
