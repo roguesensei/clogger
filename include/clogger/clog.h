@@ -11,8 +11,8 @@ extern "C" {
 #include "core.h"
 
 // Formatter sync/async
-void clog_messagef(clog_level level, clogger* logger, const char* location, const char* format, va_list args);
-pthread_t clog_messagef_async(clog_level level, clogger* logger, const char* location, const char* format, va_list args);
+void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
+pthread_t clog_messagef_async(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
 
 // Generic logging message
 void clog_message(const char* location, const char* message, ...);
@@ -41,10 +41,10 @@ void clog_trace(const char* function_name, const char* file_name, int line);
 // Assert function
 void clog_assert(int condition, const char* location, const char* message, ...);
 // Expect function (non-fatal assert function)
-void clog_expect(int condition, const char* location, const char* message, ...);
+int clog_expect(int condition, const char* location, const char* message, ...);
 
 // Log message to file: returns CLOGGER_FALSE if the file is not found etc. else CLOGGER_TRUE
-clog_bool clog_to_file(const char* file_path, const char* location, const char* message, ...);
+int clog_to_file(const char* file_path, const char* location, const char* message, ...);
 
 #ifdef __cplusplus
 }

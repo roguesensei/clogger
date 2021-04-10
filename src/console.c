@@ -5,7 +5,7 @@
 
 #include <windows.h>
 
-void clog_set_console_colour(clog_console_colour console_colour, unsigned short flags)
+void clog_set_console_colour(clog_console_colour_t console_colour, unsigned short flags)
 {
     WORD windows_flags = 0;
 
@@ -155,7 +155,7 @@ void clog_reset_console_colour()
 #endif
 
 // US English variants
-void clog_set_console_color(clog_console_color console_color, unsigned short flags)
+void clog_set_console_color(clog_console_color_t console_color, unsigned short flags)
 {
     clog_set_console_colour(console_color, flags);
 }

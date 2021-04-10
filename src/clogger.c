@@ -8,12 +8,12 @@
 // The "do nothing" thread so when the thread is joined, it doesn't crash
 void* thread_do_nothing(void* args) { return NULL; }
 
-clogger make_clogger(const char* clogger_name)
+clogger_t make_clogger(const char* clogger_name)
 {
-    return (clogger) {clogger_name, NULL, {Blue, Clear}, clog_level_warning, 0};
+    return (clogger_t) {clogger_name, NULL, {Blue, Clear}, clog_level_warning, 0};
 }
 
-void clogger_info(clogger* logger, const char* location, const char* message, ...)
+void clogger_info(clogger_t* logger, const char* location, const char* message, ...)
 {
     if (logger->log_level <= clog_level_info)
     {
@@ -25,7 +25,7 @@ void clogger_info(clogger* logger, const char* location, const char* message, ..
     }
 }
 
-void clogger_debug(clogger* logger, const char* location, const char* message, ...)
+void clogger_debug(clogger_t* logger, const char* location, const char* message, ...)
 {
     if (logger->log_level <= clog_level_debug)
     {
@@ -37,7 +37,7 @@ void clogger_debug(clogger* logger, const char* location, const char* message, .
     }
 }
 
-void clogger_warning(clogger* logger, const char* location, const char* message, ...)
+void clogger_warning(clogger_t* logger, const char* location, const char* message, ...)
 {
     if (logger->log_level <= clog_level_warning)
     {
@@ -49,7 +49,7 @@ void clogger_warning(clogger* logger, const char* location, const char* message,
     }
 }
 
-void clogger_error(clogger* logger, const char* location, const char* message, ...)
+void clogger_error(clogger_t* logger, const char* location, const char* message, ...)
 {
     if (logger->log_level <= clog_level_error)
     {
@@ -67,7 +67,7 @@ void clogger_error(clogger* logger, const char* location, const char* message, .
     }
 }
 
-void clogger_critical(clogger* logger, const char* location, const char* message, ...)
+void clogger_critical(clogger_t* logger, const char* location, const char* message, ...)
 {
     if (logger->log_level <= clog_level_critical)
     {
@@ -85,7 +85,7 @@ void clogger_critical(clogger* logger, const char* location, const char* message
     }
 }
 
-pthread_t clogger_info_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_info_async(clogger_t* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -105,7 +105,7 @@ pthread_t clogger_info_async(clogger* logger, const char* location, const char* 
     return thread;
 }
 
-pthread_t clogger_debug_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_debug_async(clogger_t* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -125,7 +125,7 @@ pthread_t clogger_debug_async(clogger* logger, const char* location, const char*
     return thread;
 }
 
-pthread_t clogger_warning_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_warning_async(clogger_t* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -145,7 +145,7 @@ pthread_t clogger_warning_async(clogger* logger, const char* location, const cha
     return thread;
 }
 
-pthread_t clogger_error_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_error_async(clogger_t* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
@@ -168,7 +168,7 @@ pthread_t clogger_error_async(clogger* logger, const char* location, const char*
     return thread;
 }
 
-pthread_t clogger_critical_async(clogger* logger, const char* location, const char* message, ...)
+pthread_t clogger_critical_async(clogger_t* logger, const char* location, const char* message, ...)
 {
     pthread_t thread;
 
