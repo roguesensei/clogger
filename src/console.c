@@ -11,27 +11,27 @@ void clog_set_console_colour(clog_console_colour_t console_colour, unsigned shor
 
     switch (console_colour.foreground_colour)
     {
-        case Black:
+        case BLACK:
             break;
-        case Red:
+        case RED:
             windows_flags |= FOREGROUND_RED;
             break;
-        case Green:
+        case GREEN:
             windows_flags |= FOREGROUND_GREEN;
             break;
-        case Yellow:
+        case YELLOW:
             windows_flags |= FOREGROUND_RED | FOREGROUND_GREEN;
             break;
-        case Blue:
+        case BLUE:
             windows_flags |= FOREGROUND_BLUE;
             break;
-        case Magenta:
+        case MAGENTA:
             windows_flags |= FOREGROUND_RED | FOREGROUND_BLUE;
             break;
-        case Cyan:
+        case CYAN:
             windows_flags |= FOREGROUND_GREEN | FOREGROUND_BLUE;
             break;
-        case White:
+        case WHITE:
             windows_flags |= FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
             break;
         default:
@@ -40,27 +40,27 @@ void clog_set_console_colour(clog_console_colour_t console_colour, unsigned shor
 
     switch (console_colour.background_colour)
     {
-        case Black:
+        case BLACK:
             break;
-        case Red:
+        case RED:
             windows_flags |= BACKGROUND_RED;
             break;
-        case Green:
+        case GREEN:
             windows_flags |= BACKGROUND_GREEN;
             break;
-        case Yellow:
+        case YELLOW:
             windows_flags |= BACKGROUND_RED | BACKGROUND_GREEN;
             break;
-        case Blue:
+        case BLUE:
             windows_flags |= BACKGROUND_BLUE;
             break;
-        case Magenta:
+        case MAGENTA:
             windows_flags |= BACKGROUND_RED | BACKGROUND_BLUE;
             break;
-        case Cyan:
+        case CYAN:
             windows_flags |= BACKGROUND_GREEN | BACKGROUND_BLUE;
             break;
-        case White:
+        case WHITE:
             windows_flags |= BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE;
             break;
         default:
@@ -88,28 +88,28 @@ void clog_set_console_colour(clog_console_colour_t console_colour, unsigned shor
 {
     switch (console_colour.foreground_colour)
     {
-        case Black:
+        case BLACK:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HBLK : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_BLK : CLOGGER_FG_BLK);
             break;
-        case Red:
+        case RED:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HRED : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_RED : CLOGGER_FG_RED);
             break;
-        case Green:
+        case GREEN:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HGRN : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_GRN : CLOGGER_FG_GRN);
             break;
-        case Yellow:
+        case YELLOW:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HYEL : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_YEL : CLOGGER_FG_YEL);
             break;
-        case Blue:
+        case BLUE:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HBLU : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_BLU : CLOGGER_FG_BLU);
             break;
-        case Magenta:
+        case MAGENTA:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HMAG : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_MAG : CLOGGER_FG_MAG);
             break;
-        case Cyan:
+        case CYAN:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HCYN : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_CYN : CLOGGER_FG_CYN);
             break;
-        case White:
+        case WHITE:
             printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HWHT : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_WHT : CLOGGER_FG_WHT);
             break;
         default:
@@ -118,28 +118,28 @@ void clog_set_console_colour(clog_console_colour_t console_colour, unsigned shor
 
     switch (console_colour.background_colour)
     {
-        case Black:
+        case BLACK:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HBLK : CLOGGER_BG_BLK);
             break;
-        case Red:
+        case RED:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HRED : CLOGGER_BG_RED);
             break;
-        case Green:
+        case GREEN:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HGRN : CLOGGER_BG_GRN);
             break;
-        case Yellow:
+        case YELLOW:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HYEL : CLOGGER_BG_YEL);
             break;
-        case Blue:
+        case BLUE:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HBLU : CLOGGER_BG_BLU);
             break;
-        case Magenta:
+        case MAGENTA:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HMAG : CLOGGER_BG_MAG);
             break;
-        case Cyan:
+        case CYAN:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HCYN : CLOGGER_BG_CYN);
             break;
-        case White:
+        case WHITE:
             printf("%s", CLOGGER_BACKGROUND_INTENSE & flags ? CLOGGER_BG_HWHT : CLOGGER_BG_WHT);
             break;
         default:

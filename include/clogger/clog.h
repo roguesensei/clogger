@@ -38,10 +38,7 @@ void clog_trace(const char* function_name, const char* file_name, int line);
 #define CLOGGER_TRACE() clog_trace(__FUNCTION__, __FILE__, __LINE__)
 #define CLOGGER_TRACE_LINE(line) clog_trace(__FUNCTION__, __FILE__, line)
 
-// Assert function
-void clog_assert(int condition, const char* location, const char* message, ...);
-// Expect function (non-fatal assert function), returns the result of the condition
-int clog_expect(int condition, const char* location, const char* message, ...);
+
 
 // Log message to file: returns CLOGGER_FALSE if the file is not found etc. else CLOGGER_TRUE
 int clog_to_file(const char* file_path, const char* location, const char* message, ...);

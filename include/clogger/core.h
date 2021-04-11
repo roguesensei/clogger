@@ -10,12 +10,12 @@ extern "C" {
 
 typedef enum clog_level
 {
-    clog_level_message, clog_level_info, clog_level_debug, clog_level_warning, clog_level_error, clog_level_critical
+    CLOG_LEVEL_MESSAGE, CLOG_LEVEL_INFO, CLOG_LEVEL_DEBUG, CLOG_LEVEL_WARNING, CLOG_LEVEL_ERROR, CLOG_LEVEL_CRITICAL
 } clog_level_t;
 
 typedef enum clog_colour
 {
-    Clear, Black, Red, Green, Yellow, Blue, Magenta, Cyan, White
+    CLEAR, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
 } clog_colour_t;
 
 typedef struct clog_console_colour
