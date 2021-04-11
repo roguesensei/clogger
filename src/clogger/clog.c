@@ -1,5 +1,5 @@
-#include "clogger/clog.h"
-#include "clogger/console.h"
+#include "clog.h"
+#include "console.h"
 
 #include <stdio.h>
 #include <string.h>

@@ -1,7 +1,7 @@
-#include "clogger/clog_assert.h"
-#include "clogger/core.h"
-#include "clogger/console.h"
-#include "clogger/clog.h"
+#include "clog_assert.h"
+#include "core.h"
+#include "console.h"
+#include "clog.h"
 
 #include <stdlib.h>
 #include <stdio.h>
