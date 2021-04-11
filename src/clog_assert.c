@@ -9,28 +9,15 @@
 
 typedef enum fatal
 {
-    NON_FATAL, FATAL
+    NON_FATAL = CLOG_LEVEL_NON_FATAL_ASSERT,
+    FATAL = CLOG_LEVEL_FATAL_ASSERT
 } fatal_t;
 
 int evaluate_assert(fatal_t fatal, int condition, const char* location, const char* message, va_list args)
 {
     if (!condition)
     {
-        if (fatal)
-        {
-            clog_set_console_colour((clog_console_colour_t) {WHITE, RED},
-                                    CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
-        }
-        else
-        {
-            clog_set_console_colour((clog_console_colour_t) {WHITE, YELLOW}, CLOGGER_FOREGROUND_INTENSE);
-        }
-        printf("[ASSERT FAILED]");
-        clog_reset_console_colour();
-
-        printf(" >> ");
-
-        clog_messagef(CLOG_LEVEL_MESSAGE, NULL, location, message, args);
+        clog_messagef((clog_level_t)fatal, NULL, location, message, args);
     }
 
     return condition;
@@ -82,6 +69,31 @@ int clog_expect(int condition, const char* location, const char* message, ...)
 
     va_start(args, message);
     evaluate_assert(NON_FATAL, condition, location, message, args);
+    va_end(args);
+
+    return condition;
+}
+
+int clog_expect_equal_int32(int expected, int actual, const char* location, const char* message, ...)
+{
+    int condition = expected == actual;
+    va_list args;
+
+    va_start(args, message);
+    if (!evaluate_assert(NON_FATAL, condition, location, message, args))
+    {
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        printf("[EXPECTED RESULT]");
+        clog_reset_console_colour();
+
+        printf(" >> %d\n", expected);
+
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        printf("[ACTUAL RESULT]");
+        clog_reset_console_colour();
+
+        printf(" >> %d\n", actual);
+    }
     va_end(args);
 
     return condition;

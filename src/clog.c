@@ -99,22 +99,43 @@ void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, 
 
             printf("%s", separator);
             break;
+        case CLOG_LEVEL_FATAL_ASSERT:
+            clog_set_console_colour((clog_console_colour_t) {WHITE, RED},
+                                    CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
+
+            printf("[ASSERT FAILED]");
+            clog_reset_console_colour();
+
+            printf("%s", separator);
+            break;
+        case CLOG_LEVEL_NON_FATAL_ASSERT:
+            clog_set_console_colour((clog_console_colour_t) {WHITE, YELLOW}, CLOGGER_FOREGROUND_INTENSE);
+
+            printf("[ASSERT FAILED]");
+            clog_reset_console_colour();
+
+            printf("%s", separator);
+            break;
         default:
             break;
     }
 
     // Location
-    clog_set_console_colour((clog_console_colour_t) {MAGENTA, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-    printf("%s", location);
-    clog_reset_console_colour();
+    if (location)
+    {
+        clog_set_console_colour((clog_console_colour_t) {MAGENTA, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("%s", location);
+        clog_reset_console_colour();
 
-    printf("%s", separator);
+        printf("%s", separator);
+    }
 
     vprintf(format, args);
     printf("\n");
 }
 
-pthread_t clog_messagef_async(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args)
+pthread_t
+clog_messagef_async(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args)
 {
     pthread_t thread;
 
@@ -255,7 +276,6 @@ void clog_trace(const char* function_name, const char* file_name, int line)
 {
     printf("Traceback:\n\tIn function: %s >> %s:%d\n", function_name, file_name, line);
 }
-
 
 
 int clog_to_file(const char* file_path, const char* location, const char* message, ...)
