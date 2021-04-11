@@ -5,6 +5,8 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/RogueSensei/clogger/CMake?label=build&style=flat-square)
 
 A lightweight functional logging library written in C
+
+For clarification, it's pronounced "C logger".
 ## Getting Started
 All the tools you need are contained within a single header: `clogger.h`. Just include it in your C/C++ project and call the standard `clog_message` function, which takes a location (typically the function name) and a message as parameters.
 
