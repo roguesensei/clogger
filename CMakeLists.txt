@@ -11,3 +11,5 @@ include_directories(include/)
 add_library(clogger STATIC src/clogger/clog.c src/clogger/clog_assert.c src/clogger/console.c src/clogger/clogger.c)
 target_link_libraries(clogger pthread)
 
+target_precompile_headers(clogger PUBLIC include/clogger_pch.c include/clogger_pch.h)
+

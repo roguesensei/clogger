@@ -1,12 +1,8 @@
 #include "clog_assert.h"
+#include "clogger_pch.h"
 #include "core.h"
 #include "console.h"
 #include "clog.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
 
 typedef enum fatal
 {

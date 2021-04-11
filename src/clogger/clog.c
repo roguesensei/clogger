@@ -1,10 +1,6 @@
 #include "clog.h"
 #include "console.h"
-
-#include <stdio.h>
-#include <string.h>
-#include <pthread.h>
-#include <time.h>
+#include "clogger_pch.h"
 
 typedef struct thread_args
 {

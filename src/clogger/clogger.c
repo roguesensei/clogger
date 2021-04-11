@@ -1,10 +1,6 @@
 #include "clogger.h"
 #include "clog.h"
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <pthread.h>
-
 // The "do nothing" thread so when the thread is joined, it doesn't crash
 void* thread_do_nothing(void* args) { return NULL; }
 
