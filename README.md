@@ -1,4 +1,4 @@
-# clogger
+# clogger ![GitHub Repo stars](https://img.shields.io/github/stars/RogueSensei/clogger?style=social)
 [comment]: <> (Badges generated at https://shields.io)
 ![GitHub release](https://img.shields.io/github/v/release/RogueSensei/clogger?label=clogger&style=flat-square)
 [![GitHub](https://img.shields.io/github/license/RogueSensei/clogger?style=flat-square)](https://github.com/RogueSensei/clogger/blob/master/LICENSE)
@@ -27,4 +27,8 @@ int main()
 }
 ```
 ## Documentation
-For detailed guides on usage, macros and compiling, please refer to the [clogger wiki](https://github.com/RogueSensei/clogger/wiki).
+For guides on usage, examples and compiling, please refer to the [clogger wiki](https://github.com/RogueSensei/clogger/wiki)
+
+For the detailed API reference, please visit [rs-clogger.readthedocs.io](https://rs-clogger.readthedocs.io/)
+### Credit
+Using [jothepro/doxygen-awesome-css](https://github.com/jothepro/doxygen-awesome-css) as theme for API Reference, generated using Doxygen.
