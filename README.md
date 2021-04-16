@@ -29,7 +29,7 @@ int main()
 ```
 ## Documentation
 
-###### For guides on usage, examples and compiling, please refer to the [clogger wiki](https://github.com/RogueSensei/clogger/wiki)
+For guides on usage, examples and compiling, please refer to the [clogger wiki](https://github.com/RogueSensei/clogger/wiki)
 
 For the detailed API reference, please visit [rs-clogger.readthedocs.io](https://rs-clogger.readthedocs.io/)
 ### Credit
