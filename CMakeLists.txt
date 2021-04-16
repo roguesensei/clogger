@@ -12,6 +12,3 @@ add_library(clogger STATIC src/clogger/clog.c src/clogger/clog_assert.c src/clog
 target_link_libraries(clogger pthread)
 
 target_precompile_headers(clogger PUBLIC include/clogger_pch.c include/clogger_pch.h)
-
-add_executable(sandbox sandbox/sandbox.c)
-target_link_libraries(sandbox clogger)
