@@ -175,6 +175,44 @@ void clog_assert_uint8_neq(uint8_t not_expected, uint8_t actual, const char* loc
     }
 }
 
+void clog_assert_uint8_is_nullptr(const uint8_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_uint8_is_not_nullptr(const uint8_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
+
+        abort();
+    }
+}
+
 void clog_assert_int16_eq(int16_t expected, int16_t actual, const char* location, const char* message, ...)
 {
     va_list args;
@@ -222,6 +260,44 @@ void clog_assert_int16_neq(int16_t not_expected, int16_t actual, const char* loc
         clog_reset_console_colour();
 
         printf(" >> %d\n", actual);
+
+        abort();
+    }
+}
+
+void clog_assert_int16_is_nullptr(const int16_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_int16_is_not_nullptr(const int16_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
 
         abort();
     }
@@ -279,6 +355,44 @@ void clog_assert_uint16_neq(uint16_t not_expected, uint16_t actual, const char* 
     }
 }
 
+void clog_assert_uint16_is_nullptr(const uint16_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_uint16_is_not_nullptr(const uint16_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
+
+        abort();
+    }
+}
+
 void clog_assert_int32_eq(int32_t expected, int32_t actual, const char* location, const char* message, ...)
 {
     va_list args;
@@ -326,6 +440,44 @@ void clog_assert_int32_neq(int32_t not_expected, int32_t actual, const char* loc
         clog_reset_console_colour();
 
         printf(" >> %d\n", actual);
+
+        abort();
+    }
+}
+
+void clog_assert_int32_is_nullptr(const int32_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_int32_is_not_nullptr(const int32_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
 
         abort();
     }
@@ -383,6 +535,44 @@ void clog_assert_uint32_neq(uint32_t not_expected, uint32_t actual, const char* 
     }
 }
 
+void clog_assert_uint32_is_nullptr(const uint32_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_uint32_is_not_nullptr(const uint32_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
+
+        abort();
+    }
+}
+
 void clog_assert_int64_eq(int64_t expected, int64_t actual, const char* location, const char* message, ...)
 {
     va_list args;
@@ -435,6 +625,44 @@ void clog_assert_int64_neq(int64_t not_expected, int64_t actual, const char* loc
     }
 }
 
+void clog_assert_int64_is_nullptr(const int64_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_int64_is_not_nullptr(const int64_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
+
+        abort();
+    }
+}
+
 void clog_assert_uint64_eq(uint64_t expected, uint64_t actual, const char* location, const char* message, ...)
 {
     va_list args;
@@ -482,6 +710,44 @@ void clog_assert_uint64_neq(uint64_t not_expected, uint64_t actual, const char* 
         clog_reset_console_colour();
 
         printf(" >> %lu\n", (unsigned long) actual);
+
+        abort();
+    }
+}
+
+void clog_assert_uint64_is_nullptr(const uint64_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_uint64_is_not_nullptr(const uint64_t* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
 
         abort();
     }
@@ -640,6 +906,44 @@ void clog_assert_str_neq(const char* not_expected, size_t expected_size, const c
         clog_reset_console_colour();
 
         printf(" >> %s (%d bytes)\n", actual, actual_size);
+
+        abort();
+    }
+}
+
+void clog_assert_str_is_nullptr(const char* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr == NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+
+        abort();
+    }
+}
+
+void clog_assert_str_is_not_nullptr(const char* value_ptr, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
+    int result = evaluate_assert(FATAL, value_ptr != NULL, location, message, args);
+    va_end(args);
+
+    if (!result)
+    {
+        clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
 
         abort();
     }
