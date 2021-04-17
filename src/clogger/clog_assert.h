@@ -285,6 +285,7 @@ void clog_assert_size_neq(size_t not_expected, size_t actual, const char* locati
 void clog_assert_char_eq(char expected, char actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality assertion of two chars
+/// @note Although similar to `clog_assert_int8_neq()`, the values written to the console will be the char ASCII value
 /// @param not_expected [in] The not expected value
 /// @param actual [in] The actual value
 /// @param location [in] Location of the assert
@@ -628,7 +629,7 @@ int clog_expect_size_eq(size_t expected, size_t actual, const char* location, co
 int clog_expect_size_neq(size_t not_expected, size_t actual, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two chars
-/// @note Although similar to `clog_assert_int8_eq()`, the values written to the console will be the char ASCII value
+/// @note Although similar to `clog_expect_int8_eq()`, the values written to the console will be the char ASCII value
 /// @param expected [in] The expected value
 /// @param actual [in] The actual value
 /// @param location [in] Location of the assert
@@ -638,6 +639,7 @@ int clog_expect_size_neq(size_t not_expected, size_t actual, const char* locatio
 int clog_expect_char_eq(char expected, char actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two chars
+/// @note Although similar to `clog_expect_int8_neq()`, the values written to the console will be the char ASCII value
 /// @param not_expected [in] The not expected value
 /// @param actual [in] The actual value
 /// @param location [in] Location of the assert
@@ -645,6 +647,46 @@ int clog_expect_char_eq(char expected, char actual, const char* location, const 
 /// @param ... [in] Variable-length args
 /// @return Assertion result
 int clog_expect_char_neq(char not_expected, char actual, const char* location, const char* message, ...);
+
+/// @brief Make an equality non-fatal assertion of two strings
+/// @param expected [in] The expected value
+/// @param expected_size [in] The `sizeof` the expected string
+/// @param actual [in] The actual value
+/// @param actual_size [in] The `sizeof` the actual string
+/// @param location [in] Location of the assert
+/// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
+/// @param ... [in] Variable-length args
+/// @return Assertion result
+int clog_expect_str_eq(const char* expected, size_t expected_size, const char* actual, size_t actual_size,
+                        const char* location, const char* message, ...);
+
+/// @brief Make an inequality non-fatal assertion of two strings
+/// @param not_expected [in] The not expected value
+/// @param not_expected_size [in] The `sizeof` the not expected string
+/// @param actual [in] The actual value
+/// @param actual_size [in] The `sizeof` the actual string
+/// @param location [in] Location of the assert
+/// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
+/// @param ... [in] Variable-length args
+/// @return Assertion result
+int clog_expect_str_neq(const char* not_expected, size_t not_expected_size, const char* actual, size_t actual_size,
+                         const char* location, const char* message, ...);
+
+/// @brief Assert if a pointer is `NULL` without terminating
+/// @param value_ptr [in] Pointer to a string or char
+/// @param location [in] Location of the assert
+/// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
+/// @param ... [in] Variable-length args
+/// @return Assertion result
+int clog_expect_str_is_nullptr(const char* value_ptr, const char* location, const char* message, ...);
+
+/// @brief Assert if a pointer is not `NULL` without terminating
+/// @param value_ptr [in] Pointer to a string or char
+/// @param location [in] Location of the assert
+/// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
+/// @param ... [in] Variable-length args
+/// @return Assertion result
+int clog_expect_str_is_not_nullptr(const char* value_ptr, const char* location, const char* message, ...);
 
 #ifdef __cplusplus
 }

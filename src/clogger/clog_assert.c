@@ -884,13 +884,13 @@ void clog_assert_str_eq(const char* expected, size_t expected_size, const char* 
     }
 }
 
-void clog_assert_str_neq(const char* not_expected, size_t expected_size, const char* actual, size_t actual_size,
+void clog_assert_str_neq(const char* not_expected, size_t not_expected_size, const char* actual, size_t actual_size,
                          const char* location, const char* message, ...)
 {
     va_list args;
 
     va_start(args, message);
-    int result = evaluate_assert(FATAL, strncmp(not_expected, actual, expected_size) != 0, location, message, args);
+    int result = evaluate_assert(FATAL, strncmp(not_expected, actual, not_expected_size) != 0, location, message, args);
     va_end(args);
 
     if (!result)
@@ -899,7 +899,7 @@ void clog_assert_str_neq(const char* not_expected, size_t expected_size, const c
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> NOT %s (%d bytes)\n", not_expected, expected_size);
+        printf(" >> NOT %s (%d bytes)\n", not_expected, not_expected_size);
 
         clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
@@ -1500,13 +1500,13 @@ int clog_expect_int64_eq(int64_t expected, int64_t actual, const char* location,
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> %ld\n",(long) expected);
+        printf(" >> %ld\n", (long) expected);
 
         clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> %ld\n",(long) actual);
+        printf(" >> %ld\n", (long) actual);
     }
     va_end(args);
 
@@ -1525,13 +1525,13 @@ int clog_expect_int64_neq(int64_t not_expected, int64_t actual, const char* loca
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> NOT %ld\n",(long ) not_expected);
+        printf(" >> NOT %ld\n", (long) not_expected);
 
         clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> %ld\n",(long) actual);
+        printf(" >> %ld\n", (long) actual);
     }
     va_end(args);
 
@@ -1588,7 +1588,7 @@ int clog_expect_uint64_eq(uint64_t expected, uint64_t actual, const char* locati
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> %lu\n", (unsigned long)expected);
+        printf(" >> %lu\n", (unsigned long) expected);
 
         clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
         printf("[ACTUAL RESULT]");
@@ -1613,13 +1613,13 @@ int clog_expect_uint64_neq(uint64_t not_expected, uint64_t actual, const char* l
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> NOT %lu\n",(unsigned long) not_expected);
+        printf(" >> NOT %lu\n", (unsigned long) not_expected);
 
         clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
-        printf(" >> %lu\n",(unsigned long) actual);
+        printf(" >> %lu\n", (unsigned long) actual);
     }
     va_end(args);
 
@@ -1758,6 +1758,96 @@ int clog_expect_char_neq(char not_expected, char actual, const char* location, c
         clog_reset_console_colour();
 
         printf(" >> %c\n", actual);
+    }
+    va_end(args);
+
+    return condition;
+}
+
+int clog_expect_str_eq(const char* expected, size_t expected_size, const char* actual, size_t actual_size,
+                       const char* location, const char* message, ...)
+{
+    int condition = strncmp(expected, actual, expected_size) == 0;
+    va_list args;
+
+    va_start(args, message);
+    if (!evaluate_assert(NON_FATAL, condition, location, message, args))
+    {
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED RESULT]");
+        clog_reset_console_colour();
+
+        printf(" >> %s (%d bytes)\n", expected, expected_size);
+
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[ACTUAL RESULT]");
+        clog_reset_console_colour();
+
+        printf(" >> %s (%d bytes)\n", actual, actual_size);
+    }
+    va_end(args);
+
+    return condition;
+}
+
+int clog_expect_str_neq(const char* not_expected, size_t not_expected_size, const char* actual, size_t actual_size,
+                        const char* location, const char* message, ...)
+{
+    int condition = strncmp(not_expected, actual, not_expected_size) != 0;
+    va_list args;
+
+    va_start(args, message);
+    if (!evaluate_assert(NON_FATAL, condition, location, message, args))
+    {
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[EXPECTED RESULT]");
+        clog_reset_console_colour();
+
+        printf(" >> %s (%d bytes)\n", not_expected, not_expected_size);
+
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
+        printf("[ACTUAL RESULT]");
+        clog_reset_console_colour();
+
+        printf(" >> %s (%d bytes)\n", actual, actual_size);
+    }
+    va_end(args);
+
+    return condition;
+}
+
+int clog_expect_str_is_nullptr(const char* value_ptr, const char* location, const char* message, ...)
+{
+    int condition = value_ptr == NULL;
+
+    va_list args;
+
+    va_start(args, message);
+    if (!evaluate_assert(NON_FATAL, condition, location, message, args))
+    {
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        printf("[EXPECTED NULLPTR]");
+        clog_reset_console_colour();
+
+        printf(" >> AT ADDRESS %p\n", value_ptr);
+    }
+    va_end(args);
+
+    return condition;
+}
+
+int clog_expect_str_is_not_nullptr(const char* value_ptr, const char* location, const char* message, ...)
+{
+    int condition = value_ptr != NULL;
+
+    va_list args;
+
+    va_start(args, message);
+    if (!evaluate_assert(NON_FATAL, condition, location, message, args))
+    {
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        printf("[RECEIVED NULLPTR]");
+        clog_reset_console_colour();
     }
     va_end(args);
 
