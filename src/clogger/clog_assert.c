@@ -968,13 +968,13 @@ int clog_expect_int8_eq(int8_t expected, int8_t actual, const char* location, co
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %d\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -993,13 +993,13 @@ int clog_expect_int8_neq(int8_t not_expected, int8_t actual, const char* locatio
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %d\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1019,7 +1019,7 @@ int clog_expect_int8_is_nullptr(const int8_t* value_ptr, const char* location, c
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1039,7 +1039,7 @@ int clog_expect_int8_is_not_nullptr(const int8_t* value_ptr, const char* locatio
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1056,13 +1056,13 @@ int clog_expect_uint8_eq(uint8_t expected, uint8_t actual, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %u\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1081,13 +1081,13 @@ int clog_expect_uint8_neq(uint8_t not_expected, uint8_t actual, const char* loca
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %u\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1107,7 +1107,7 @@ int clog_expect_uint8_is_nullptr(const uint8_t* value_ptr, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1127,7 +1127,7 @@ int clog_expect_uint8_is_not_nullptr(const uint8_t* value_ptr, const char* locat
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1144,13 +1144,13 @@ int clog_expect_int16_eq(int16_t expected, int16_t actual, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %d\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1169,13 +1169,13 @@ int clog_expect_int16_neq(int16_t not_expected, int16_t actual, const char* loca
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %d\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1195,7 +1195,7 @@ int clog_expect_int16_is_nullptr(const int16_t* value_ptr, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1215,7 +1215,7 @@ int clog_expect_int16_is_not_nullptr(const int16_t* value_ptr, const char* locat
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1232,13 +1232,13 @@ int clog_expect_uint16_eq(uint16_t expected, uint16_t actual, const char* locati
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %u\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1257,13 +1257,13 @@ int clog_expect_uint16_neq(uint16_t not_expected, uint16_t actual, const char* l
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %u\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1283,7 +1283,7 @@ int clog_expect_uint16_is_nullptr(const uint16_t* value_ptr, const char* locatio
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1303,7 +1303,7 @@ int clog_expect_uint16_is_not_nullptr(const uint16_t* value_ptr, const char* loc
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1320,13 +1320,13 @@ int clog_expect_int32_eq(int32_t expected, int32_t actual, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %d\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1345,13 +1345,13 @@ int clog_expect_int32_neq(int32_t not_expected, int32_t actual, const char* loca
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %d\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1371,7 +1371,7 @@ int clog_expect_int32_is_nullptr(const int32_t* value_ptr, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1391,7 +1391,7 @@ int clog_expect_int32_is_not_nullptr(const int32_t* value_ptr, const char* locat
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1408,13 +1408,13 @@ int clog_expect_uint32_eq(uint32_t expected, uint32_t actual, const char* locati
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %u\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1433,13 +1433,13 @@ int clog_expect_uint32_neq(uint32_t not_expected, uint32_t actual, const char* l
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %u\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1459,7 +1459,7 @@ int clog_expect_uint32_is_nullptr(const uint32_t* value_ptr, const char* locatio
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1479,7 +1479,7 @@ int clog_expect_uint32_is_not_nullptr(const uint32_t* value_ptr, const char* loc
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1496,13 +1496,13 @@ int clog_expect_int64_eq(int64_t expected, int64_t actual, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %ld\n", (long) expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1521,13 +1521,13 @@ int clog_expect_int64_neq(int64_t not_expected, int64_t actual, const char* loca
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %ld\n", (long) not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1547,7 +1547,7 @@ int clog_expect_int64_is_nullptr(const int64_t* value_ptr, const char* location,
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1567,7 +1567,7 @@ int clog_expect_int64_is_not_nullptr(const int64_t* value_ptr, const char* locat
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1590,7 +1590,7 @@ int clog_expect_uint64_eq(uint64_t expected, uint64_t actual, const char* locati
 
         printf(" >> %lu\n", (unsigned long) expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1609,13 +1609,13 @@ int clog_expect_uint64_neq(uint64_t not_expected, uint64_t actual, const char* l
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %lu\n", (unsigned long) not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1635,7 +1635,7 @@ int clog_expect_uint64_is_nullptr(const uint64_t* value_ptr, const char* locatio
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1655,7 +1655,7 @@ int clog_expect_uint64_is_not_nullptr(const uint64_t* value_ptr, const char* loc
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
@@ -1672,13 +1672,13 @@ int clog_expect_size_eq(size_t expected, size_t actual, const char* location, co
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %d\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1697,13 +1697,13 @@ int clog_expect_size_neq(size_t not_expected, size_t actual, const char* locatio
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %d\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1722,13 +1722,13 @@ int clog_expect_char_eq(char expected, char actual, const char* location, const 
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> %c\n", expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1747,13 +1747,13 @@ int clog_expect_char_neq(char not_expected, char actual, const char* location, c
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED RESULT]");
         clog_reset_console_colour();
 
         printf(" >> NOT %c\n", not_expected);
 
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[ACTUAL RESULT]");
         clog_reset_console_colour();
 
@@ -1825,7 +1825,7 @@ int clog_expect_str_is_nullptr(const char* value_ptr, const char* location, cons
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[EXPECTED NULLPTR]");
         clog_reset_console_colour();
 
@@ -1845,7 +1845,7 @@ int clog_expect_str_is_not_nullptr(const char* value_ptr, const char* location, 
     va_start(args, message);
     if (!evaluate_assert(NON_FATAL, condition, location, message, args))
     {
-        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, 0);
+        clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
         printf("[RECEIVED NULLPTR]");
         clog_reset_console_colour();
     }
