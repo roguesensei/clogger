@@ -22,7 +22,7 @@ extern "C" {
 /// @param args [in] Variable arguments list to use with the `format` string
 void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
 
-/// @brief Asynchronous variant of `clog_messagef`
+/// @brief Asynchronous variant of `clog_messagef()`
 /// @note This function isn't typically used by the end user, it's advisable to use the standard functions
 /// @param level [in] The log level
 /// @param logger [in] Pointer to a `clogger_t` data structure. Pass `NULL` if not used
