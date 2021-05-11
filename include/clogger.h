@@ -6,6 +6,7 @@
 #include "clogger/console.h"
 #include "clogger/clog.h"
 #include "clogger/clog_assert.h"
+#include "clogger/clog_expect.h"
 #include "clogger/clogger.h"
 
 #endif //CLOGGER_H
