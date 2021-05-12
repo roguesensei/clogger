@@ -291,8 +291,12 @@ int clog_to_file(const char* file_path, const char* location, const char* messag
 
         fputs(timestamp, file_ptr);
         fputs(" >> ", file_ptr);
-        fputs(location, file_ptr);
-        fputs(" >> ", file_ptr);
+
+        if (location)
+        {
+            fputs(location, file_ptr);
+            fputs(" >> ", file_ptr);
+        }
 
         va_start(args, message);
         vfprintf(file_ptr, message, args);
@@ -313,3 +317,73 @@ int clog_to_file(const char* file_path, const char* location, const char* messag
     return result;
 }
 
+int clog_prepend_to_file(const char* file_path, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    int result = CLOGGER_FALSE;
+    FILE* file_ptr;
+
+    file_ptr = fopen(file_path, "r");
+
+    if (file_ptr != NULL)
+    {
+        // Open a temporary file
+        const char* temp_file_name = "temp";
+        FILE* temp;
+        temp = fopen(temp_file_name, "a+");
+
+        char timestamp[10];
+
+        format_timestamp(timestamp);
+
+        fputs(timestamp, temp);
+        fputs(" >> ", temp);
+
+        if (location)
+        {
+            fputs(location, temp);
+            fputs(" >> ", temp);
+        }
+
+        va_start(args, message);
+        vfprintf(temp, message, args);
+        va_end(args);
+
+        fputs("\n", temp);
+
+        // Copy original contents to temporary file
+        int c;
+        while ((c = fgetc(file_ptr)) != EOF)
+        {
+            fputc(c, temp);
+        }
+
+        // Close and re-open the file in read mode
+        fclose(temp);
+        temp = fopen(temp_file_name, "r");
+
+        fclose(file_ptr);
+        file_ptr = fopen(file_path, "w+");
+
+        // Copy contents back to original file
+        while ((c = fgetc(temp)) != EOF)
+        {
+            fputc(c, file_ptr);
+        }
+        fclose(file_ptr);
+
+        // Delete the temporary file
+        fclose(temp);
+        remove(temp_file_name);
+
+        result = CLOGGER_TRUE;
+    }
+    else
+    {
+        perror(file_path);
+        clog_error(__FUNCTION__, "Could not open file %s", file_path);
+    }
+
+    return result;
+}
