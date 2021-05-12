@@ -112,12 +112,21 @@ pthread_t clog_critical_async(const char* location, const char* message, ...);
 
 /// @brief Log message to file
 /// @param file_path [in] The file path to dump the log message.
-/// @warning This should be the path to the actual file e.g. `/logs/log.txt`
+/// @deprecated Please use `clog_append_to_file()`
 /// @param location [in] Location of the log
 /// @param message [in] Format-able string message as you would use `printf()`
 /// @param ... [in] Variable-length args
 /// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
 int clog_to_file(const char* file_path, const char* location, const char* message, ...);
+
+/// @brief Log message to file
+/// @param file_path [in] The file path to dump the log message.
+/// @warning This should be the path to the actual file e.g. `/logs/log.txt`
+/// @param location [in] Location of the log
+/// @param message [in] Format-able string message as you would use `printf()`
+/// @param ... [in] Variable-length args
+/// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
+int clog_append_to_file(const char* file_path, const char* location, const char* message, ...);
 
 /// @brief Prepend log message to file
 /// @param file_path [in] The file path to dump the log message.
@@ -130,10 +139,10 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
 
 /// @brief Displays a function traceback message
 /// @details This should be used in sync with the error/critical functions to make debugging/tracing easier as they will not trace back themselves.
-/// @note In some IDEs, the traceback message printed to the console/terminal is clickable, allowing the end-user to jump to the point of interest.
 /// @param function_name [in] Name of the function, usually `__FUNCTION__`
 /// @param file_name [in] Name of the file, usually `__FILE__`
 /// @param line [in] The line number, usually `__LINE__` (or some variant)
+/// @remarks In some IDEs, the traceback message printed to the console/terminal is clickable, allowing the end-user to jump to the point of interest.
 void clog_trace(const char* function_name, const char* file_name, int line);
 
 /// @brief Shorthand macro for `clog_trace`
