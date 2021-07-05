@@ -72,3 +72,6 @@ cmake-build-release/
 venv/
 
 [Dd]oxygen
+
+# Visual Studio
+.vs/

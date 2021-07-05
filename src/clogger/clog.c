@@ -202,7 +202,7 @@ pthread_t clog_message_async(const char* location, const char* message, ...)
     va_list args;
 
     va_start(args, message);
-    thread = (pthread_t) clog_messagef_async(CLOG_LEVEL_MESSAGE, NULL, location, message, args);
+    thread = clog_messagef_async(CLOG_LEVEL_MESSAGE, NULL, location, message, args);
     va_end(args);
 
     return thread;
@@ -214,7 +214,7 @@ pthread_t clog_info_async(const char* location, const char* message, ...)
     va_list args;
 
     va_start(args, message);
-    thread = (pthread_t) clog_messagef_async(CLOG_LEVEL_INFO, NULL, location, message, args);
+    thread = clog_messagef_async(CLOG_LEVEL_INFO, NULL, location, message, args);
     va_end(args);
 
     return thread;
@@ -226,7 +226,7 @@ pthread_t clog_debug_async(const char* location, const char* message, ...)
     va_list args;
 
     va_start(args, message);
-    thread = (pthread_t) clog_messagef_async(CLOG_LEVEL_DEBUG, NULL, location, message, args);
+    thread = clog_messagef_async(CLOG_LEVEL_DEBUG, NULL, location, message, args);
     va_end(args);
 
     return thread;
@@ -238,7 +238,7 @@ pthread_t clog_warning_async(const char* location, const char* message, ...)
     va_list args;
 
     va_start(args, message);
-    thread = (pthread_t) clog_messagef_async(CLOG_LEVEL_WARNING, NULL, location, message, args);
+    thread = clog_messagef_async(CLOG_LEVEL_WARNING, NULL, location, message, args);
     va_end(args);
 
     return thread;
@@ -250,7 +250,7 @@ pthread_t clog_error_async(const char* location, const char* message, ...)
     va_list args;
 
     va_start(args, message);
-    thread = (pthread_t) clog_messagef_async(CLOG_LEVEL_ERROR, NULL, location, message, args);
+    thread = clog_messagef_async(CLOG_LEVEL_ERROR, NULL, location, message, args);
     va_end(args);
 
     return thread;
@@ -262,7 +262,7 @@ pthread_t clog_critical_async(const char* location, const char* message, ...)
     va_list args;
 
     va_start(args, message);
-    thread = (pthread_t) clog_messagef_async(CLOG_LEVEL_CRITICAL, NULL, location, message, args);
+    thread = clog_messagef_async(CLOG_LEVEL_CRITICAL, NULL, location, message, args);
     va_end(args);
 
     return thread;
