@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#ifdef WIN32
+#ifdef _MSC_VER
 #ifndef _TIMESPEC_DEFINED
 #define _TIMESPEC_DEFINED
 #endif
