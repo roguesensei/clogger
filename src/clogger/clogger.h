@@ -53,47 +53,6 @@ void clogger_error(clogger_t* logger, const char* location, const char* message,
 /// @param ... [in] Variable-length args
 void clogger_critical(clogger_t* logger, const char* location, const char* message, ...);
 
-/// @brief Asynchronous variant of `clogger_info()`
-/// @param logger [in] Pointer to `clogger_t` data structure
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clogger_info_async(clogger_t* logger, const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clogger_debug()`
-/// @param logger [in] Pointer to `clogger_t` data structure
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clogger_debug_async(clogger_t* logger, const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clogger_warning()`
-/// @param logger [in] Pointer to `clogger_t` data structure
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clogger_warning_async(clogger_t* logger, const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clogger_error()`
-/// @note Unlike its sync variant, this does not yet support error callback
-/// @param logger [in] Pointer to `clogger_t` data structure
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clogger_error_async(clogger_t* logger, const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clogger_critical()`
-/// @param logger [in] Pointer to `clogger_t` data structure
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clogger_critical_async(clogger_t* logger, const char* location, const char* message, ...);
-
 #ifdef __cplusplus
 }
 #endif
