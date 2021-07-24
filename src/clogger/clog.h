@@ -8,7 +8,6 @@
 extern "C" {
 #endif
 
-#include <pthread.h>
 #include <stdarg.h>
 
 #include "core.h"
@@ -21,16 +20,6 @@ extern "C" {
 /// @param format [in] String detailing the format
 /// @param args [in] Variable arguments list to use with the `format` string
 void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
-
-/// @brief Asynchronous variant of `clog_messagef()`
-/// @note This function isn't typically used by the end user, it's advisable to use the standard functions
-/// @param level [in] The log level
-/// @param logger [in] Pointer to a `clogger_t` data structure. Pass `NULL` if not used
-/// @param location [in] Location of the log, usually `__FUNCTION__` though can be `NULL`
-/// @param format [in] String detailing the format
-/// @param args [in] Variable arguments list to use with the `format` string
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clog_messagef_async(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
 
 /// @brief The generic logging message
 /// @param location [in] Location of the log, usually `__FUNCTION__` though can be `NULL`
@@ -67,48 +56,6 @@ void clog_error(const char* location, const char* message, ...);
 /// @param message [in] Format-able string message as you would use `printf()`
 /// @param ... [in] Variable-length args
 void clog_critical(const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clog_message()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clog_message_async(const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clog_info()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clog_info_async(const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clog_debug()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clog_debug_async(const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clog_warning()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clog_warning_async(const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clog_error()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clog_error_async(const char* location, const char* message, ...);
-
-/// @brief Asynchronous variant of `clog_critical()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return Thread of the function so it can be joined/awaited
-pthread_t clog_critical_async(const char* location, const char* message, ...);
 
 /// @brief Log message to file
 /// @param file_path [in] The file path to dump the log message.
