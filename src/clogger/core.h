@@ -47,7 +47,6 @@ typedef struct clogger
     const char* name; ///< Name of the `clogger`, such as the project name or module
     void (* error_callback)(clog_level_t level, const char* clogger_name,
                             const char* location); ///< Function pointer that calls on an `ERROR` or `CRITICAL` level message
-    // void (* error_callback_async)(const clog_thread* thread, const char* clogger_name, const char* location);
     clog_console_colour_t console_colour; ///< Colour dictating how the name should display in the console
     clog_level_t log_level; ///< The minimum level to log messages
     unsigned short colour_flags; ///< Flags to modify the colour
