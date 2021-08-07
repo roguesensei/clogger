@@ -11,8 +11,6 @@
 extern "C" {
 #endif
 
-#include <pthread.h>
-
 /// @brief Simplified `clogger_t` structure creation function
 /// @param clogger_name [in] Name of the `clogger`
 /// @return Initialized `clogger_t`
