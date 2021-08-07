@@ -4,6 +4,31 @@
 // The "do nothing" thread so when the thread is joined, it doesn't crash
 void* thread_do_nothing(void* args) { return NULL; }
 
+clogger_t* clogger_create(const char* clogger_name)
+{
+    clogger_t* logger = malloc(sizeof(clogger_t));
+    char* default_file_path = "clogger.txt";
+
+    logger->name = clogger_name;
+    logger->error_callback = NULL;
+    logger->console_colour = (clog_console_colour_t) {BLUE, CLEAR};
+    logger->log_level = CLOG_LEVEL_WARNING;
+    logger->colour_flags = 0;
+    logger->file_opt = CLOGGER_FILE_OPT_DEFAULT;
+    logger->log_file_path = calloc(strlen(default_file_path) + 1, sizeof(char));
+
+    memset(logger->log_file_path, 0, sizeof(char));
+    strncpy(logger->log_file_path, default_file_path, strlen(default_file_path));
+
+    return logger;
+}
+
+void clogger_destroy(clogger_t* logger)
+{
+    free(logger->log_file_path);
+    free(logger);
+}
+
 clogger_t make_clogger(const char* clogger_name)
 {
     return (clogger_t) {clogger_name, NULL, {BLUE, CLEAR}, CLOG_LEVEL_WARNING, 0};
@@ -53,6 +78,12 @@ void clogger_error(clogger_t* logger, const char* location, const char* message,
 
         va_start(args, message);
         clog_messagef(CLOG_LEVEL_ERROR, logger, location, message, args);
+
+        // Log to file
+        if (logger->file_opt & CLOGGER_FILEOPT_ERROR_BIT)
+        {
+            clog_append_to_file(logger->log_file_path, location, message);
+        }
         va_end(args);
 
         // Error callback

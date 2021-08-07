@@ -170,49 +170,6 @@ void clog_trace(const char* function_name, const char* file_name, int line)
     printf("Traceback:\n\tIn function: %s >> %s:%d\n", function_name, file_name, line);
 }
 
-int clog_to_file(const char* file_path, const char* location, const char* message, ...)
-{
-    va_list args;
-
-    int result = CLOGGER_FALSE;
-    FILE* file_ptr;
-
-    file_ptr = fopen(file_path, "a+");
-
-    if (file_ptr != NULL)
-    {
-        char timestamp[10];
-
-        format_timestamp(timestamp);
-
-        fputs(timestamp, file_ptr);
-        fputs(" >> ", file_ptr);
-
-        if (location)
-        {
-            fputs(location, file_ptr);
-            fputs(" >> ", file_ptr);
-        }
-
-        va_start(args, message);
-        vfprintf(file_ptr, message, args);
-        va_end(args);
-
-        fputs("\n", file_ptr);
-
-        result = CLOGGER_TRUE;
-
-        fclose(file_ptr);
-    }
-    else
-    {
-        perror(file_path);
-        clog_error(__FUNCTION__, "Could not open file %s", file_path);
-    }
-
-    return result;
-}
-
 int clog_append_to_file(const char* file_path, const char* location, const char* message, ...)
 {
     va_list args;
@@ -317,6 +274,49 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
         remove(temp_file_name);
 
         result = CLOGGER_TRUE;
+    }
+    else
+    {
+        perror(file_path);
+        clog_error(__FUNCTION__, "Could not open file %s", file_path);
+    }
+
+    return result;
+}
+
+int clog_to_file(const char* file_path, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    int result = CLOGGER_FALSE;
+    FILE* file_ptr;
+
+    file_ptr = fopen(file_path, "a+");
+
+    if (file_ptr != NULL)
+    {
+        char timestamp[10];
+
+        format_timestamp(timestamp);
+
+        fputs(timestamp, file_ptr);
+        fputs(" >> ", file_ptr);
+
+        if (location)
+        {
+            fputs(location, file_ptr);
+            fputs(" >> ", file_ptr);
+        }
+
+        va_start(args, message);
+        vfprintf(file_ptr, message, args);
+        va_end(args);
+
+        fputs("\n", file_ptr);
+
+        result = CLOGGER_TRUE;
+
+        fclose(file_ptr);
     }
     else
     {

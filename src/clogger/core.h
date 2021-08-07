@@ -50,6 +50,8 @@ typedef struct clogger
     clog_console_colour_t console_colour; ///< Colour dictating how the name should display in the console
     clog_level_t log_level; ///< The minimum level to log messages
     unsigned short colour_flags; ///< Flags to modify the colour
+    unsigned char file_opt; ///< Flags to determine the file logging options
+    char* log_file_path; ///< File log path
 } clogger_t;
 
 #ifdef __cplusplus

@@ -59,15 +59,6 @@ void clog_critical(const char* location, const char* message, ...);
 
 /// @brief Log message to file
 /// @param file_path [in] The file path to dump the log message.
-/// @deprecated Please use `clog_append_to_file()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
-int clog_to_file(const char* file_path, const char* location, const char* message, ...);
-
-/// @brief Log message to file
-/// @param file_path [in] The file path to dump the log message.
 /// @warning This should be the path to the actual file e.g. `/logs/log.txt`
 /// @param location [in] Location of the log
 /// @param message [in] Format-able string message as you would use `printf()`
@@ -83,6 +74,15 @@ int clog_append_to_file(const char* file_path, const char* location, const char*
 /// @param ... [in] Variable-length args
 /// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
 int clog_prepend_to_file(const char* file_path, const char* location, const char* message, ...);
+
+/// @brief Log message to file
+/// @deprecated Please use `clog_append_to_file()`
+/// @param file_path [in] The file path to dump the log message.
+/// @param location [in] Location of the log
+/// @param message [in] Format-able string message as you would use `printf()`
+/// @param ... [in] Variable-length args
+/// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
+int clog_to_file(const char* file_path, const char* location, const char* message, ...);
 
 /// @brief Displays a function traceback message
 /// @details This should be used in sync with the error/critical functions to make debugging/tracing easier as they will not trace back themselves.
