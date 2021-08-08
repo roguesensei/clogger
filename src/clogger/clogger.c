@@ -1,9 +1,6 @@
 #include "clogger.h"
 #include "clog.h"
 
-// The "do nothing" thread so when the thread is joined, it doesn't crash
-void* thread_do_nothing(void* args) { return NULL; }
-
 clogger_t* clogger_create(const char* clogger_name)
 {
     clogger_t* logger = malloc(sizeof(clogger_t));
@@ -29,10 +26,6 @@ void clogger_destroy(clogger_t* logger)
     free(logger);
 }
 
-clogger_t make_clogger(const char* clogger_name)
-{
-    return (clogger_t) {clogger_name, NULL, {BLUE, CLEAR}, CLOG_LEVEL_WARNING, 0};
-}
 
 void clogger_info(clogger_t* logger, const char* location, const char* message, ...)
 {
@@ -199,4 +192,20 @@ void clogger_critical(clogger_t* logger, const char* location, const char* messa
             logger->error_callback(CLOG_LEVEL_CRITICAL, logger->name, location);
         }
     }
+}
+
+void clogger_set_fileopt_option(clogger_t* logger, unsigned char option, int enabled)
+{
+
+}
+
+void clogger_set_fileopt_path(clogger_t* logger, const char* path)
+{
+    realloc(logger->log_file_path, (strlen(path) * sizeof(char) + sizeof(char)));
+    strncpy(logger->log_file_path, path, strlen(logger->log_file_path));
+}
+
+clogger_t make_clogger(const char* clogger_name)
+{
+    return (clogger_t) {clogger_name, NULL, {BLUE, CLEAR}, CLOG_LEVEL_WARNING, 0, 0, NULL};
 }

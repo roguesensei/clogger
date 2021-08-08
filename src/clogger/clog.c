@@ -210,7 +210,6 @@ int clog_append_to_file(const char* file_path, const char* location, const char*
     else
     {
         perror(file_path);
-        clog_error(__FUNCTION__, "Could not open file %s", file_path);
     }
 
     return result;
@@ -223,15 +222,12 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
     int result = CLOGGER_FALSE;
     FILE* file_ptr;
 
-    file_ptr = fopen(file_path, "r");
-
-    if (file_ptr != NULL)
+    // Open a temporary file
+    const char* temp_file_name = "temp";
+    FILE* temp;
+    temp = fopen(temp_file_name, "a+");
+    if (temp != NULL)
     {
-        // Open a temporary file
-        const char* temp_file_name = "temp";
-        FILE* temp;
-        temp = fopen(temp_file_name, "a+");
-
         char timestamp[10];
 
         format_timestamp(timestamp);
@@ -251,21 +247,26 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
 
         fputs("\n", temp);
 
-        // Copy original contents to temporary file
-        int c;
-        while ((c = fgetc(file_ptr)) != EOF)
+        // Copy original contents to temporary file, if it exists
+        file_ptr = fopen(file_path, "r");
+        if (file_ptr != NULL)
         {
-            fputc(c, temp);
+            int c;
+            while ((c = fgetc(file_ptr)) != EOF)
+            {
+                fputc(c, temp);
+            }
+            fclose(file_ptr);
         }
+
+        file_ptr = fopen(file_path, "w+");
 
         // Close and re-open the file in read mode
         fclose(temp);
         temp = fopen(temp_file_name, "r");
 
-        fclose(file_ptr);
-        file_ptr = fopen(file_path, "w+");
-
         // Copy contents back to original file
+        int c;
         while ((c = fgetc(temp)) != EOF)
         {
             fputc(c, file_ptr);
@@ -281,7 +282,6 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
     else
     {
         perror(file_path);
-        clog_error(__FUNCTION__, "Could not open file %s", file_path);
     }
 
     return result;
