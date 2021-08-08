@@ -1,6 +1,20 @@
 #include "clogger.h"
 #include "clog.h"
 
+u_int8_t clear_flags(u_int8_t bits, u_int8_t flags)
+{
+    bits &= ~flags;
+
+    return bits;
+}
+
+u_int8_t set_flags(u_int8_t bits, u_int8_t flags)
+{
+    bits |= flags;
+
+    return bits;
+}
+
 clogger_t* clogger_create(const char* clogger_name)
 {
     clogger_t* logger = malloc(sizeof(clogger_t));
@@ -38,7 +52,7 @@ void clogger_info(clogger_t* logger, const char* location, const char* message, 
         va_end(args);
 
         // Log to file
-        if (logger->file_opt & CLOGGER_FILEOPT_INFO_BIT)
+        if (logger->file_opt & CLOGGER_FILE_OPT_INFO_BIT)
         {
             char fmessage[++written];
 
@@ -46,13 +60,13 @@ void clogger_info(clogger_t* logger, const char* location, const char* message, 
             vsnprintf(fmessage, sizeof(fmessage), message, args);
             va_end(args);
 
-            if (logger->file_opt & CLOGGER_FILEOPT_PREPEND_BIT)
+            if (logger->file_opt & CLOGGER_FILE_OPT_PREPEND_BIT)
             {
-                clog_prepend_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_prepend_to_file(logger->log_file_path, location, "%s >> [INFO] >> %s", logger->name, fmessage);
             }
             else
             {
-                clog_append_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_append_to_file(logger->log_file_path, location, "%s >> [INFO] >> %s", logger->name, fmessage);
             }
         }
     }
@@ -69,7 +83,7 @@ void clogger_debug(clogger_t* logger, const char* location, const char* message,
         va_end(args);
 
         // Log to file
-        if (logger->file_opt & CLOGGER_FILEOPT_DEBUG_BIT)
+        if (logger->file_opt & CLOGGER_FILE_OPT_DEBUG_BIT)
         {
             char fmessage[++written];
 
@@ -77,13 +91,13 @@ void clogger_debug(clogger_t* logger, const char* location, const char* message,
             vsnprintf(fmessage, sizeof(fmessage), message, args);
             va_end(args);
 
-            if (logger->file_opt & CLOGGER_FILEOPT_PREPEND_BIT)
+            if (logger->file_opt & CLOGGER_FILE_OPT_PREPEND_BIT)
             {
-                clog_prepend_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_prepend_to_file(logger->log_file_path, location, "%s >> [DEBUG] >> %s", logger->name, fmessage);
             }
             else
             {
-                clog_append_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_append_to_file(logger->log_file_path, location, "%s >> [DEBUG] >> %s", logger->name, fmessage);
             }
         }
     }
@@ -100,7 +114,7 @@ void clogger_warning(clogger_t* logger, const char* location, const char* messag
         va_end(args);
 
         // Log to file
-        if (logger->file_opt & CLOGGER_FILEOPT_WARNING_BIT)
+        if (logger->file_opt & CLOGGER_FILE_OPT_WARNING_BIT)
         {
             char fmessage[++written];
 
@@ -108,13 +122,13 @@ void clogger_warning(clogger_t* logger, const char* location, const char* messag
             vsnprintf(fmessage, sizeof(fmessage), message, args);
             va_end(args);
 
-            if (logger->file_opt & CLOGGER_FILEOPT_PREPEND_BIT)
+            if (logger->file_opt & CLOGGER_FILE_OPT_PREPEND_BIT)
             {
-                clog_prepend_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_prepend_to_file(logger->log_file_path, location, "%s >> [WARNING] >> %s", logger->name, fmessage);
             }
             else
             {
-                clog_append_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_append_to_file(logger->log_file_path, location, "%s >> [WARNING] >> %s", logger->name, fmessage);
             }
         }
     }
@@ -131,7 +145,7 @@ void clogger_error(clogger_t* logger, const char* location, const char* message,
         va_end(args);
 
         // Log to file
-        if (logger->file_opt & CLOGGER_FILEOPT_ERROR_BIT)
+        if (logger->file_opt & CLOGGER_FILE_OPT_ERROR_BIT)
         {
             char fmessage[++written];
 
@@ -139,7 +153,7 @@ void clogger_error(clogger_t* logger, const char* location, const char* message,
             vsnprintf(fmessage, sizeof(fmessage), message, args);
             va_end(args);
 
-            if (logger->file_opt & CLOGGER_FILEOPT_PREPEND_BIT)
+            if (logger->file_opt & CLOGGER_FILE_OPT_PREPEND_BIT)
             {
                 clog_prepend_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
             }
@@ -168,7 +182,7 @@ void clogger_critical(clogger_t* logger, const char* location, const char* messa
         va_end(args);
 
         // Log to file
-        if (logger->file_opt & CLOGGER_FILEOPT_CRITICAL_BIT)
+        if (logger->file_opt & CLOGGER_FILE_OPT_CRITICAL_BIT)
         {
             char fmessage[++written];
 
@@ -176,13 +190,13 @@ void clogger_critical(clogger_t* logger, const char* location, const char* messa
             vsnprintf(fmessage, sizeof(fmessage), message, args);
             va_end(args);
 
-            if (logger->file_opt & CLOGGER_FILEOPT_PREPEND_BIT)
+            if (logger->file_opt & CLOGGER_FILE_OPT_PREPEND_BIT)
             {
-                clog_prepend_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_prepend_to_file(logger->log_file_path, location, "%s >> [CRITICAL] >> %s", logger->name, fmessage);
             }
             else
             {
-                clog_append_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+                clog_append_to_file(logger->log_file_path, location, "%s >> [CRITICAL] >> %s", logger->name, fmessage);
             }
         }
 
@@ -194,12 +208,19 @@ void clogger_critical(clogger_t* logger, const char* location, const char* messa
     }
 }
 
-void clogger_set_fileopt_option(clogger_t* logger, unsigned char option, int enabled)
+void clogger_set_file_opt_option(clogger_t* logger, clogger_file_opt_t option, int enabled)
 {
-
+    if (enabled)
+    {
+        logger->file_opt = set_flags(logger->file_opt, option);
+    }
+    else
+    {
+        logger->file_opt = clear_flags(logger->file_opt, option);
+    }
 }
 
-void clogger_set_fileopt_path(clogger_t* logger, const char* path)
+void clogger_set_file_opt_path(clogger_t* logger, const char* path)
 {
     realloc(logger->log_file_path, (strlen(path) * sizeof(char) + sizeof(char)));
     strncpy(logger->log_file_path, path, strlen(logger->log_file_path));
