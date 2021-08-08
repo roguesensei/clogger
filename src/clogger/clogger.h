@@ -5,7 +5,6 @@
 #define CLOGGER_CLOGGER_H
 
 #include "core.h"
-#include "console.h"
 
 #ifdef __cplusplus
 extern "C" {

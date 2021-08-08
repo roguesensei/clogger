@@ -1,7 +1,7 @@
 #include "clogger.h"
 #include "clog.h"
+#include "clog_assert.h"
 #include "clogger_pch.h"
-
 
 uint8_t clear_flags(uint8_t bits, uint8_t flags)
 {
@@ -224,7 +224,9 @@ void clogger_set_file_opt_option(clogger_t* logger, clogger_file_opt_t option, i
 
 void clogger_set_file_opt_path(clogger_t* logger, const char* path)
 {
-    realloc(logger->log_file_path, (strlen(path) * sizeof(char) + sizeof(char)));
+    void* result = realloc(logger->log_file_path, (strlen(path) * sizeof(char) + sizeof(char)));
+    clog_assert(result != NULL, __FUNCTION__, "Could not set the file path to %s because the realloc() failed", path);
+
     strncpy(logger->log_file_path, path, strlen(logger->log_file_path));
 }
 
