@@ -1,14 +1,16 @@
 #include "clogger.h"
 #include "clog.h"
+#include "clogger_pch.h"
 
-u_int8_t clear_flags(u_int8_t bits, u_int8_t flags)
+
+uint8_t clear_flags(uint8_t bits, uint8_t flags)
 {
     bits &= ~flags;
 
     return bits;
 }
 
-u_int8_t set_flags(u_int8_t bits, u_int8_t flags)
+uint8_t set_flags(uint8_t bits, uint8_t flags)
 {
     bits |= flags;
 
