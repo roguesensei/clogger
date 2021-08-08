@@ -15,7 +15,6 @@ extern "C" {
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include <pthread.h>
 #include <time.h>
 
 #ifdef __cplusplus

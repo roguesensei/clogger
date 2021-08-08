@@ -12,14 +12,15 @@ extern "C" {
 
 #include "core.h"
 
-/// @brief The common log function used throughout
+/// @brief The utility log function used throughout the library
 /// @note This function isn't typically used by the end user, it's advisable to use the standard functions
 /// @param level [in] The log level
 /// @param logger [in] Pointer to a `clogger_t` data structure. Pass `NULL` if not used
 /// @param location [in] Location of the log, usually `__FUNCTION__` though can be `NULL`
 /// @param format [in] String detailing the format
 /// @param args [in] Variable arguments list to use with the `format` string
-void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
+/// @return Number of charracters written to the console
+int clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
 
 /// @brief The generic logging message
 /// @param location [in] Location of the log, usually `__FUNCTION__` though can be `NULL`
@@ -59,15 +60,6 @@ void clog_critical(const char* location, const char* message, ...);
 
 /// @brief Log message to file
 /// @param file_path [in] The file path to dump the log message.
-/// @deprecated Please use `clog_append_to_file()`
-/// @param location [in] Location of the log
-/// @param message [in] Format-able string message as you would use `printf()`
-/// @param ... [in] Variable-length args
-/// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
-int clog_to_file(const char* file_path, const char* location, const char* message, ...);
-
-/// @brief Log message to file
-/// @param file_path [in] The file path to dump the log message.
 /// @warning This should be the path to the actual file e.g. `/logs/log.txt`
 /// @param location [in] Location of the log
 /// @param message [in] Format-able string message as you would use `printf()`
@@ -83,6 +75,15 @@ int clog_append_to_file(const char* file_path, const char* location, const char*
 /// @param ... [in] Variable-length args
 /// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
 int clog_prepend_to_file(const char* file_path, const char* location, const char* message, ...);
+
+/// @brief Log message to file
+/// @deprecated Please use `clog_append_to_file()`
+/// @param file_path [in] The file path to dump the log message.
+/// @param location [in] Location of the log
+/// @param message [in] Format-able string message as you would use `printf()`
+/// @param ... [in] Variable-length args
+/// @return `CLOGGER_FALSE` on failure or `CLOGGER_TRUE` on success
+int clog_to_file(const char* file_path, const char* location, const char* message, ...);
 
 /// @brief Displays a function traceback message
 /// @details This should be used in sync with the error/critical functions to make debugging/tracing easier as they will not trace back themselves.

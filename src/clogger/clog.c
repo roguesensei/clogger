@@ -13,8 +13,9 @@ void format_timestamp(char* buffer)
     strncpy(buffer, timestamp_buffer, sizeof(timestamp_buffer));
 }
 
-void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args)
+int clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args)
 {
+    int written = 0;
     char timestamp[10];
     const char separator[] = " >> ";
 
@@ -22,19 +23,19 @@ void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, 
 
     // Timestamp
     clog_set_console_colour((clog_console_colour_t) {CYAN, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-    printf("%s", timestamp);
+    written += printf("%s", timestamp);
     clog_reset_console_colour();
 
-    printf("%s", separator);
+    written += printf("%s", separator);
 
     // Logger name
     if (logger != NULL)
     {
         clog_set_console_colour(logger->console_colour, logger->colour_flags);
-        printf("%s", logger->name);
+        written += printf("%s", logger->name);
         clog_reset_console_colour();
 
-        printf("%s", separator);
+        written += printf("%s", separator);
     }
 
     // Log level
@@ -42,56 +43,56 @@ void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, 
     {
         case CLOG_LEVEL_INFO:
             clog_set_console_colour((clog_console_colour_t) {BLUE, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[INFO]");
+            written += printf("[INFO]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_DEBUG:
             clog_set_console_colour((clog_console_colour_t) {GREEN, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[DEBUG]");
+            written += printf("[DEBUG]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_WARNING:
             clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[WARNING]");
+            written += printf("[WARNING]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_ERROR:
             clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[ERROR]");
+            written += printf("[ERROR]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_CRITICAL:
             clog_set_console_colour((clog_console_colour_t) {WHITE, RED},
                                     CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
-            printf("[CRITICAL]");
+            written += printf("[CRITICAL]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_FATAL_ASSERT:
             clog_set_console_colour((clog_console_colour_t) {WHITE, RED},
                                     CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
 
-            printf("[ASSERT FAILED]");
+            written += printf("[ASSERT FAILED]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_NON_FATAL_ASSERT:
             clog_set_console_colour((clog_console_colour_t) {WHITE, YELLOW}, CLOGGER_FOREGROUND_INTENSE);
 
-            printf("[ASSERT FAILED]");
+            written += printf("[ASSERT FAILED]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         default:
             break;
@@ -101,14 +102,16 @@ void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, 
     if (location)
     {
         clog_set_console_colour((clog_console_colour_t) {MAGENTA, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-        printf("%s", location);
+        written += printf("%s", location);
         clog_reset_console_colour();
 
-        printf("%s", separator);
+        written += printf("%s", separator);
     }
 
-    vprintf(format, args);
-    printf("\n");
+    written += vprintf(format, args);
+    written += printf("\n");
+
+    return written;
 }
 
 void clog_message(const char* location, const char* message, ...)
@@ -170,49 +173,6 @@ void clog_trace(const char* function_name, const char* file_name, int line)
     printf("Traceback:\n\tIn function: %s >> %s:%d\n", function_name, file_name, line);
 }
 
-int clog_to_file(const char* file_path, const char* location, const char* message, ...)
-{
-    va_list args;
-
-    int result = CLOGGER_FALSE;
-    FILE* file_ptr;
-
-    file_ptr = fopen(file_path, "a+");
-
-    if (file_ptr != NULL)
-    {
-        char timestamp[10];
-
-        format_timestamp(timestamp);
-
-        fputs(timestamp, file_ptr);
-        fputs(" >> ", file_ptr);
-
-        if (location)
-        {
-            fputs(location, file_ptr);
-            fputs(" >> ", file_ptr);
-        }
-
-        va_start(args, message);
-        vfprintf(file_ptr, message, args);
-        va_end(args);
-
-        fputs("\n", file_ptr);
-
-        result = CLOGGER_TRUE;
-
-        fclose(file_ptr);
-    }
-    else
-    {
-        perror(file_path);
-        clog_error(__FUNCTION__, "Could not open file %s", file_path);
-    }
-
-    return result;
-}
-
 int clog_append_to_file(const char* file_path, const char* location, const char* message, ...)
 {
     va_list args;
@@ -250,7 +210,6 @@ int clog_append_to_file(const char* file_path, const char* location, const char*
     else
     {
         perror(file_path);
-        clog_error(__FUNCTION__, "Could not open file %s", file_path);
     }
 
     return result;
@@ -263,15 +222,12 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
     int result = CLOGGER_FALSE;
     FILE* file_ptr;
 
-    file_ptr = fopen(file_path, "r");
-
-    if (file_ptr != NULL)
+    // Open a temporary file
+    const char* temp_file_name = "temp";
+    FILE* temp;
+    temp = fopen(temp_file_name, "a+");
+    if (temp != NULL)
     {
-        // Open a temporary file
-        const char* temp_file_name = "temp";
-        FILE* temp;
-        temp = fopen(temp_file_name, "a+");
-
         char timestamp[10];
 
         format_timestamp(timestamp);
@@ -291,21 +247,26 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
 
         fputs("\n", temp);
 
-        // Copy original contents to temporary file
-        int c;
-        while ((c = fgetc(file_ptr)) != EOF)
+        // Copy original contents to temporary file, if it exists
+        file_ptr = fopen(file_path, "r");
+        if (file_ptr != NULL)
         {
-            fputc(c, temp);
+            int c;
+            while ((c = fgetc(file_ptr)) != EOF)
+            {
+                fputc(c, temp);
+            }
+            fclose(file_ptr);
         }
+
+        file_ptr = fopen(file_path, "w+");
 
         // Close and re-open the file in read mode
         fclose(temp);
         temp = fopen(temp_file_name, "r");
 
-        fclose(file_ptr);
-        file_ptr = fopen(file_path, "w+");
-
         // Copy contents back to original file
+        int c;
         while ((c = fgetc(temp)) != EOF)
         {
             fputc(c, file_ptr);
@@ -317,6 +278,48 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
         remove(temp_file_name);
 
         result = CLOGGER_TRUE;
+    }
+    else
+    {
+        perror(file_path);
+    }
+
+    return result;
+}
+
+int clog_to_file(const char* file_path, const char* location, const char* message, ...)
+{
+    va_list args;
+
+    int result = CLOGGER_FALSE;
+    FILE* file_ptr;
+
+    file_ptr = fopen(file_path, "a+");
+
+    if (file_ptr != NULL)
+    {
+        char timestamp[10];
+
+        format_timestamp(timestamp);
+
+        fputs(timestamp, file_ptr);
+        fputs(" >> ", file_ptr);
+
+        if (location)
+        {
+            fputs(location, file_ptr);
+            fputs(" >> ", file_ptr);
+        }
+
+        va_start(args, message);
+        vfprintf(file_ptr, message, args);
+        va_end(args);
+
+        fputs("\n", file_ptr);
+
+        result = CLOGGER_TRUE;
+
+        fclose(file_ptr);
     }
     else
     {
