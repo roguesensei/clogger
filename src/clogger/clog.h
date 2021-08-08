@@ -12,14 +12,15 @@ extern "C" {
 
 #include "core.h"
 
-/// @brief The common log function used throughout
+/// @brief The utility log function used throughout the library
 /// @note This function isn't typically used by the end user, it's advisable to use the standard functions
 /// @param level [in] The log level
 /// @param logger [in] Pointer to a `clogger_t` data structure. Pass `NULL` if not used
 /// @param location [in] Location of the log, usually `__FUNCTION__` though can be `NULL`
 /// @param format [in] String detailing the format
 /// @param args [in] Variable arguments list to use with the `format` string
-void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
+/// @return Number of charracters written to the console
+int clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
 
 /// @brief The generic logging message
 /// @param location [in] Location of the log, usually `__FUNCTION__` though can be `NULL`

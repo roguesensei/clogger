@@ -77,14 +77,19 @@ void clogger_error(clogger_t* logger, const char* location, const char* message,
         va_list args;
 
         va_start(args, message);
-        clog_messagef(CLOG_LEVEL_ERROR, logger, location, message, args);
+        int written = clog_messagef(CLOG_LEVEL_ERROR, logger, location, message, args);
+        va_end(args);
 
         // Log to file
         if (logger->file_opt & CLOGGER_FILEOPT_ERROR_BIT)
         {
-            clog_append_to_file(logger->log_file_path, location, message);
+            char fmessage[++written];
+            va_start(args, message);
+            vsnprintf(fmessage, sizeof(fmessage), message, args);
+
+            clog_append_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
+            va_end(args);
         }
-        va_end(args);
 
         // Error callback
         if (logger->error_callback)

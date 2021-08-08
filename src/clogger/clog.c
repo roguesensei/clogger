@@ -13,8 +13,9 @@ void format_timestamp(char* buffer)
     strncpy(buffer, timestamp_buffer, sizeof(timestamp_buffer));
 }
 
-void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args)
+int clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args)
 {
+    int written = 0;
     char timestamp[10];
     const char separator[] = " >> ";
 
@@ -22,19 +23,19 @@ void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, 
 
     // Timestamp
     clog_set_console_colour((clog_console_colour_t) {CYAN, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-    printf("%s", timestamp);
+    written += printf("%s", timestamp);
     clog_reset_console_colour();
 
-    printf("%s", separator);
+    written += printf("%s", separator);
 
     // Logger name
     if (logger != NULL)
     {
         clog_set_console_colour(logger->console_colour, logger->colour_flags);
-        printf("%s", logger->name);
+        written += printf("%s", logger->name);
         clog_reset_console_colour();
 
-        printf("%s", separator);
+        written += printf("%s", separator);
     }
 
     // Log level
@@ -42,56 +43,56 @@ void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, 
     {
         case CLOG_LEVEL_INFO:
             clog_set_console_colour((clog_console_colour_t) {BLUE, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[INFO]");
+            written += printf("[INFO]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_DEBUG:
             clog_set_console_colour((clog_console_colour_t) {GREEN, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[DEBUG]");
+            written += printf("[DEBUG]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_WARNING:
             clog_set_console_colour((clog_console_colour_t) {YELLOW, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[WARNING]");
+            written += printf("[WARNING]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_ERROR:
             clog_set_console_colour((clog_console_colour_t) {RED, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-            printf("[ERROR]");
+            written += printf("[ERROR]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_CRITICAL:
             clog_set_console_colour((clog_console_colour_t) {WHITE, RED},
                                     CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
-            printf("[CRITICAL]");
+            written += printf("[CRITICAL]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_FATAL_ASSERT:
             clog_set_console_colour((clog_console_colour_t) {WHITE, RED},
                                     CLOGGER_FOREGROUND_INTENSE | CLOGGER_BACKGROUND_INTENSE);
 
-            printf("[ASSERT FAILED]");
+            written += printf("[ASSERT FAILED]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         case CLOG_LEVEL_NON_FATAL_ASSERT:
             clog_set_console_colour((clog_console_colour_t) {WHITE, YELLOW}, CLOGGER_FOREGROUND_INTENSE);
 
-            printf("[ASSERT FAILED]");
+            written += printf("[ASSERT FAILED]");
             clog_reset_console_colour();
 
-            printf("%s", separator);
+            written += printf("%s", separator);
             break;
         default:
             break;
@@ -101,14 +102,16 @@ void clog_messagef(clog_level_t level, clogger_t* logger, const char* location, 
     if (location)
     {
         clog_set_console_colour((clog_console_colour_t) {MAGENTA, CLEAR}, CLOGGER_FOREGROUND_INTENSE);
-        printf("%s", location);
+        written += printf("%s", location);
         clog_reset_console_colour();
 
-        printf("%s", separator);
+        written += printf("%s", separator);
     }
 
-    vprintf(format, args);
-    printf("\n");
+    written += vprintf(format, args);
+    written += printf("\n");
+
+    return written;
 }
 
 void clog_message(const char* location, const char* message, ...)
