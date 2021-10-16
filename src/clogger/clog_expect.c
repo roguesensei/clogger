@@ -8,7 +8,7 @@ int evaluate_expect(int condition, const char* location, const char* message, va
 {
     if (!condition)
     {
-        clog_messagef(CLOG_LEVEL_FATAL_ASSERT, NULL, location, message, args);
+        clog_messagef(CLOG_LEVEL_NON_FATAL_ASSERT, NULL, location, message, args);
     }
 
     return condition;
