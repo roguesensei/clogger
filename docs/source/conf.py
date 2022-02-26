@@ -24,7 +24,7 @@ subprocess.call('cd ../../ ; doxygen Doxyfile', shell=True)
 # -- Project information -----------------------------------------------------
 
 project = 'clogger'
-copyright = '2021, RogueSensei'
+copyright = '2021-2022, RogueSensei'
 author = 'RogueSensei'
 
 # The full version, including alpha/beta/rc tags
