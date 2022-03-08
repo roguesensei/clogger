@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
+#include "core.h"
 
 /// @brief Assertion function that does not terminate the program on failure
 /// @details The expect function works similarly to the traditional std `assert()` function, logging a message if the condition supplied fails, without terminating on failure. See the other specialized functions in the `clog_expect` family below for more explicit assert messages.
@@ -18,7 +18,7 @@ extern "C" {
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect(int condition, const char* location, const char* message, ...);
+CLoggerBool clog_expect(CLoggerBool condition, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 8-bit signed integers
 /// @param expected [in] The expected value
@@ -27,7 +27,7 @@ int clog_expect(int condition, const char* location, const char* message, ...);
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int8_eq(int8_t expected, int8_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int8_eq(CLoggerInt8 expected, CLoggerInt8 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 8-bit signed integers
 /// @param not_expected [in] The not expected value
@@ -36,7 +36,7 @@ int clog_expect_int8_eq(int8_t expected, int8_t actual, const char* location, co
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int8_neq(int8_t not_expected, int8_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int8_neq(CLoggerInt8 not_expected, CLoggerInt8 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 8-bit signed integer
@@ -44,7 +44,7 @@ int clog_expect_int8_neq(int8_t not_expected, int8_t actual, const char* locatio
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int8_is_nullptr(const int8_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int8_is_nullptr(const CLoggerInt8* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 8-bit signed integer
@@ -52,7 +52,7 @@ int clog_expect_int8_is_nullptr(const int8_t* value_ptr, const char* location, c
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int8_is_not_nullptr(const int8_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int8_is_not_nullptr(const CLoggerInt8* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 8-bit unsigned integers
 /// @param expected [in] The expected value
@@ -61,7 +61,7 @@ int clog_expect_int8_is_not_nullptr(const int8_t* value_ptr, const char* locatio
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint8_eq(uint8_t expected, uint8_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint8_eq(CLoggerUInt8 expected, CLoggerUInt8 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 8-bit unsigned integers
 /// @param not_expected [in] The not expected value
@@ -70,7 +70,7 @@ int clog_expect_uint8_eq(uint8_t expected, uint8_t actual, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint8_neq(uint8_t not_expected, uint8_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint8_neq(CLoggerUInt8 not_expected, CLoggerUInt8 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 8-bit unsigned integer
@@ -78,7 +78,7 @@ int clog_expect_uint8_neq(uint8_t not_expected, uint8_t actual, const char* loca
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint8_is_nullptr(const uint8_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint8_is_nullptr(const CLoggerUInt8* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 8-bit unsigned integer
@@ -86,7 +86,7 @@ int clog_expect_uint8_is_nullptr(const uint8_t* value_ptr, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint8_is_not_nullptr(const uint8_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint8_is_not_nullptr(const CLoggerUInt8* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 16-bit signed integers
 /// @param expected [in] The expected value
@@ -95,7 +95,7 @@ int clog_expect_uint8_is_not_nullptr(const uint8_t* value_ptr, const char* locat
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int16_eq(int16_t expected, int16_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int16_eq(CLoggerInt16 expected, CLoggerInt16 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 16-bit signed integers
 /// @param not_expected [in] The not expected value
@@ -104,7 +104,7 @@ int clog_expect_int16_eq(int16_t expected, int16_t actual, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int16_neq(int16_t not_expected, int16_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int16_neq(CLoggerInt16 not_expected, CLoggerInt16 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 16-bit signed integer
@@ -112,7 +112,7 @@ int clog_expect_int16_neq(int16_t not_expected, int16_t actual, const char* loca
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int16_is_nullptr(const int16_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int16_is_nullptr(const CLoggerInt16* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 16-bit signed integer
@@ -120,7 +120,7 @@ int clog_expect_int16_is_nullptr(const int16_t* value_ptr, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int16_is_not_nullptr(const int16_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int16_is_not_nullptr(const CLoggerInt16* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 16-bit unsigned integers
 /// @param expected [in] The expected value
@@ -129,7 +129,7 @@ int clog_expect_int16_is_not_nullptr(const int16_t* value_ptr, const char* locat
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint16_eq(uint16_t expected, uint16_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint16_eq(CLoggerUInt16 expected, CLoggerUInt16 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 16-bit unsigned integers
 /// @param not_expected [in] The not expected value
@@ -138,7 +138,7 @@ int clog_expect_uint16_eq(uint16_t expected, uint16_t actual, const char* locati
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint16_neq(uint16_t not_expected, uint16_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint16_neq(CLoggerUInt16 not_expected, CLoggerUInt16 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 16-bit unsigned integer
@@ -146,7 +146,7 @@ int clog_expect_uint16_neq(uint16_t not_expected, uint16_t actual, const char* l
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint16_is_nullptr(const uint16_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint16_is_nullptr(const CLoggerUInt16* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 16-bit unsigned integer
@@ -154,7 +154,7 @@ int clog_expect_uint16_is_nullptr(const uint16_t* value_ptr, const char* locatio
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint16_is_not_nullptr(const uint16_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint16_is_not_nullptr(const CLoggerUInt16* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 32-bit signed integers
 /// @param expected [in] The expected value
@@ -163,7 +163,7 @@ int clog_expect_uint16_is_not_nullptr(const uint16_t* value_ptr, const char* loc
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int32_eq(int32_t expected, int32_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int32_eq(CLoggerInt32 expected, CLoggerInt32 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 32-bit signed integers
 /// @param not_expected [in] The not expected value
@@ -172,7 +172,7 @@ int clog_expect_int32_eq(int32_t expected, int32_t actual, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int32_neq(int32_t not_expected, int32_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int32_neq(CLoggerInt32 not_expected, CLoggerInt32 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 32-bit signed integer
@@ -180,7 +180,7 @@ int clog_expect_int32_neq(int32_t not_expected, int32_t actual, const char* loca
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int32_is_nullptr(const int32_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int32_is_nullptr(const CLoggerInt32* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 32-bit signed integer
@@ -188,7 +188,7 @@ int clog_expect_int32_is_nullptr(const int32_t* value_ptr, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int32_is_not_nullptr(const int32_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int32_is_not_nullptr(const CLoggerInt32* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 32-bit unsigned integers
 /// @param expected [in] The expected value
@@ -197,7 +197,7 @@ int clog_expect_int32_is_not_nullptr(const int32_t* value_ptr, const char* locat
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint32_eq(uint32_t expected, uint32_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint32_eq(CLoggerUInt32 expected, CLoggerUInt32 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 32-bit unsigned integers
 /// @param not_expected [in] The not expected value
@@ -206,7 +206,7 @@ int clog_expect_uint32_eq(uint32_t expected, uint32_t actual, const char* locati
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint32_neq(uint32_t not_expected, uint32_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint32_neq(CLoggerUInt32 not_expected, CLoggerUInt32 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 32-bit unsigned integer
@@ -214,7 +214,7 @@ int clog_expect_uint32_neq(uint32_t not_expected, uint32_t actual, const char* l
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint32_is_nullptr(const uint32_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint32_is_nullptr(const CLoggerUInt32* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 32-bit unsigned integer
@@ -222,7 +222,7 @@ int clog_expect_uint32_is_nullptr(const uint32_t* value_ptr, const char* locatio
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint32_is_not_nullptr(const uint32_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint32_is_not_nullptr(const CLoggerUInt32* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 64-bit signed integers
 /// @param expected [in] The expected value
@@ -231,7 +231,7 @@ int clog_expect_uint32_is_not_nullptr(const uint32_t* value_ptr, const char* loc
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int64_eq(int64_t expected, int64_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int64_eq(int64_t expected, CLoggerInt64 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 64-bit signed integers
 /// @param not_expected [in] The not expected value
@@ -240,7 +240,7 @@ int clog_expect_int64_eq(int64_t expected, int64_t actual, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int64_neq(int64_t not_expected, int64_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int64_neq(CLoggerInt64 not_expected, CLoggerInt64 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 64-bit signed integer
@@ -248,7 +248,7 @@ int clog_expect_int64_neq(int64_t not_expected, int64_t actual, const char* loca
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int64_is_nullptr(const int64_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int64_is_nullptr(const CLoggerInt64* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 64-bit signed integer
@@ -256,7 +256,7 @@ int clog_expect_int64_is_nullptr(const int64_t* value_ptr, const char* location,
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_int64_is_not_nullptr(const int64_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_int64_is_not_nullptr(const CLoggerInt64* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two 64-bit unsigned integers
 /// @param expected [in] The expected value
@@ -265,7 +265,7 @@ int clog_expect_int64_is_not_nullptr(const int64_t* value_ptr, const char* locat
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint64_eq(uint64_t expected, uint64_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint64_eq(CLoggerUInt64 expected, CLoggerUInt64 actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two 64-bit unsigned integers
 /// @param not_expected [in] The not expected value
@@ -274,7 +274,7 @@ int clog_expect_uint64_eq(uint64_t expected, uint64_t actual, const char* locati
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint64_neq(uint64_t not_expected, uint64_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint64_neq(CLoggerUInt64 not_expected, CLoggerUInt64 actual, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 64-bit unsigned integer
@@ -282,7 +282,7 @@ int clog_expect_uint64_neq(uint64_t not_expected, uint64_t actual, const char* l
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint64_is_nullptr(const uint64_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint64_is_nullptr(const CLoggerUInt64* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a 64-bit unsigned integer
@@ -290,7 +290,7 @@ int clog_expect_uint64_is_nullptr(const uint64_t* value_ptr, const char* locatio
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_uint64_is_not_nullptr(const uint64_t* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_uint64_is_not_nullptr(const CLoggerUInt64* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two `size_t` values
 /// @param expected [in] The expected value
@@ -298,7 +298,7 @@ int clog_expect_uint64_is_not_nullptr(const uint64_t* value_ptr, const char* loc
 /// @param location [in] Location of the assert
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
-int clog_expect_size_eq(size_t expected, size_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_size_eq(size_t expected, size_t actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two `size_t` values
 /// @param not_expected [in] The not expected value
@@ -307,7 +307,7 @@ int clog_expect_size_eq(size_t expected, size_t actual, const char* location, co
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_size_neq(size_t not_expected, size_t actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_size_neq(size_t not_expected, size_t actual, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two chars
 /// @note Although similar to `clog_expect_int8_eq()`, the values written to the console will be the char ASCII value
@@ -317,7 +317,7 @@ int clog_expect_size_neq(size_t not_expected, size_t actual, const char* locatio
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_char_eq(char expected, char actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_char_eq(char expected, char actual, const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two chars
 /// @note Although similar to `clog_expect_int8_neq()`, the values written to the console will be the char ASCII value
@@ -327,7 +327,7 @@ int clog_expect_char_eq(char expected, char actual, const char* location, const 
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_char_neq(char not_expected, char actual, const char* location, const char* message, ...);
+CLoggerBool clog_expect_char_neq(char not_expected, char actual, const char* location, const char* message, ...);
 
 /// @brief Make an equality non-fatal assertion of two strings
 /// @param expected [in] The expected value
@@ -338,7 +338,7 @@ int clog_expect_char_neq(char not_expected, char actual, const char* location, c
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_str_eq(const char* expected, size_t expected_size, const char* actual, size_t actual_size,
+CLoggerBool clog_expect_str_eq(const char* expected, size_t expected_size, const char* actual, size_t actual_size,
                        const char* location, const char* message, ...);
 
 /// @brief Make an inequality non-fatal assertion of two strings
@@ -350,7 +350,7 @@ int clog_expect_str_eq(const char* expected, size_t expected_size, const char* a
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_str_neq(const char* not_expected, size_t not_expected_size, const char* actual, size_t actual_size,
+CLoggerBool clog_expect_str_neq(const char* not_expected, size_t not_expected_size, const char* actual, size_t actual_size,
                         const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is `NULL` without terminating
@@ -359,7 +359,7 @@ int clog_expect_str_neq(const char* not_expected, size_t not_expected_size, cons
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_str_is_nullptr(const char* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_str_is_nullptr(const char* value_ptr, const char* location, const char* message, ...);
 
 /// @brief Assert if a pointer is not `NULL` without terminating
 /// @param value_ptr [in] Pointer to a string or char
@@ -367,7 +367,7 @@ int clog_expect_str_is_nullptr(const char* value_ptr, const char* location, cons
 /// @param message [in] Format-able string message as you would use `printf()` that will print on the condition failure
 /// @param ... [in] Variable-length args
 /// @return Assertion result
-int clog_expect_str_is_not_nullptr(const char* value_ptr, const char* location, const char* message, ...);
+CLoggerBool clog_expect_str_is_not_nullptr(const char* value_ptr, const char* location, const char* message, ...);
 
 #ifdef __cplusplus
 }

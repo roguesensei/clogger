@@ -20,7 +20,7 @@ extern "C" {
 /// @param format [in] String detailing the format
 /// @param args [in] Variable arguments list to use with the `format` string
 /// @return Number of charracters written to the console
-int clog_messagef(clog_level_t level, clogger_t* logger, const char* location, const char* format, va_list args);
+int clog_messagef(CLoggerLevel level, CLogger * logger, const char* location, const char* format, va_list args);
 
 /// @brief The generic logging message
 /// @param location [in] Location of the log, usually `__FUNCTION__` though can be `NULL`
