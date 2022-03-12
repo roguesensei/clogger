@@ -5,7 +5,7 @@
 
 #include <windows.h>
 
-void clog_set_console_colour(clog_console_colour_t console_colour, unsigned short flags)
+void clog_set_console_colour(CLoggerConsoleColour console_colour, CLoggerUInt16 flags)
 {
     WORD windows_flags = 0;
 

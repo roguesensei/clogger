@@ -13,9 +13,9 @@ void format_timestamp(char* buffer)
 	strncpy(buffer, timestamp_buffer, sizeof(timestamp_buffer));
 }
 
-int clog_messagef(CLoggerLevel level, CLogger* logger, const char* location, const char* format, va_list args)
+CLoggerInt32 clog_messagef(CLoggerLevel level, CLogger* logger, const char* location, const char* format, va_list args)
 {
-	int written = 0;
+	CLoggerInt32 written = 0;
 	char timestamp[10];
 	const char separator[] = " >> ";
 
@@ -181,11 +181,11 @@ void clog_trace(const char* function_name, const char* file_name, int line)
 	printf("Traceback:\n\tIn function: %s >> %s:%d\n", function_name, file_name, line);
 }
 
-int clog_append_to_file(const char* file_path, const char* location, const char* message, ...)
+CLoggerBool clog_append_to_file(const char* file_path, const char* location, const char* message, ...)
 {
 	va_list args;
 
-	int result = CLOGGER_FALSE;
+	CLoggerBool result = CLOGGER_FALSE;
 	FILE* file_ptr;
 
 	file_ptr = fopen(file_path, "a+");
@@ -223,11 +223,11 @@ int clog_append_to_file(const char* file_path, const char* location, const char*
 	return result;
 }
 
-int clog_prepend_to_file(const char* file_path, const char* location, const char* message, ...)
+CLoggerBool clog_prepend_to_file(const char* file_path, const char* location, const char* message, ...)
 {
 	va_list args;
 
-	int result = CLOGGER_FALSE;
+	CLoggerBool result = CLOGGER_FALSE;
 	FILE* file_ptr;
 
 	// Open a temporary file
@@ -290,49 +290,6 @@ int clog_prepend_to_file(const char* file_path, const char* location, const char
 	else
 	{
 		perror(file_path);
-	}
-
-	return result;
-}
-
-int clog_to_file(const char* file_path, const char* location, const char* message, ...)
-{
-	va_list args;
-
-	int result = CLOGGER_FALSE;
-	FILE* file_ptr;
-
-	file_ptr = fopen(file_path, "a+");
-
-	if (file_ptr != NULL)
-	{
-		char timestamp[10];
-
-		format_timestamp(timestamp);
-
-		fputs(timestamp, file_ptr);
-		fputs(" >> ", file_ptr);
-
-		if (location)
-		{
-			fputs(location, file_ptr);
-			fputs(" >> ", file_ptr);
-		}
-
-		va_start(args, message);
-		vfprintf(file_ptr, message, args);
-		va_end(args);
-
-		fputs("\n", file_ptr);
-
-		result = CLOGGER_TRUE;
-
-		fclose(file_ptr);
-	}
-	else
-	{
-		perror(file_path);
-		clog_error(__FUNCTION__, "Could not open file %s", file_path);
 	}
 
 	return result;
