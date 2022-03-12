@@ -28,6 +28,6 @@ int main()
 
 For guides on usage, examples and compiling, please refer to the [clogger wiki](https://gitlab.com/roguesensei/clogger/-/wikis/home)
 
-For the detailed API reference, please visit [clogger-2.readthedocs.io](https://rs-clogger.readthedocs.io/)
+For the detailed API reference, please visit [clogger-2.readthedocs.io](https://clogger-2.readthedocs.io/)
 ### Credit
 Using [jothepro/doxygen-awesome-css](https://github.com/jothepro/doxygen-awesome-css) as theme for API Reference, generated using Doxygen.
