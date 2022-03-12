@@ -28,7 +28,7 @@ copyright = '2021-2022, RogueSensei'
 author = 'RogueSensei'
 
 # The full version, including alpha/beta/rc tags
-release = '1.2.0'
+release = '2.0.0'
 
 breath_projects = {
     'clogger': '../doxygen/xml/'
