@@ -22,21 +22,16 @@ extern "C" {
 /// @brief Function to set the text colour in the console
 /// @param console_colour [in] Colour of the text
 /// @param flags [in] Flags to manipulate the text colour
-void clog_set_console_colour(clog_console_colour_t console_colour, unsigned short flags);
+void clog_set_console_colour(CLoggerConsoleColour console_colour, CLoggerUInt16 flags);
 
 /// @brief Function that resets the text colour back to normal
 void clog_reset_console_colour();
 
-/// @brief US English variant of `clog_colour_t`
-typedef clog_colour_t clog_color_t;
-
-/// @brief US English variant of `clog_console_colour_t`
-typedef clog_console_colour_t clog_console_color_t;
 
 /// @brief Function to set the text color in the console
 /// @param console_colour [in] Color of the text
 /// @param flags [in] Flags to manipulate the text color
-void clog_set_console_color(clog_console_color_t console_color, unsigned short flags);
+void clog_set_console_color(CLoggerConsoleColor console_color, unsigned short flags);
 
 /// @brief Function that resets the text color back to normal
 void clog_reset_console_color();
