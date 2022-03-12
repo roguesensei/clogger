@@ -10,6 +10,9 @@
 
 image: gcc
 
+before_script:
+    - apt install cmake
+
 build:
 
     stage: build
