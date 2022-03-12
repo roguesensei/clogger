@@ -11,7 +11,8 @@
 image: gcc
 
 before_script:
-    - apt install cmake
+    - apt update
+    - apt install make cmake gcc
 
 build:
 
