@@ -37,6 +37,8 @@ typedef enum CLoggerFileOpt
 /// @return Initalized logger
 void clogger_init(CLogger* logger, const char* clogger_name);
 
+void clogger_init_filepath(CLogger* logger, const char* clogger_name, const char* file_path);
+
 /// @brief `CLOG_LEVEL_INFO` log message, will only call if the `CLogger` struct is set as such
 /// @param logger [in] Pointer to `CLogger` data structure
 /// @param location [in] Location of the log
@@ -78,10 +80,6 @@ void clogger_critical(CLogger* logger, const char* location, const char* message
 /// @param enabled Enable or disable
 void clogger_set_file_opt_option(CLogger* logger, CLoggerFileOpt option, CLoggerBool enabled);
 
-/// @brief Set the default file path to the log file
-/// @param logger Pointer to the `CLogger`
-/// @param path Path to log file
-void clogger_set_file_opt_path(CLogger* logger, const char* path);
 
 #ifdef __cplusplus
 }

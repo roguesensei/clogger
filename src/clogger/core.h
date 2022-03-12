@@ -87,7 +87,7 @@ extern "C"
 		CLoggerLevel log_level;				 ///< The minimum level to log messages
 		CLoggerUInt16 colour_flags;			 ///< Flags to modify the colour
 		CLoggerUInt8 file_opt;				 ///< Flags to determine the file logging options
-		char* log_file_path;				 ///< File log path
+		const char* log_file_path;				 ///< File log path
 	} CLogger;
 
 #ifdef __cplusplus
