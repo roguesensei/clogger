@@ -3,7 +3,7 @@
 
 Before going any further, have you:
 - Checked the Issues page for a similar issue?
-- Updated to the latest version of `wani`?
+- Updated to the latest version of clogger?
 
 If you answered yes to both, carry on as you were. Feel free to delete this comment.
 -->

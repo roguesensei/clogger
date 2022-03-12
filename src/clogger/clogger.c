@@ -23,7 +23,7 @@ void clogger_init(CLogger* logger, const char* clogger_name)
 	char* default_file_path = "clogger.txt";
 
 	logger->name = clogger_name;
-	logger->error_callback = NULL;
+	logger->callback = NULL;
 	logger->console_colour = (CLoggerConsoleColour){ CLOGGER_COLOUR_BLUE, CLOGGER_COLOUR_CLEAR };
 	logger->log_level = CLOGGER_LEVEL_WARNING;
 	logger->colour_flags = 0;
@@ -155,12 +155,6 @@ void clogger_error(CLogger* logger, const char* location, const char* message, .
 				clog_append_to_file(logger->log_file_path, location, "%s >> [ERROR] >> %s", logger->name, fmessage);
 			}
 		}
-
-		// Error callback
-		if (logger->error_callback)
-		{
-			logger->error_callback(CLOGGER_LEVEL_ERROR, logger->name, location);
-		}
 	}
 }
 
@@ -191,12 +185,6 @@ void clogger_critical(CLogger* logger, const char* location, const char* message
 			{
 				clog_append_to_file(logger->log_file_path, location, "%s >> [CRITICAL] >> %s", logger->name, fmessage);
 			}
-		}
-
-		// Error callback
-		if (logger->error_callback)
-		{
-			logger->error_callback(CLOGGER_LEVEL_CRITICAL, logger->name, location);
 		}
 	}
 }
