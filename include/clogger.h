@@ -1,12 +1,12 @@
 #ifndef CLOGGER_H
 #define CLOGGER_H
 
-#include "../clogger/ansi.h"
-#include "../clogger/core.h"
-#include "../clogger/console.h"
-#include "../clogger/clog.h"
-#include "../clogger/clog_assert.h"
-#include "../clogger/clog_expect.h"
-#include "../clogger/clogger.h"
+#include "../src/clogger/ansi.h"
+#include "../src/clogger/core.h"
+#include "../src/clogger/console.h"
+#include "../src/clogger/clog.h"
+#include "../src/clogger/clog_assert.h"
+#include "../src/clogger/clog_expect.h"
+#include "../src/clogger/clogger.h"
 
 #endif //CLOGGER_H
