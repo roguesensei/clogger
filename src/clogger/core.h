@@ -82,8 +82,9 @@ extern "C"
 		const char* name; ///< Name of the `clogger`, such as the project name or module
 		void (*error_callback)(
 			CLoggerLevel level, const char* clogger_name,
-			const char* location); ///< Function pointer that calls on an `ERROR` or `CRITICAL` level message
-		void (*assert_fail_callback)();
+			const char* location);		///< Function pointer that calls on an `ERROR` or `CRITICAL` level message
+		void (*assert_fail_callback)(); ///< Function pointer that calls on an assert failure (default set to invoke
+										///< `exit()`)
 		CLoggerConsoleColour console_colour; ///< Colour dictating how the name should display in the console
 		CLoggerLevel log_level;				 ///< The minimum level to log messages
 		CLoggerUInt16 colour_flags;			 ///< Flags to modify the colour
