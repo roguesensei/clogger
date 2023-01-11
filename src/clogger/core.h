@@ -80,14 +80,15 @@ extern "C"
 	typedef struct CLogger
 	{
 		const char* name; ///< Name of the `clogger`, such as the project name or module
-		void (*callback)(
+		void (*error_callback)(
 			CLoggerLevel level, const char* clogger_name,
-			const char* location);			 ///< Function pointer that calls on an `ERROR` or `CRITICAL` level message
+			const char* location); ///< Function pointer that calls on an `ERROR` or `CRITICAL` level message
+		void (*assert_fail_callback)();
 		CLoggerConsoleColour console_colour; ///< Colour dictating how the name should display in the console
 		CLoggerLevel log_level;				 ///< The minimum level to log messages
 		CLoggerUInt16 colour_flags;			 ///< Flags to modify the colour
 		CLoggerUInt8 file_opt;				 ///< Flags to determine the file logging options
-		const char* log_file_path;				 ///< File log path
+		const char* log_file_path;			 ///< File log path
 	} CLogger;
 
 #ifdef __cplusplus

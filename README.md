@@ -1,6 +1,8 @@
-# clogger 
+# clogger
 
-![GitHub release](https://img.shields.io/github/v/release/RogueSensei/clogger?label=clogger&style=flat-square) [![GitHub](https://img.shields.io/github/license/RogueSensei/clogger?style=flat-square)](https://github.com/RogueSensei/clogger/blob/master/LICENSE) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/RogueSensei/clogger/CMake?label=build&style=flat-square) [![GitHub Repo stars](https://img.shields.io/github/stars/RogueSensei/clogger?style=social)](https://github.com/RogueSensei/clogger)
+![Latest Release](https://img.shields.io/gitlab/v/tag/roguesensei/clogger?color=blue&label=latest%20release&style=flat-square)
+![MIT License](https://img.shields.io/gitlab/license/roguesensei/clogger?color=green&label=license&style=flat-square)
+![Build](https://img.shields.io/gitlab/pipeline-status/roguesensei/clogger?branch=master&style=flat-square)
 
 A lightweight functional logging library written in C
 

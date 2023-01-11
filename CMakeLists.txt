@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(clogger VERSION 2.0.0 LANGUAGES C)
+project(clogger VERSION 2.1.0 LANGUAGES C)
 
 message(STATUS "${PROJECT_NAME}: Version ${PROJECT_VERSION}")
 
@@ -8,3 +8,6 @@ set(CMAKE_C_STANDARD 11)
 add_library(clogger STATIC src/clogger/clog.c src/clogger/clog_assert.c src/clogger/clog_expect.c src/clogger/console.c src/clogger/clogger.c)
 target_include_directories(clogger PUBLIC src/ include/)
 target_precompile_headers(clogger PUBLIC src/clogger_pch.c src/clogger_pch.h)
+
+add_executable(sandbox sandbox/sandbox.c)
+target_link_libraries(sandbox clogger)

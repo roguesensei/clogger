@@ -118,9 +118,9 @@ CLoggerInt32 clog_messagef(CLoggerLevel level, CLogger* logger, const char* loca
 	written += vprintf(format, args);
 	written += printf("\n");
 
-	if (logger != NULL && logger->callback != NULL)
+	if (logger != NULL && logger->error_callback != NULL)
 	{
-		logger->callback(level, logger->name, location);
+		logger->error_callback(level, logger->name, location);
 	}
 
 	return written;

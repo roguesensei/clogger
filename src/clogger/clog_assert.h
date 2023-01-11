@@ -1,5 +1,5 @@
-//! @file
-//! @brief clogger assertion module
+/// @file
+/// @brief clogger assertion module
 
 #ifndef CLOGGER_CLOG_ASSERT_H
 #define CLOGGER_CLOG_ASSERT_H
