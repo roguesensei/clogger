@@ -89,28 +89,44 @@ void clog_set_console_colour(CLoggerConsoleColour console_colour, CLoggerUInt16 
     switch (console_colour.foreground_colour)
     {
         case CLOGGER_COLOUR_BLACK:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HBLK : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_BLK : CLOGGER_FG_BLK);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HBLK
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_BLK
+                                                            : CLOGGER_FG_BLK);
             break;
         case CLOGGER_COLOUR_RED:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HRED : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_RED : CLOGGER_FG_RED);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HRED
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_RED
+                                                            : CLOGGER_FG_RED);
             break;
         case CLOGGER_COLOUR_GREEN:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HGRN : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_GRN : CLOGGER_FG_GRN);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HGRN
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_GRN
+                                                            : CLOGGER_FG_GRN);
             break;
         case CLOGGER_COLOUR_YELLOW:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HYEL : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_YEL : CLOGGER_FG_YEL);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HYEL
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_YEL
+                                                            : CLOGGER_FG_YEL);
             break;
         case CLOGGER_COLOUR_BLUE:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HBLU : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_BLU : CLOGGER_FG_BLU);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HBLU
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_BLU
+                                                            : CLOGGER_FG_BLU);
             break;
         case CLOGGER_COLOUR_MAGENTA:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HMAG : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_MAG : CLOGGER_FG_MAG);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HMAG
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_MAG
+                                                            : CLOGGER_FG_MAG);
             break;
         case CLOGGER_COLOUR_CYAN:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HCYN : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_CYN : CLOGGER_FG_CYN);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HCYN
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_CYN
+                                                            : CLOGGER_FG_CYN);
             break;
         case CLOGGER_COLOUR_WHITE:
-            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HWHT : CLOGGER_UNDERSCORE & flags ? CLOGGER_FG_UL_WHT : CLOGGER_FG_WHT);
+            printf("%s", CLOGGER_FOREGROUND_INTENSE & flags ? CLOGGER_FG_HWHT
+                         : CLOGGER_UNDERSCORE & flags       ? CLOGGER_FG_UL_WHT
+                                                            : CLOGGER_FG_WHT);
             break;
         default:
             break;
@@ -147,10 +163,7 @@ void clog_set_console_colour(CLoggerConsoleColour console_colour, CLoggerUInt16 
     }
 }
 
-void clog_reset_console_colour()
-{
-    printf(CLOGGER_RESET_CONSOLE);
-}
+void clog_reset_console_colour() { printf(CLOGGER_RESET_CONSOLE); }
 
 #endif
 
