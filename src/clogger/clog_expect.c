@@ -1,4 +1,5 @@
 #include "clog_expect.h"
+
 #include "../clogger_pch.h"
 #include "clog.h"
 #include "console.h"
